@@ -72,7 +72,7 @@ function PureChatHeader({
         onClick={() => setShowIframe(!showIframe)} // Toggle iframe visibility
       >
         <img
-          src="/KofoButton.webp"
+          src="/kofoButton.webp"
           alt="Donate Now"
           className="h-auto w-auto max-h-[30px] md:max-h-[40px]" // Reduced height constraints
         />
