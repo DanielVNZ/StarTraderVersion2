@@ -8,6 +8,10 @@ node_modules
 # testing
 coverage
 
+# next.js
+.next/
+out/
+build
 
 # misc
 .DS_Store
@@ -32,4 +36,4 @@ yarn-error.log*
 .vercel
 .vscode
 .env*.local
-env.local
+
