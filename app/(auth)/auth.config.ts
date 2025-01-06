@@ -6,8 +6,7 @@ export const authConfig = {
     newUser: '/',
   },
   providers: [
-    // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
-    // while this file is also used in non-Node.js environments
+    // Providers added later in auth.ts since they may require bcrypt or other Node.js dependencies.
   ],
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
@@ -36,4 +35,5 @@ export const authConfig = {
       return true;
     },
   },
+  trustHost: true, // Rely on the Host header from the incoming request
 } satisfies NextAuthConfig;
