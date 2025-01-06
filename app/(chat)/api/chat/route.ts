@@ -109,18 +109,18 @@ export async function POST(request: Request) {
 
       try {
         // Fetch data from Supabase
-        const { data: commodities, error: commoditiesError } = await supabase
-          .from('Commodities')
-          .select('*');
-          console.log('Fetched Commodities...');
+       // const { data: commodities, error: commoditiesError } = await supabase
+       //   .from('Commodities')
+       //   .select('*');
+       //   console.log('Fetched Commodities...');
 
         const { data: locations, error: locationsError } = await supabase
           .from('Locations')
           .select('*');
           console.log('Fetched Locations...');
-        if (commoditiesError || locationsError) {
+        if (locationsError) {
           throw new Error(
-            `Error fetching data: ${commoditiesError?.message || ''} ${
+            `Error fetching data: ${
               locationsError?.message || ''
             }`
           );
@@ -128,7 +128,7 @@ export async function POST(request: Request) {
 
         dataStream.writeData({
           type: 'supabase-data',
-          content: { commodities, locations },
+          content: { locations },
         });
 
         // Proceed with message generation

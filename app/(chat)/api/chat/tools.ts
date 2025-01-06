@@ -163,105 +163,94 @@ export const tools = {
   
 
   getCommodityPrices: {
-    description: "Retrieve commodity prices for a specific commodity or location. Use this tool to help a user find  the best sell or buy location for a specific commodity.",
+    description: "Retrieve commodity prices for a specific commodity or location. Use this tool to help the user find the best sell or buy location for a specific commodity.",
     parameters: z.object({
-      // commodity_name: z.string().optional(),
-      id_commodity: z.number().optional(),
+        id_commodity: z.number().optional(),
     }),
-    execute: async (args: {
-      // commodity_name?: string;
-      id_commodity?: number;
-    }) => {
-      console.log("Fetching commodity prices with arguments:", args);
-  
-      // Construct query parameters dynamically
-      const queryParams = new URLSearchParams();
-      Object.entries(args).forEach(([key, value]) => {
-        if (value !== undefined) {
-          queryParams.append(key, value.toString());
-        }
-      });
-  
-      const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
-      console.log("API URL:", apiUrl);
-  
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          console.error("Failed to fetch commodity prices:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        // Updated Zod schema with all fields nullable
-        const schema = z.object({
-          status: z.literal("ok"),
-          data: z.array(
-            z.object({
-              id: z.number().nullable(),
-              id_commodity: z.number().nullable(),
-              id_terminal: z.number().nullable(),
-              id_star_system: z.number().nullable(),
-              id_planet: z.number().nullable(),
-              id_orbit: z.number().nullable(),
-              id_moon: z.number().nullable(),
-              id_city: z.number().nullable(),
-              id_outpost: z.number().nullable(),
-              id_poi: z.number().nullable(),
-              id_faction: z.number().nullable(),
-              price_buy: z.number().nullable(),
-              price_buy_min: z.number().nullable(),
-              price_buy_max: z.number().nullable(),
-              price_buy_avg: z.number().nullable(),
-              price_sell: z.number().nullable(),
-              price_sell_min: z.number().nullable(),
-              price_sell_max: z.number().nullable(),
-              price_sell_avg: z.number().nullable(),
-              scu_buy: z.number().nullable(),
-              scu_sell: z.number().nullable(),
-              scu_sell_stock: z.number().nullable(),
-              status_buy: z.number().nullable(),
-              status_sell: z.number().nullable(),
-              volatility_price_buy: z.number().nullable(),
-              volatility_price_sell: z.number().nullable(),
-              commodity_name: z.string().nullable(),
-              commodity_code: z.string().nullable(),
-              commodity_slug: z.string().nullable(),
-              terminal_name: z.string().nullable(),
-              terminal_code: z.string().nullable(),
-              terminal_slug: z.string().nullable(),
-              star_system_name: z.string().nullable(),
-              planet_name: z.string().nullable(),
-              orbit_name: z.string().nullable(),
-              moon_name: z.string().nullable(),
-              space_station_name: z.string().nullable(),
-              city_name: z.string().nullable(),
-              outpost_name: z.string().nullable(),
-              game_version: z.string().nullable(),
-              date_added: z.number().nullable(),
-              date_modified: z.number().nullable(),
-            })
-          ),
+    execute: async (args: { id_commodity?: number }) => {
+        console.log("Fetching commodity prices with arguments:", args);
+
+        // Construct query parameters dynamically
+        const queryParams = new URLSearchParams();
+        Object.entries(args).forEach(([key, value]) => {
+            if (value !== undefined) {
+                queryParams.append(key, value.toString());
+            }
         });
-  
-        const parsedData = schema.safeParse(responseData);
-        if (!parsedData.success) {
-          console.warn("Invalid data format:", parsedData.error.errors);
-          return { error: "Invalid data format received from the API." };
+
+        const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
+        console.log("API URL:", apiUrl);
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                console.error("Failed to fetch commodity prices:", response.statusText);
+                return { error: `Failed to fetch data: ${response.statusText}` };
+            }
+
+            const responseData = await response.json();
+
+            // Updated Zod schema with the required fields
+            const schema = z.object({
+                status: z.literal("ok"),
+                data: z.array(
+                    z.object({
+                        id_commodity: z.number().nullable(),
+                        id_star_system: z.number().nullable(),
+                        id_planet: z.number().nullable(),
+                        id_orbit: z.number().nullable(),
+                        id_moon: z.number().nullable(),
+                        id_city: z.number().nullable(),
+                        id_outpost: z.number().nullable(),
+                        id_terminal: z.number().nullable(),
+                        terminal_name: z.string().nullable(),
+                        terminal_code: z.string().nullable(),
+                        commodity_name: z.string().nullable(),
+                        commodity_code: z.string().nullable(),
+                        price_buy: z.number().nullable(),
+                        price_sell: z.number().nullable(),
+                        scu_buy: z.number().nullable(),
+                        scu_sell: z.number().nullable(),
+                    })
+                ),
+            });
+
+            const parsedData = schema.safeParse(responseData);
+            if (!parsedData.success) {
+                console.warn("Invalid data format:", parsedData.error.errors);
+                return { error: "Invalid data format received from the API." };
+            }
+
+            // Extract and return the filtered data
+            const data = parsedData.data.data.map(item => ({
+                id_commodity: item.id_commodity,
+                id_star_system: item.id_star_system,
+                id_planet: item.id_planet,
+                id_orbit: item.id_orbit,
+                id_moon: item.id_moon,
+                id_city: item.id_city,
+                id_outpost: item.id_outpost,
+                id_terminal: item.id_terminal,
+                terminal_name: item.terminal_name,
+                terminal_code: item.terminal_code,
+                commodity_name: item.commodity_name,
+                commodity_code: item.commodity_code,
+                price_buy: item.price_buy,
+                price_sell: item.price_sell,
+                scu_buy: item.scu_buy,
+                scu_sell: item.scu_sell,
+            }));
+
+            console.log("Filtered JSON Output:", JSON.stringify(data, null, 2));
+            console.log(`Filtered ${data.length} commodity price records.`);
+            return { result: data };
+        } catch (error) {
+            console.error("Error fetching commodity prices:", error);
+            return { error: "An unexpected error occurred while fetching commodity prices." };
         }
-  
-        const data = parsedData.data.data; // Extract validated data
-        console.log(`Fetched ${data.length} commodity price records.`);
-  
-        return { result: data };
-      } catch (error) {
-        console.error("Error fetching commodity prices:", error);
-        return { error: "An unexpected error occurred while fetching commodity prices." };
-      }
     },
-  },  
+},
+
   
 
   getCities: {
