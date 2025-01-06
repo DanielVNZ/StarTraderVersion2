@@ -36,7 +36,8 @@ export const maxDuration = 60;
 
 type AllowedTools =
   | 'getCommodities'
-  | 'getCommodityPrices'
+  | 'getBuyCommodityPrices'
+  | 'getSellCommodityPrices'
   | 'getCities'
   | 'getMoons'
   | 'getOrbits'
@@ -47,7 +48,8 @@ type AllowedTools =
 
 const myTools: AllowedTools[] = [
   'getCommodities',
-  'getCommodityPrices',
+  'getBuyCommodityPrices',
+  'getSellCommodityPrices',
   'getCities',
   'getMoons',
   'getOrbits',
