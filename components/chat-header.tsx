@@ -66,11 +66,28 @@ function PureChatHeader({
         />
       )}
 
+      {/* Desktop Donate Button */}
       <Button
-        className="bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-zinc-50 dark:text-zinc-900 hidden md:flex py-1.5 px-2 h-fit md:h-[34px] order-4 md:ml-auto"
+        className="bg-transparent p-0 border-none hidden md:flex order-4 md:ml-auto"
         onClick={() => setShowIframe(!showIframe)} // Toggle iframe visibility
       >
-        💚 Donate Now
+        <img
+          src="/KofoButton.webp"
+          alt="Donate Now"
+          className="h-auto w-auto max-h-[30px] md:max-h-[40px]" // Reduced height constraints
+        />
+      </Button>
+
+      {/* Mobile Donate Button */}
+      <Button
+        className="bg-transparent p-0 border-none flex md:hidden order-4 ml-auto"
+        onClick={() => window.open("https://ko-fi.com/danielvnz", "_blank")} // Open Ko-fi in a new tab
+      >
+        <img
+          src="/donateMobile.webp"
+          alt="Donate"
+          className="h-auto w-auto max-h-[25px]" // Adjusted for a smaller mobile-friendly size
+        />
       </Button>
 
       {/* Conditionally render the iframe */}
