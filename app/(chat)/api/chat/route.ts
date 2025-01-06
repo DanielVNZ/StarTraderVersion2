@@ -112,11 +112,12 @@ export async function POST(request: Request) {
         const { data: commodities, error: commoditiesError } = await supabase
           .from('Commodities')
           .select('*');
+          console.log('Fetched Commodities...');
 
         const { data: locations, error: locationsError } = await supabase
           .from('Locations')
           .select('*');
-
+          console.log('Fetched Locations...');
         if (commoditiesError || locationsError) {
           throw new Error(
             `Error fetching data: ${commoditiesError?.message || ''} ${
@@ -148,7 +149,7 @@ export async function POST(request: Request) {
           },
           onFinish: async ({ response, usage }) => {
             if (session.user?.id) {
-              try {
+              try { 
                 console.log('Token usage:', usage);
 
                 const sanitizedMessages = sanitizeResponseMessages(
