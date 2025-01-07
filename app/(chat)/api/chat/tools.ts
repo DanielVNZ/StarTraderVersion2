@@ -7,7 +7,7 @@ export const tools = {
     description: "Retrieve a list of all commodities.",
     parameters: z.object({}),
     execute: async (_args: {}) => {
-      console.log("Fetching commodities...");
+      // console.log("Fetching commodities...");
   
       const apiUrl = "https://api.uexcorp.space/2.0/commodities";
   
@@ -61,7 +61,7 @@ export const tools = {
         }
   
         const data = parsedData.data.data; // Extract validated data
-        console.log(`Fetched ${data.length} commodities.`);
+        //console.log(`Fetched ${data.length} commodities.`);
   
         // Chunk the data into smaller parts if necessary
         const chunkSize = 150;
@@ -70,7 +70,7 @@ export const tools = {
           chunks.push(data.slice(i, i + chunkSize));
         }
   
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
+        //console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
         return { result: chunks };
       } catch (error) {
         console.error("Error fetching commodities:", error);
@@ -101,7 +101,7 @@ export const tools = {
         }
   
         const data = responseData.data; // Extract the actual array
-        console.log(`Fetched ${data.length} entries from star systems API`);
+        //console.log(`Fetched ${data.length} entries from star systems API`);
   
         const chunkSize = 200; // Define the size of each chunk
         const chunks = [];
@@ -142,7 +142,7 @@ export const tools = {
         }
   
         const data = responseData.data; // Extract the actual array
-        console.log(`Fetched ${data.length} entries from space stations API`);
+        // // console.log(`Fetched ${data.length} entries from space stations API`);
   
         const chunkSize = 200; // Define the size of each chunk
         const chunks = [];
@@ -152,7 +152,7 @@ export const tools = {
           chunks.push(data.slice(i, i + chunkSize));
         }
   
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
+        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
         return { result: chunks }; // Return the data in chunks
       } catch (error) {
         console.error("Error fetching space stations:", error);
@@ -168,7 +168,7 @@ export const tools = {
         id_commodity: z.number().optional(),
     }),
     execute: async (args: { id_commodity?: number }) => {
-        console.log("Fetching buy commodity prices with arguments:", args);
+        // console.log("Fetching buy commodity prices with arguments:", args);
 
         // Construct query parameters dynamically
         const queryParams = new URLSearchParams();
@@ -179,7 +179,7 @@ export const tools = {
         });
 
         const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
-        console.log("API URL:", apiUrl);
+        // console.log("API URL:", apiUrl);
 
         try {
             const response = await fetch(apiUrl);
@@ -195,18 +195,8 @@ export const tools = {
                 status: z.literal("ok"),
                 data: z.array(
                     z.object({
-                        id_commodity: z.number().nullable(),
-                        id_star_system: z.number().nullable(),
-                        id_planet: z.number().nullable(),
-                        id_orbit: z.number().nullable(),
-                        id_moon: z.number().nullable(),
-                        id_city: z.number().nullable(),
-                        id_outpost: z.number().nullable(),
-                        id_terminal: z.number().nullable(),
                         terminal_name: z.string().nullable(),
                         terminal_code: z.string().nullable(),
-                        commodity_name: z.string().nullable(),
-                        commodity_code: z.string().nullable(),
                         price_buy: z.number().nullable(),
                         scu_buy: z.number().nullable(),
                         star_system_name: z.string().nullable(),
@@ -222,25 +212,15 @@ export const tools = {
 
             // Extract and return the filtered buy data
             const data = parsedData.data.data.map(item => ({
-                id_commodity: item.id_commodity,
-                id_star_system: item.id_star_system,
-                id_planet: item.id_planet,
-                id_orbit: item.id_orbit,
-                id_moon: item.id_moon,
-                id_city: item.id_city,
-                id_outpost: item.id_outpost,
-                id_terminal: item.id_terminal,
                 terminal_name: item.terminal_name,
                 terminal_code: item.terminal_code,
-                commodity_name: item.commodity_name,
-                commodity_code: item.commodity_code,
-                price_buy: item.price_buy,
-                scu_buy: item.scu_buy,
+                price_buy: item.price_buy + "aUEC",
+                scu_buy: item.scu_buy + " SCU",
                 star_system_name: item.star_system_name,
             }));
 
-            console.log("Filtered Buy JSON Output:", JSON.stringify(data, null, 2));
-            console.log(`Filtered ${data.length} commodity buy price records.`);
+            // console.log("Filtered Buy JSON Output:", JSON.stringify(data, null, 2));
+            // console.log(`Filtered ${data.length} commodity buy price records.`);
             return { result: data };
         } catch (error) {
             console.error("Error fetching commodity buy prices:", error);
@@ -255,7 +235,7 @@ getSellCommodityPrices: {
         id_commodity: z.number().optional(),
     }),
     execute: async (args: { id_commodity?: number }) => {
-        console.log("Fetching sell commodity prices with arguments:", args);
+        // console.log("Fetching sell commodity prices with arguments:", args);
 
         // Construct query parameters dynamically
         const queryParams = new URLSearchParams();
@@ -266,7 +246,7 @@ getSellCommodityPrices: {
         });
 
         const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
-        console.log("API URL:", apiUrl);
+        // console.log("API URL:", apiUrl);
 
         try {
             const response = await fetch(apiUrl);
@@ -282,18 +262,8 @@ getSellCommodityPrices: {
                 status: z.literal("ok"),
                 data: z.array(
                     z.object({
-                        id_commodity: z.number().nullable(),
-                        id_star_system: z.number().nullable(),
-                        id_planet: z.number().nullable(),
-                        id_orbit: z.number().nullable(),
-                        id_moon: z.number().nullable(),
-                        id_city: z.number().nullable(),
-                        id_outpost: z.number().nullable(),
-                        id_terminal: z.number().nullable(),
                         terminal_name: z.string().nullable(),
                         terminal_code: z.string().nullable(),
-                        commodity_name: z.string().nullable(),
-                        commodity_code: z.string().nullable(),
                         price_sell: z.number().nullable(),
                         scu_sell: z.number().nullable(),
                         star_system_name: z.string().nullable(),
@@ -309,25 +279,15 @@ getSellCommodityPrices: {
 
             // Extract and return the filtered sell data
             const data = parsedData.data.data.map(item => ({
-                id_commodity: item.id_commodity,
-                id_star_system: item.id_star_system,
-                id_planet: item.id_planet,
-                id_orbit: item.id_orbit,
-                id_moon: item.id_moon,
-                id_city: item.id_city,
-                id_outpost: item.id_outpost,
-                id_terminal: item.id_terminal,
                 terminal_name: item.terminal_name,
                 terminal_code: item.terminal_code,
-                commodity_name: item.commodity_name,
-                commodity_code: item.commodity_code,
-                price_sell: item.price_sell,
-                scu_sell: item.scu_sell,
+                price_sell: item.price_sell + " aUEC",
+                scu_sell: item.scu_sell + " SCU",
                 star_system_name: item.star_system_name,
             }));
 
-            console.log("Filtered Sell JSON Output:", JSON.stringify(data, null, 2));
-            console.log(`Filtered ${data.length} commodity sell price records.`);
+            // console.log("Filtered Sell JSON Output:", JSON.stringify(data, null, 2));
+            // console.log(`Filtered ${data.length} commodity sell price records.`);
             return { result: data };
         } catch (error) {
             console.error("Error fetching commodity sell prices:", error);
@@ -345,7 +305,7 @@ getSellCommodityPrices: {
     }),
     additionalProperties: false,
     execute: async (args: { id_star_system?: number }) => {
-      console.log("Fetching cities with arguments:", args);
+      // console.log("Fetching cities with arguments:", args);
   
       const queryParams = new URLSearchParams();
       if (args.id_star_system !== undefined) {
@@ -353,7 +313,7 @@ getSellCommodityPrices: {
       }
          
   
-      console.log("Query parameters for cities API:", queryParams.toString());
+      // console.log("Query parameters for cities API:", queryParams.toString());
   
       try {
         const response = await fetch(`https://api.uexcorp.space/2.0/cities?${queryParams.toString()}`);
@@ -371,7 +331,7 @@ getSellCommodityPrices: {
         }
   
         const data = responseData.data; // Extract the actual array
-        console.log(`Fetched ${data.length} entries from cities API`);
+        // console.log(`Fetched ${data.length} entries from cities API`);
   
         const chunkSize = 200; // Define the size of each chunk
         const chunks = [];
@@ -381,7 +341,7 @@ getSellCommodityPrices: {
           chunks.push(data.slice(i, i + chunkSize));
         }
   
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
+        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
         return { result: chunks }; // Return the data in chunks
       } catch (error) {
         console.error("Error fetching cities:", error);
@@ -397,13 +357,13 @@ getSellCommodityPrices: {
       id_planet: z.number().optional(),
     }),
     execute: async (args: { id_star_system?: number; id_planet?: number }) => {
-      console.log("Fetching moons with arguments:", args);
+      // console.log("Fetching moons with arguments:", args);
   
       const queryParams = new URLSearchParams();
       if (args.id_star_system !== undefined) queryParams.append("id_star_system", args.id_star_system.toString());
       if (args.id_planet !== undefined) queryParams.append("id_planet", args.id_planet.toString());
   
-      console.log("Query parameters for moons API:", queryParams.toString());
+      // console.log("Query parameters for moons API:", queryParams.toString());
   
       try {
         const response = await fetch(`https://api.uexcorp.space/2.0/moons?${queryParams.toString()}`);
@@ -421,7 +381,7 @@ getSellCommodityPrices: {
         }
   
         const data = responseData.data; // Extract the actual array
-        console.log(`Fetched ${data.length} entries from moons API`);
+        // console.log(`Fetched ${data.length} entries from moons API`);
   
         const chunkSize = 200; // Define the size of each chunk
         const chunks = [];
@@ -431,7 +391,7 @@ getSellCommodityPrices: {
           chunks.push(data.slice(i, i + chunkSize));
         }
   
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
+        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
         return { result: chunks }; // Return the data in chunks
       } catch (error) {
         console.error("Error fetching moons:", error);
@@ -448,7 +408,7 @@ getSellCommodityPrices: {
     execute: async (args: {
       id_star_system?: number;
     }) => {
-      console.log("Fetching orbits with arguments:", args);
+      // console.log("Fetching orbits with arguments:", args);
   
       // Construct query parameters dynamically
       const queryParams = new URLSearchParams();
@@ -460,7 +420,7 @@ getSellCommodityPrices: {
   
       const queryString = queryParams.toString();
       const apiUrl = `https://api.uexcorp.space/2.0/orbits${queryString ? `?${queryString}` : ''}`;
-      console.log("API URL:", apiUrl);
+      // console.log("API URL:", apiUrl);
   
       try {
         const response = await fetch(apiUrl);
@@ -510,7 +470,7 @@ getSellCommodityPrices: {
         }
   
         const data = parsedData.data.data; // Extract validated data
-        console.log(`Fetched ${data.length} entries from orbits API.`);
+        // console.log(`Fetched ${data.length} entries from orbits API.`);
   
         // Chunk the data into smaller parts if necessary
         const chunkSize = 200;
@@ -519,7 +479,7 @@ getSellCommodityPrices: {
           chunks.push(data.slice(i, i + chunkSize));
         }
   
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
+        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
         return { result: chunks };
       } catch (error) {
         console.error("Error fetching orbits:", error);
@@ -546,7 +506,7 @@ getSellCommodityPrices: {
       id_orbit?: number;
       id_moon?: number;
     }) => {
-      console.log("Fetching outposts with arguments:", args);
+      // console.log("Fetching outposts with arguments:", args);
   
       // Construct query parameters dynamically
       const queryParams = new URLSearchParams();
@@ -558,7 +518,7 @@ getSellCommodityPrices: {
   
       const queryString = queryParams.toString();
       const apiUrl = `https://api.uexcorp.space/2.0/outposts${queryString ? `?${queryString}` : ''}`;
-      console.log("API URL:", apiUrl);
+      // console.log("API URL:", apiUrl);
   
       try {
         const response = await fetch(apiUrl);
@@ -627,7 +587,7 @@ getSellCommodityPrices: {
         }
   
         const data = parsedData.data.data; // Extract validated data
-        console.log(`Fetched ${data.length} entries from outposts API.`);
+        // console.log(`Fetched ${data.length} entries from outposts API.`);
   
         // Chunk the data into smaller parts if necessary
         const chunkSize = 1000;
@@ -636,7 +596,7 @@ getSellCommodityPrices: {
           chunks.push(data.slice(i, i + chunkSize));
         }
   
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
+        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
         return { result: chunks };
       } catch (error) {
         console.error("Error fetching outposts:", error);
@@ -652,7 +612,7 @@ getSellCommodityPrices: {
       id_star_system: z.number().optional(),
     }),
     execute: async (args: { id_star_system?: number }) => {
-      console.log("Fetching planets with arguments:", args);
+      // console.log("Fetching planets with arguments:", args);
   
       const queryParams = new URLSearchParams();
       if (args.id_star_system !== undefined) {
@@ -662,8 +622,8 @@ getSellCommodityPrices: {
       const queryString = queryParams.toString();
       const apiUrl = `https://api.uexcorp.space/2.0/planets${queryString ? `?${queryString}` : ''}`;
   
-      console.log("Query parameters for planets API:", queryString);
-      console.log("API URL:", apiUrl);
+      // console.log("Query parameters for planets API:", queryString);
+      // console.log("API URL:", apiUrl);
   
       try {
         const response = await fetch(apiUrl);
@@ -681,7 +641,7 @@ getSellCommodityPrices: {
         }
   
         const data = responseData.data;
-        console.log(`Fetched ${data.length} entries from planets API`);
+        // console.log(`Fetched ${data.length} entries from planets API`);
   
         const chunkSize = 200;
         const chunks = [];
@@ -689,7 +649,7 @@ getSellCommodityPrices: {
           chunks.push(data.slice(i, i + chunkSize));
         }
   
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
+        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
         return { result: chunks };
       } catch (error) {
         console.error("Error fetching planets:", error);
