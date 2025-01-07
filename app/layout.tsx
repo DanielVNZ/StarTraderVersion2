@@ -1,20 +1,16 @@
+// app/layout.tsx
+
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
-import { ThemeProvider } from '@/components/theme-provider';
-
 import './globals.css';
-import { PostHogProvider } from './providers'
-
+import { ThemeProvider } from '@/components/theme-provider';
+import { PostHogProvider } from './providers';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://startrader.space'),
   title: 'Star Trader',
   description: 'AI Chat bot to help you with trading in Star Citizen',
-};
-
-export const viewport = {
-  maximumScale: 1, // Disable auto-zoom on mobile Safari
 };
 
 const LIGHT_THEME_COLOR = 'hsl(0 0% 100%)';
@@ -37,45 +33,30 @@ const THEME_COLOR_SCRIPT = `\
   updateThemeColor();
 })();`;
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      // `next-themes` injects an extra classname to the body element to avoid
-      // visual flicker before hydration. Hence the `suppressHydrationWarning`
-      // prop is necessary to avoid the React hydration mismatch warning.
-      // https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
-      suppressHydrationWarning
+      suppressHydrationWarning // Avoid hydration warnings from dynamic classes
     >
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: THEME_COLOR_SCRIPT,
           }}
-
-          
         />
-        
       </head>
       <body className="antialiased">
-        
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Toaster position="top-center" />
-          {children}
-        </ThemeProvider>
-      </body>
-      <body>
-      <PostHogProvider>
-          {children}
+        <PostHogProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Toaster position="top-center" />
+            {children}
+          </ThemeProvider>
         </PostHogProvider>
       </body>
     </html>
