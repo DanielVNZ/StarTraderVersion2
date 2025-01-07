@@ -15,7 +15,7 @@ export const authConfig = {
       // Publicly accessible routes
       const isOnPublicRoute = ['/sitemap.xml', '/api/sitemap'].some((route) =>
         nextUrl.pathname.startsWith(route)
-      );
+      ) || /^\/sitemap-\d+\.xml$/.test(nextUrl.pathname);      
 
       const isOnChat = nextUrl.pathname.startsWith('/');
       const isOnRegister = nextUrl.pathname.startsWith('/register');
