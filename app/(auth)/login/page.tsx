@@ -4,11 +4,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, startTransition } from 'react';
 import { toast } from 'sonner';
+import { Button as Button2, ButtonGroup } from '@nextui-org/react';
 
 import { AuthForm } from '@/components/auth-form';
 import { SubmitButton } from '@/components/submit-button';
-
-import { login, type LoginActionState, guestLogin, type GuestLoginActionState } from '../actions';
+import {
+  login,
+  type LoginActionState,
+  guestLogin,
+  type GuestLoginActionState,
+} from '../actions';
 
 export default function Page() {
   const router = useRouter();
@@ -27,6 +32,7 @@ export default function Page() {
   });
 
   const [isLoading, setIsLoading] = useState(false); // For loading state
+  const [showIframe, setShowIframe] = useState(false); // State to toggle iframe visibility
 
   useEffect(() => {
     if (loginState.status === 'failed') {
@@ -75,7 +81,31 @@ export default function Page() {
   };
 
   return (
-    <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
+    <div className="relative flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
+      {/* Top-Right Buttons for Desktop */}
+      <div className="absolute top-4 right-4 hidden md:flex gap-4">
+        {/* Ko-fi Button */}
+        <Button2
+          className="rounded-full text-lg"
+          color="secondary"
+          onPress={() => setShowIframe(!showIframe)} // Toggle iframe visibility
+        >
+          Buy me a ☕
+        </Button2>
+
+        {/* GitHub Button */}
+        <Button2
+          className="rounded-full text-lg"
+          color="secondary"
+          onPress={() =>
+            window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
+          } // Open GitHub in a new tab
+        >
+          ⭐ on GitHub
+        </Button2>
+      </div>
+
+      {/* Main Content */}
       <div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12">
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
           <h3 className="text-xl font-semibold dark:text-zinc-50">Welcome back to Star Trader</h3>
@@ -127,7 +157,61 @@ export default function Page() {
           </Link>
           {' for free. No email verification required!'}
         </p>
+
+        {/* Mobile Buttons Below the Text */}
+        <div className="flex md:hidden justify-center gap-4 mt-4">
+          {/* Mobile Ko-fi Button */}
+          <Button2
+            className="rounded-full text-lg"
+            color="secondary"
+            onPress={() => window.open('https://ko-fi.com/danielvnz', '_blank')} // Open Ko-fi link in a new tab
+          >
+            Buy me a ☕
+          </Button2>
+
+          {/* Mobile GitHub Button */}
+          <Button2
+            className="rounded-full text-lg"
+            color="secondary"
+            onPress={() =>
+              window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
+            } // Open GitHub in a new tab
+          >
+            ⭐ on GitHub
+          </Button2>
+        </div>
       </div>
+
+      {/* Conditionally render the iframe */}
+      {showIframe && (
+        <div
+          className="fixed top-0 right-0 bg-white shadow-lg rounded-md"
+          style={{
+            width: '400px',
+            height: '500px',
+            border: '1px solid #ccc',
+            zIndex: 1000,
+          }}
+        >
+          <Button2
+            className="absolute top-2 right-2 py-1.5 px-2 h-fit"
+            onPress={() => setShowIframe(false)} // Close iframe
+          >
+            Close
+          </Button2>
+          <iframe
+            id="kofiframe"
+            src="https://ko-fi.com/danielvnz/?hidefeed=true&widget=true&embed=true&preview=true"
+            style={{
+              border: 'none',
+              width: '100%',
+              height: '100%',
+              background: '#f9f9f9',
+            }}
+            title="Support me on Ko-fi"
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 }

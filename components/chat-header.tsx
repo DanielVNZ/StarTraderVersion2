@@ -10,7 +10,9 @@ import { PlusIcon } from './icons';
 import { useSidebar } from './ui/sidebar';
 import { memo } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
-import { VisibilityType, VisibilitySelector } from './visibility-selector';
+import { Button as Button2, ButtonGroup } from '@nextui-org/react';
+import { VisibilityType, VisibilitySelector } from '@/components/visibility-selector';
+
 
 function PureChatHeader({
   chatId,
@@ -66,29 +68,59 @@ function PureChatHeader({
         />
       )}
 
-      {/* Desktop Donate Button */}
-      <Button
-        className="bg-transparent p-0 border-none hidden md:flex order-4 md:ml-auto"
-        onClick={() => setShowIframe(!showIframe)} // Toggle iframe visibility
-      >
-        <img
-          src="/kofoButton.webp"
-          alt="Donate Now"
-          className="h-auto w-auto max-h-[30px] md:max-h-[40px]" // Reduced height constraints
-        />
-      </Button>
+      {/* Desktop Buttons */}
+      <div className="flex flex-col items-end order-4 md:ml-auto hidden md:flex">
+        <ButtonGroup className="flex gap-4">
+          {/* Ko-fi Button */}
+          <Button2
+            className="rounded-full"
+            color="secondary"
+            onClick={() => setShowIframe(!showIframe)} // Toggle iframe visibility
+          >
+            Buy me a ☕ ($3 NZD)
+          </Button2>
 
-      {/* Mobile Donate Button */}
-      <Button
-        className="bg-transparent p-0 border-none flex md:hidden order-4 ml-auto"
-        onClick={() => window.open("https://ko-fi.com/danielvnz", "_blank")} // Open Ko-fi in a new tab
-      >
-        <img
-          src="/donateMobile.webp"
-          alt="Donate"
-          className="h-auto w-auto max-h-[25px]" // Adjusted for a smaller mobile-friendly size
-        />
-      </Button>
+          {/* GitHub Button */}
+          <Button2
+            className="rounded-full"
+            color="secondary"
+            onPress={() =>
+              window.open(
+                'https://github.com/DanielVNZ/StarTraderVersion2',
+                '_blank'
+              )
+            } // Open GitHub in a new tab
+          >
+            ⭐ on Github
+          </Button2>
+        </ButtonGroup>
+      </div>
+
+      {/* Mobile Buttons */}
+      <div className="flex gap-4 md:hidden order-4 ml-auto">
+        {/* Mobile Ko-fi Button */}
+        <Button2
+          className="rounded-full text-lg"
+          color="secondary"
+          onPress={() => window.open('https://ko-fi.com/danielvnz', '_blank')} // Open Ko-fi link in a new tab
+        >
+          ☕
+        </Button2>
+
+        {/* Mobile GitHub Button */}
+        <Button2
+          className="rounded-full text-lg"
+          color="secondary"
+          onPress={() =>
+            window.open(
+              'https://github.com/DanielVNZ/StarTraderVersion2',
+              '_blank'
+            )
+          } // Open GitHub in a new tab
+        >
+          ⭐
+        </Button2>
+      </div>
 
       {/* Conditionally render the iframe */}
       {showIframe && (
