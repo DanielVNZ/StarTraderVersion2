@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useActionState, useEffect, useState } from 'react';
+import { useState, useEffect, startTransition } from 'react';
 import { toast } from 'sonner';
 
 import { AuthForm } from '@/components/auth-form';
 import { SubmitButton } from '@/components/submit-button';
 
-import { login, type LoginActionState } from '../actions';
+import { login, type LoginActionState, guestLogin, type GuestLoginActionState } from '../actions';
 
 export default function Page() {
   const router = useRouter();
@@ -16,27 +16,57 @@ export default function Page() {
   const [email, setEmail] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);
 
-  const [state, formAction] = useActionState<LoginActionState, FormData>(
-    login,
-    {
-      status: 'idle',
-    },
-  );
+  // State for login
+  const [loginState, setLoginState] = useState<LoginActionState>({
+    status: 'idle',
+  });
+
+  // State for guest login
+  const [guestState, setGuestState] = useState<GuestLoginActionState>({
+    status: 'idle',
+  });
 
   useEffect(() => {
-    if (state.status === 'failed') {
+    if (loginState.status === 'failed') {
       toast.error('Invalid credentials!');
-    } else if (state.status === 'invalid_data') {
-      toast.error('Failed validating your submission!');
-    } else if (state.status === 'success') {
+    } else if (loginState.status === 'success') {
       setIsSuccessful(true);
       router.refresh();
     }
-  }, [state.status, router]);
+  }, [loginState.status, router]);
 
-  const handleSubmit = (formData: FormData) => {
+  useEffect(() => {
+    if (guestState.status === 'failed') {
+      toast.error('Guest login failed. Please try again.');
+    } else if (guestState.status === 'success') {
+      toast.success('Logged in as Guest!');
+      router.push('/'); // Redirect after successful guest login
+    }
+  }, [guestState.status, router]);
+
+  const handleSubmit = async (formData: FormData) => {
     setEmail(formData.get('email') as string);
-    formAction(formData);
+    setLoginState({ status: 'in_progress' });
+
+    try {
+      const result = await login(loginState, formData);
+      setLoginState(result);
+    } catch {
+      setLoginState({ status: 'failed' });
+    }
+  };
+
+  const handleGuestLogin = () => {
+    setGuestState({ status: 'in_progress' });
+
+    startTransition(async () => {
+      try {
+        const result = await guestLogin(guestState);
+        setGuestState(result);
+      } catch {
+        setGuestState({ status: 'failed' });
+      }
+    });
   };
 
   return (
@@ -45,22 +75,35 @@ export default function Page() {
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
           <h3 className="text-xl font-semibold dark:text-zinc-50">Welcome back to Star Trader</h3>
           <p className="text-sm text-gray-500 dark:text-zinc-400">
-            Use your email and password to sign in
+            Use your email and password to sign in or continue as a guest.
           </p>
         </div>
         <AuthForm action={handleSubmit} defaultEmail={email}>
+          {/* Standard Sign-In Button */}
           <SubmitButton isSuccessful={isSuccessful}>Start Trading</SubmitButton>
-          <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
-            {"Don't have an account? "}
-            <Link
-              href="/register"
-              className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
-            >
-              Sign up
-            </Link>
-            {' for free. No email verification required!'}
-          </p>
         </AuthForm>
+
+        {/* Guest Login Button */}
+        <div className="text-center">
+          <button
+            onClick={handleGuestLogin}
+            className="relative inline-flex items-center justify-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-600"
+            style={{ width: 'fit-content', margin: '0 auto' }}
+          >
+            Continue as Guest
+          </button>
+        </div>
+
+        <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
+          {"Don't have an account? "}
+          <Link
+            href="/register"
+            className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
+          >
+            Sign up
+          </Link>
+          {' for free. No email verification required!'}
+        </p>
       </div>
     </div>
   );
