@@ -124,34 +124,50 @@ function PureChatHeader({
 
       {/* Conditionally render the iframe */}
       {showIframe && (
-        <div
-          className="fixed top-0 right-0 bg-white shadow-lg rounded-md"
-          style={{
-            width: '400px',
-            height: '500px',
-            border: '1px solid #ccc',
-            zIndex: 1000,
-          }}
-        >
-          <Button
-            className="bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-zinc-50 dark:text-zinc-900 absolute top-2 right-2 py-1.5 px-2 h-fit"
-            onClick={() => setShowIframe(false)} // Close iframe
-          >
-            😭 Close Window
-          </Button>
-          <iframe
-            id="kofiframe"
-            src="https://ko-fi.com/danielvnz/?hidefeed=true&widget=true&embed=true&preview=true"
-            style={{
-              border: 'none',
-              width: '100%',
-              height: '130%',
-              background: '#f9f9f9',
-            }}
-            title="danielvnz"
-          />
-        </div>
-      )}
+  <div
+    className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 rounded-md"
+    style={{
+      zIndex: 2147483647, // Very high z-index to ensure it appears above everything
+    }}
+  >
+    <div
+      className="bg-white shadow-lg rounded-md relative"
+      style={{
+        width: '400px',
+        height: '680px',
+        border: '5px solid #11CADF',
+        zIndex: 2147483647,
+        position: 'fixed',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        top: '20px', // Slight padding from the top  
+        borderRadius: '20px', 
+      }}
+    >
+      <iframe
+        id="kofiframe"
+        src="https://ko-fi.com/danielvnz/?hidefeed=true&widget=true&embed=true&preview=true"
+        style={{
+          border: 'none',
+          width: '100%',
+          height: 'calc(100% - 50px)', // Adjust iframe height to account for button
+          background: '#f9f9f9',
+          borderRadius: '16px',
+        }}
+        title="danielvnz"
+      />
+      <Button
+  className="bg-red-500 hover:bg-red-700 text-white absolute bottom-2 left-1/2 transform -translate-x-1/2 py-1.5 px-2 h-fit"
+  onClick={() => setShowIframe(false)} // Close iframe
+>
+  😭 Close Window
+</Button>
+    </div>
+  </div>
+)}
+
+
+
     </header>
   );
 }
