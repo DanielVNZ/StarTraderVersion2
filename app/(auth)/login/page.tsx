@@ -103,84 +103,108 @@ export default function Page() {
         >
           ⭐ on GitHub
         </Button2>
+        <Button2
+            className="rounded-full hover:bg-secondary-light hover:text-yellow-400 transition text-lg"
+            color="secondary"
+            onPress={() =>
+              window.open(
+                'https://discord.gg/zy9x4UKwsw',
+                '_blank'
+              )
+            } // Open GitHub in a new tab
+          >
+            👋 Join our Discord
+          </Button2>
       </div>
 
       {/* Main Content */}
-      <div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12">
-        <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
-          <h3 className="text-xl font-semibold dark:text-zinc-50">Welcome back to Star Trader</h3>
-          <p className="text-sm text-gray-500 dark:text-zinc-400">
-            Use your email and password to sign in or continue as a guest.
-          </p>
-        </div>
-        <AuthForm action={handleSubmit} defaultEmail={email}>
-          {/* Standard Sign-In Button */}
-          <SubmitButton isSuccessful={isSuccessful}>Start Trading</SubmitButton>
-        </AuthForm>
+<div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12">
+  <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
+    <h3 className="text-xl font-semibold dark:text-zinc-50">Welcome back to Star Trader</h3>
+    <p className="text-sm text-gray-500 dark:text-zinc-400">
+      Use your email and password to sign in or continue as a guest.
+    </p>
+  </div>
+  <AuthForm action={handleSubmit} defaultEmail={email}>
+    {/* Standard Sign-In Button */}
+    <SubmitButton isSuccessful={isSuccessful}>Start Trading</SubmitButton>
+  </AuthForm>
 
-        {/* Guest Login Button */}
-        <div className="text-center">
-          <button
-            onClick={handleGuestLogin}
-            className="relative inline-flex items-center justify-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-600"
-            style={{ width: 'fit-content', margin: '0 auto' }}
-            disabled={isLoading} // Disable the button while loading
-          >
-            {isLoading ? (
-              <svg
-                className="animate-spin size-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"
-                />
-              </svg>
-            ) : (
-              'Continue as Guest'
-            )}
-          </button>
-        </div>
+  {/* Guest Login Button */}
+  <div className="text-center">
+    <button
+      onClick={handleGuestLogin}
+      className="relative inline-flex items-center justify-center rounded-md bg-blue-500 px-5 py-3 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-600"
+      style={{ margin: '0 auto' }}
+      disabled={isLoading} // Disable the button while loading
+    >
+      {isLoading ? (
+        <svg
+          className="animate-spin h-5 w-5 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"
+          />
+        </svg>
+      ) : (
+        'Continue as Guest'
+      )}
+    </button>
+  </div>
 
-        <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
-          {"Don't have an account? "}
-          <Link
-            href="/register"
-            className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
-          >
-            Sign up
-          </Link>
-          {' for free. No email verification required!'}
-        </p>
+  <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
+    {"Don't have an account? "}
+    <Link
+      href="/register"
+      className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
+    >
+      Sign up
+    </Link>
+    {' for free. No email verification required!'}
+  </p>
 
-        {/* Mobile Buttons Below the Text */}
-        <div className="flex md:hidden justify-center gap-4 mt-4">
-          {/* Mobile Ko-fi Button */}
-          <Button2
-            className="rounded-full text-lg"
-            color="secondary"
-            onPress={() => window.open('https://ko-fi.com/danielvnz', '_blank')} // Open Ko-fi link in a new tab
-          >
-            Buy me a ☕
-          </Button2>
+  {/* Mobile Buttons Below the Text */}
+  <div className="flex flex-col md:hidden justify-center gap-4 mt-4 items-center bg-background">
+    {/* Mobile Ko-fi Button */}
+    <Button2
+      className="rounded-full bg-secondary hover:bg-secondary-light text-white transition text-lg px-6 py-6 flex items-center justify-center"
+      color="secondary"
+      onPress={() => window.open('https://ko-fi.com/danielvnz', '_blank')} // Open Ko-fi link in a new tab
+    >
+      Buy me a ☕
+    </Button2>
 
-          {/* Mobile GitHub Button */}
-          <Button2
-            className="rounded-full text-lg"
-            color="secondary"
-            onPress={() =>
-              window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
-            } // Open GitHub in a new tab
-          >
-            ⭐ on GitHub
-          </Button2>
-        </div>
-      </div>
+    {/* Mobile GitHub Button */}
+    <Button2
+      className="rounded-full bg-secondary hover:bg-secondary-light text-white transition text-lg px-6 py-6 flex items-center justify-center"
+      color="secondary"
+      onPress={() =>
+        window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
+      } // Open GitHub in a new tab
+    >
+      ⭐ on GitHub
+    </Button2>
+
+    {/* Mobile Discord Button */}
+    <Button2
+      className="rounded-full bg-secondary hover:bg-secondary-light text-white transition text-lg px-6 py-6 flex items-center justify-center"
+      color="secondary"
+      onPress={() =>
+        window.open('https://discord.gg/zy9x4UKwsw', '_blank')
+      } // Open Discord in a new tab
+    >
+      👋 Join our Discord
+    </Button2>
+  </div>
+</div>
+
 
       {/* Conditionally render the iframe */}
       {showIframe && (

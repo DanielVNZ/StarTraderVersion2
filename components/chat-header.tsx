@@ -93,6 +93,18 @@ function PureChatHeader({
           >
             ⭐ on Github
           </Button2>
+          <Button2
+            className="rounded-full hover:bg-secondary-light hover:text-yellow-400 transition text-lg"
+            color="secondary"
+            onPress={() =>
+              window.open(
+                'https://discord.gg/zy9x4UKwsw',
+                '_blank'
+              )
+            } // Open GitHub in a new tab
+          >
+            👋 Join our Discord
+          </Button2>
         </ButtonGroup>
       </div>
 
@@ -119,6 +131,18 @@ function PureChatHeader({
           } // Open GitHub in a new tab
         >
           ⭐
+        </Button2>
+        <Button2
+          className="rounded-full text-lg"
+          color="secondary"
+          onPress={() =>
+            window.open(
+              'https://discord.gg/zy9x4UKwsw',
+              '_blank'
+            )
+          } // Open GitHub in a new tab
+        >
+          👋
         </Button2>
       </div>
 
