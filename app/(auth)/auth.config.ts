@@ -13,10 +13,13 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
 
       // Publicly accessible routes
-      const isOnPublicRoute = ['/sitemap.xml', '/api/sitemap'].some((route) =>
-        nextUrl.pathname.startsWith(route)
-      ) || /^\/sitemap-\d+\.xml$/.test(nextUrl.pathname);      
-
+      const isOnPublicRoute =
+        ['/sitemap.xml', '/api/sitemap'].some((route) =>
+          nextUrl.pathname.startsWith(route)
+        ) ||
+        /^\/sitemap-\d+\.xml$/.test(nextUrl.pathname) || // Dynamic sitemaps
+        nextUrl.pathname.match(/\.(png|jpg|jpeg|gif|svg|webp)$/i); // Allow image files
+        
       const isOnChat = nextUrl.pathname.startsWith('/');
       const isOnRegister = nextUrl.pathname.startsWith('/register');
       const isOnLogin = nextUrl.pathname.startsWith('/login');
