@@ -4,6 +4,8 @@ import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/theme-provider';
 
 import './globals.css';
+import { PostHogProvider } from './providers'
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://startrader.space'),
@@ -54,6 +56,8 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{
             __html: THEME_COLOR_SCRIPT,
           }}
+
+          
         />
       </head>
       <body className="antialiased">
@@ -66,6 +70,9 @@ export default async function RootLayout({
           <Toaster position="top-center" />
           {children}
         </ThemeProvider>
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );

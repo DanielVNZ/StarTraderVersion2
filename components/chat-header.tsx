@@ -13,10 +13,11 @@ import { Button as Button2, ButtonGroup } from '@nextui-org/react';
 import { type VisibilityType, VisibilitySelector } from '@/components/visibility-selector';
 import posthog from 'posthog-js'
 
+
 posthog.init('phc_hf6aHkwqcMFrKU4jQf1o4laa4ROxMJtzyWFfCid0dNT',
   {
       api_host: 'https://us.i.posthog.com',
-      person_profiles: 'always' // or 'always' to create profiles for anonymous users as well
+      person_profiles: 'always' 
   }
 )
 
