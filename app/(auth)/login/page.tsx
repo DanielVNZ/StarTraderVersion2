@@ -26,6 +26,8 @@ export default function Page() {
     status: 'idle',
   });
 
+  const [isLoading, setIsLoading] = useState(false); // For loading state
+
   useEffect(() => {
     if (loginState.status === 'failed') {
       toast.error('Invalid credentials!');
@@ -57,6 +59,7 @@ export default function Page() {
   };
 
   const handleGuestLogin = () => {
+    setIsLoading(true); // Set loading state to true
     setGuestState({ status: 'in_progress' });
 
     startTransition(async () => {
@@ -65,6 +68,8 @@ export default function Page() {
         setGuestState(result);
       } catch {
         setGuestState({ status: 'failed' });
+      } finally {
+        setIsLoading(false); // Reset loading state
       }
     });
   };
@@ -89,8 +94,26 @@ export default function Page() {
             onClick={handleGuestLogin}
             className="relative inline-flex items-center justify-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-600"
             style={{ width: 'fit-content', margin: '0 auto' }}
+            disabled={isLoading} // Disable the button while loading
           >
-            Continue as Guest
+            {isLoading ? (
+              <svg
+                className="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"
+                />
+              </svg>
+            ) : (
+              'Continue as Guest'
+            )}
           </button>
         </div>
 
