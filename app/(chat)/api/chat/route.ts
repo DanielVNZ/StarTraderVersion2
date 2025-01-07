@@ -38,6 +38,7 @@ type AllowedTools =
   | 'getCommodities'
   | 'getBuyCommodityPrices'
   | 'getSellCommodityPrices'
+  | 'getTerminals'
   | 'getCities'
   | 'getMoons'
   | 'getOrbits'
@@ -50,6 +51,7 @@ const myTools: AllowedTools[] = [
   'getCommodities',
   'getBuyCommodityPrices',
   'getSellCommodityPrices',
+  'getTerminals',
   'getCities',
   'getMoons',
   'getOrbits',

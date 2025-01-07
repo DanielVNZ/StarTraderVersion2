@@ -604,7 +604,53 @@ getSellCommodityPrices: {
       }
     },
   },
-  
+
+  getTerminals: {
+    description: "Retrieve a list of terminals with their names and associated star systems. Use this tool to provide terminal information for commodity trading.",
+    parameters: z.object({}),
+    execute: async () => {
+        // API URL
+        const apiUrl = "https://api.uexcorp.space/2.0/terminals?type=commodity";
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                console.error("Failed to fetch terminals:", response.statusText);
+                return { error: `Failed to fetch data: ${response.statusText}` };
+            }
+
+            const responseData = await response.json();
+
+            // Zod schema to validate response
+            const schema = z.object({
+                status: z.literal("ok"),
+                data: z.array(
+                    z.object({
+                        name: z.string().nullable(),
+                        star_system_name: z.string().nullable(),
+                    })
+                ),
+            });
+
+            const parsedData = schema.safeParse(responseData);
+            if (!parsedData.success) {
+                console.warn("Invalid terminal data format:", parsedData.error.errors);
+                return { error: "Invalid terminal data format received from the API." };
+            }
+
+            // Extract and return the terminal data
+            const data = parsedData.data.data.map(item => ({
+                name: item.name,
+                star_system_name: item.star_system_name,
+            }));
+
+            return { result: data };
+        } catch (error) {
+            console.error("Error fetching terminals:", error);
+            return { error: "An unexpected error occurred while fetching terminal data." };
+        }
+    },
+  },
 
   getPlanets: {
     description: "Retrieve a list of planets.",
