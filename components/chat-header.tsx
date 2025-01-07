@@ -10,7 +10,7 @@ import { PlusIcon } from './icons';
 import { useSidebar } from './ui/sidebar';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { Button as Button2, ButtonGroup } from '@nextui-org/react';
-import { VisibilityType, VisibilitySelector } from '@/components/visibility-selector';
+import { type VisibilityType, VisibilitySelector } from '@/components/visibility-selector';
 
 
 function PureChatHeader({
@@ -68,7 +68,7 @@ function PureChatHeader({
       )}
 
       {/* Desktop Buttons */}
-      <div className="flex flex-col items-end order-4 md:ml-auto hidden md:flex">
+      <div className="flex-col items-end order-4 md:ml-auto hidden md:flex">
         <ButtonGroup className="flex gap-4">
           {/* Ko-fi Button */}
           <Button2
@@ -148,7 +148,7 @@ function PureChatHeader({
               background: '#f9f9f9',
             }}
             title="danielvnz"
-          ></iframe>
+          />
         </div>
       )}
     </header>

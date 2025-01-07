@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, startTransition } from 'react';
 import { toast } from 'sonner';
-import { Button as Button2, ButtonGroup } from '@nextui-org/react';
+import { Button as Button2, } from '@nextui-org/react';
 
 import { AuthForm } from '@/components/auth-form';
 import { SubmitButton } from '@/components/submit-button';
@@ -128,7 +128,7 @@ export default function Page() {
           >
             {isLoading ? (
               <svg
-                className="animate-spin h-5 w-5 text-white"
+                className="animate-spin size-5 text-white"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -209,7 +209,7 @@ export default function Page() {
               background: '#f9f9f9',
             }}
             title="Support me on Ko-fi"
-          ></iframe>
+          />
         </div>
       )}
     </div>

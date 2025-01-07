@@ -214,8 +214,8 @@ export const tools = {
             const data = parsedData.data.data.map(item => ({
                 terminal_name: item.terminal_name,
                 terminal_code: item.terminal_code,
-                price_buy: item.price_buy + "aUEC",
-                scu_buy: item.scu_buy + " SCU",
+                price_buy: `${item.price_buy}aUEC`,
+                scu_buy: `${item.scu_buy} SCU`,
                 star_system_name: item.star_system_name,
             }));
 
@@ -281,8 +281,8 @@ getSellCommodityPrices: {
             const data = parsedData.data.data.map(item => ({
                 terminal_name: item.terminal_name,
                 terminal_code: item.terminal_code,
-                price_sell: item.price_sell + " aUEC",
-                scu_sell: item.scu_sell + " SCU",
+                price_sell: `${item.price_sell} aUEC`,
+                scu_sell: `${item.scu_sell} SCU`,
                 star_system_name: item.star_system_name,
             }));
 
