@@ -72,16 +72,17 @@ function PureChatHeader({
         <ButtonGroup className="flex gap-4">
           {/* Ko-fi Button */}
           <Button2
-            className="rounded-full"
+            className="rounded-full hover:bg-secondary-light hover:text-brown-600 transition text-lg"
             color="secondary"
-            onClick={() => setShowIframe(!showIframe)} // Toggle iframe visibility
+            onPress={() => setShowIframe(!showIframe)} // Toggle iframe visibility
+            
           >
             Buy me a ☕ ($3 NZD)
           </Button2>
 
           {/* GitHub Button */}
           <Button2
-            className="rounded-full"
+            className="rounded-full hover:bg-secondary-light hover:text-yellow-400 transition text-lg"
             color="secondary"
             onPress={() =>
               window.open(

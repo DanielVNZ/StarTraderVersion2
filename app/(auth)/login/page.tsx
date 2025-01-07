@@ -86,16 +86,16 @@ export default function Page() {
       <div className="absolute top-4 right-4 hidden md:flex gap-4">
         {/* Ko-fi Button */}
         <Button2
-          className="rounded-full text-lg"
+          className="rounded-full hover:bg-secondary-light hover:text-brown-600 transition text-lg"
           color="secondary"
           onPress={() => setShowIframe(!showIframe)} // Toggle iframe visibility
         >
-          Buy me a ☕
+          Buy me a ☕ ($3 NZD)
         </Button2>
 
         {/* GitHub Button */}
         <Button2
-          className="rounded-full text-lg"
+          className="rounded-full hover:bg-secondary-light hover:text-yellow-400 transition text-lg"
           color="secondary"
           onPress={() =>
             window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
