@@ -59,8 +59,10 @@ export default async function RootLayout({
 
           
         />
+        
       </head>
       <body className="antialiased">
+        
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -70,7 +72,9 @@ export default async function RootLayout({
           <Toaster position="top-center" />
           {children}
         </ThemeProvider>
-        <PostHogProvider>
+      </body>
+      <body>
+      <PostHogProvider>
           {children}
         </PostHogProvider>
       </body>
