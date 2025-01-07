@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useWindowSize } from 'usehooks-ts';
 import { ModelSelector } from '@/components/model-selector';
@@ -8,7 +8,6 @@ import { SidebarToggle } from '@/components/sidebar-toggle';
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from './icons';
 import { useSidebar } from './ui/sidebar';
-import { memo } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { Button as Button2, ButtonGroup } from '@nextui-org/react';
 import { VisibilityType, VisibilitySelector } from '@/components/visibility-selector';
