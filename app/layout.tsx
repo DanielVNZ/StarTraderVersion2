@@ -39,6 +39,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning // Avoid hydration warnings from dynamic classes
     >
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-659882552"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'AW-659882552');
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: THEME_COLOR_SCRIPT,
@@ -77,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </ThemeProvider>
         </PostHogProvider>
+        
       </body>
     </html>
   );
