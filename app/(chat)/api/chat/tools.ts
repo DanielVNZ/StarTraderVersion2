@@ -1,5 +1,4 @@
 import { z } from "zod";
-import fs from 'fs';
 
 export const tools = {
 
@@ -252,15 +251,7 @@ export const tools = {
   
         console.log("Best buy location calculated:", bestBuyLocation);
   
-        // Log the result to a JSON file
-        const logFilePath = "./getBuyCommodityPrices_output.json";
-        fs.writeFileSync(
-          logFilePath,
-          JSON.stringify({ best_buy_location: bestBuyLocation }, null, 2),
-          "utf-8"
-        );
-        console.log(`Output logged to ${logFilePath}`);
-  
+       
         return { best_buy_location: bestBuyLocation };
       } catch (error) {
         console.error("Error fetching commodity buy prices:", error);
@@ -362,15 +353,6 @@ getSellCommodityPrices: {
       }
 
       console.log("Best sell location calculated:", bestSellLocation);
-
-      // Log the result to a JSON file
-      const logFilePath = "./getSellCommodityPrices_output.json";
-      fs.writeFileSync(
-        logFilePath,
-        JSON.stringify({ best_sell_location: bestSellLocation }, null, 2),
-        "utf-8"
-      );
-      console.log(`Output logged to ${logFilePath}`);
 
       return { best_sell_location: bestSellLocation };
     } catch (error) {
@@ -863,13 +845,6 @@ getSellCommodityPrices: {
   
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
   
-        const errorLogFilePath = "./getCommoditiesPricesAll_error.json";
-        fs.writeFileSync(
-          errorLogFilePath,
-          JSON.stringify({ error: errorMessage }, null, 2),
-          "utf-8"
-        );
-        console.log(`Error logged to ${errorLogFilePath}`);
   
         return { error: "An error occurred while processing the request." };
       }
