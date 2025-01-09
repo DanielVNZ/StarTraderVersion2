@@ -841,9 +841,7 @@ getSellCommodityPrices: {
   
         return { best_route: bestRoute };
       } catch (error) {
-        console.error("Error fetching or processing data:", error);
-  
-        const errorMessage = error instanceof Error ? error.message : "Unknown error";
+        console.error("Error fetching or processing data:", error)
   
   
         return { error: "An error occurred while processing the request." };
