@@ -265,15 +265,6 @@ export const tools = {
       } catch (error) {
         console.error("Error fetching commodity buy prices:", error);
   
-        const errorMessage = error instanceof Error ? error.message : "Unknown error";
-  
-        const errorLogFilePath = "./getBuyCommodityPrices_error.json";
-        fs.writeFileSync(
-          errorLogFilePath,
-          JSON.stringify({ error: errorMessage }, null, 2),
-          "utf-8"
-        );
-        console.log(`Error logged to ${errorLogFilePath}`);
   
         return { error: "An unexpected error occurred while fetching commodity buy prices." };
       }
@@ -384,16 +375,6 @@ getSellCommodityPrices: {
       return { best_sell_location: bestSellLocation };
     } catch (error) {
       console.error("Error fetching commodity sell prices:", error);
-
-      const errorMessage = error instanceof Error ? error.message : "Unknown error";
-
-      const errorLogFilePath = "./getSellCommodityPrices_error.json";
-      fs.writeFileSync(
-        errorLogFilePath,
-        JSON.stringify({ error: errorMessage }, null, 2),
-        "utf-8"
-      );
-      console.log(`Error logged to ${errorLogFilePath}`);
 
       return { error: "An unexpected error occurred while fetching commodity sell prices." };
     }
@@ -869,16 +850,7 @@ getSellCommodityPrices: {
         };
   
         const bestRoute = calculateMostProfitableRoute(filteredData, userSCU, userFunds);
-  
-        // Log the output to a JSON file
-        const logFilePath = "./getCommoditiesPricesAll_output.json";
-        const outputData = bestRoute
-          ? { best_route: bestRoute }
-          : { error: "No profitable routes found with the current constraints." };
-  
-        fs.writeFileSync(logFilePath, JSON.stringify(outputData, null, 2), "utf-8");
-        console.log(`Output logged to ${logFilePath}`);
-  
+      
         if (!bestRoute) {
           return { error: "No profitable routes found with the current constraints." };
         }
