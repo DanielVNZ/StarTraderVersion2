@@ -35,17 +35,19 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export const maxDuration = 60;
 
 type AllowedTools =
-  | 'getCommodities'
-  | 'getBuyCommodityPrices'
-  | 'getSellCommodityPrices'
-  | 'getTerminals'
-  | 'getCities'
-  | 'getMoons'
-  | 'getOrbits'
-  | 'getOutposts'
-  | 'getPlanets'
-  | 'getStarSystems'
-  | 'getSpaceStations';
+  'getCommodities' |
+'getBuyCommodityPrices' |
+'getSellCommodityPrices' |
+'getTerminals' |
+'getCities' |
+'getMoons' |
+'getOrbits' |
+'getOutposts' |
+'getPlanets' |
+'getStarSystems' |
+'getCommoditiesPricesAll' |
+'getSpaceStations'
+
 
 const myTools: AllowedTools[] = [
   'getCommodities',
@@ -59,6 +61,7 @@ const myTools: AllowedTools[] = [
   'getPlanets',
   'getStarSystems',
   'getSpaceStations',
+  'getCommoditiesPricesAll',
 ];
 
 const allTools: AllowedTools[] = [...myTools];

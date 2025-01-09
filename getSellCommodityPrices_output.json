@@ -1,0 +1,11 @@
+{
+  "best_sell_location": {
+    "terminal_name": "Jackson's Swap",
+    "terminal_code": "JACKS",
+    "price_sell": 7159,
+    "star_system_name": "Pyro",
+    "scu_sell": 205,
+    "max_scu_sellable": 150,
+    "total_income": 1073850
+  }
+}

@@ -1,5 +1,5 @@
 import { z } from "zod";
-
+import fs from 'fs';
 
 export const tools = {
 
@@ -163,137 +163,241 @@ export const tools = {
   
 
   getBuyCommodityPrices: {
-    description: "Retrieve commodity buy prices and available stock for a specific commodity or location. Use this tool to help the user find the best buy location for a specific commodity.",
+    description:
+      "Retrieve commodity buy prices and available stock for a specific commodity or location. Use this tool to help the user find the best buy location for a specific commodity.",
     parameters: z.object({
-        id_commodity: z.number().optional(),
+      id_commodity: z.number().optional().describe("ID of the commodity to buy"),
+      userSCU: z.number().min(1).describe("SCU capacity of the user's cargo"),
     }),
-    execute: async (args: { id_commodity?: number }) => {
-        // console.log("Fetching buy commodity prices with arguments:", args);
-
-        // Construct query parameters dynamically
-        const queryParams = new URLSearchParams();
-        Object.entries(args).forEach(([key, value]) => {
-            if (value !== undefined) {
-                queryParams.append(key, value.toString());
-            }
-        });
-
-        const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
-        // console.log("API URL:", apiUrl);
-
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                console.error("Failed to fetch commodity buy prices:", response.statusText);
-                return { error: `Failed to fetch data: ${response.statusText}` };
-            }
-
-            const responseData = await response.json();
-
-            // Updated Zod schema with required fields for buy data
-            const schema = z.object({
-                status: z.literal("ok"),
-                data: z.array(
-                    z.object({
-                        terminal_name: z.string().nullable(),
-                        terminal_code: z.string().nullable(),
-                        price_buy: z.number().nullable(),
-                        scu_buy: z.number().nullable(),
-                        star_system_name: z.string().nullable(),
-                    })
-                ),
-            });
-
-            const parsedData = schema.safeParse(responseData);
-            if (!parsedData.success) {
-                console.warn("Invalid buy data format:", parsedData.error.errors);
-                return { error: "Invalid buy data format received from the API." };
-            }
-
-            // Extract and return the filtered buy data
-            const data = parsedData.data.data.map(item => ({
-                terminal_name: item.terminal_name,
-                terminal_code: item.terminal_code,
-                price_buy: `${item.price_buy}aUEC`,
-                scu_buy: `${item.scu_buy} SCU`,
-                star_system_name: item.star_system_name,
-            }));
-
-            // console.log("Filtered Buy JSON Output:", JSON.stringify(data, null, 2));
-            // console.log(`Filtered ${data.length} commodity buy price records.`);
-            return { result: data };
-        } catch (error) {
-            console.error("Error fetching commodity buy prices:", error);
-            return { error: "An unexpected error occurred while fetching commodity buy prices." };
+    execute: async (args: { id_commodity?: number; userSCU: number }) => {
+      console.log("Fetching buy commodity prices with arguments:", args);
+  
+      // Construct query parameters dynamically
+      const queryParams = new URLSearchParams();
+      Object.entries(args).forEach(([key, value]) => {
+        if (value !== undefined && key !== "userSCU") {
+          queryParams.append(key, value.toString());
         }
+      });
+  
+      const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
+      console.log("API URL:", apiUrl);
+  
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          console.error("Failed to fetch commodity buy prices:", response.statusText);
+          return { error: `Failed to fetch data: ${response.statusText}` };
+        }
+  
+        const responseData = await response.json();
+  
+        // Updated Zod schema with required fields for buy data
+        const schema = z.object({
+          status: z.literal("ok"),
+          data: z.array(
+            z.object({
+              terminal_name: z.string().nullable(),
+              terminal_code: z.string().nullable(),
+              price_buy: z.number().nullable(),
+              scu_buy: z.number().nullable(),
+              star_system_name: z.string().nullable(),
+            })
+          ),
+        });
+  
+        const parsedData = schema.safeParse(responseData);
+        if (!parsedData.success) {
+          console.warn("Invalid buy data format:", parsedData.error.errors);
+          return { error: "Invalid buy data format received from the API." };
+        }
+  
+        // Filter and prioritize buy locations
+        const userSCU = args.userSCU; // SCU capacity provided by the user
+        const filteredData = parsedData.data.data
+          .filter(
+            (item) =>
+              item.price_buy !== null &&
+              item.scu_buy !== null &&
+              item.scu_buy >= userSCU // Strict check for sufficient stock
+          )
+          .map((item) => {
+            const totalCost = item.price_buy! * userSCU; // Total cost for the specified SCU
+  
+            return {
+              terminal_name: item.terminal_name,
+              terminal_code: item.terminal_code,
+              price_buy: item.price_buy,
+              star_system_name: item.star_system_name,
+              scu_buy: item.scu_buy,
+              user_scu: userSCU, // Include the user's SCU in the output
+              total_cost: totalCost,
+            };
+          });
+  
+        // Sort by total cost (or price_buy as a secondary sort)
+        const sortedData = filteredData.sort((a, b) => {
+          if (a.total_cost !== b.total_cost) {
+            return a.total_cost - b.total_cost; // Prioritize lower total cost
+          }
+          return a.price_buy! - b.price_buy!; // Tie-break by lower price
+        });
+  
+        // Return the best buy location
+        const bestBuyLocation = sortedData.length > 0 ? sortedData[0] : null;
+  
+        if (!bestBuyLocation) {
+          return { error: "No buy locations found with sufficient stock for the commodity." };
+        }
+  
+        console.log("Best buy location calculated:", bestBuyLocation);
+  
+        // Log the result to a JSON file
+        const logFilePath = "./getBuyCommodityPrices_output.json";
+        fs.writeFileSync(
+          logFilePath,
+          JSON.stringify({ best_buy_location: bestBuyLocation }, null, 2),
+          "utf-8"
+        );
+        console.log(`Output logged to ${logFilePath}`);
+  
+        return { best_buy_location: bestBuyLocation };
+      } catch (error) {
+        console.error("Error fetching commodity buy prices:", error);
+  
+        const errorMessage = error instanceof Error ? error.message : "Unknown error";
+  
+        const errorLogFilePath = "./getBuyCommodityPrices_error.json";
+        fs.writeFileSync(
+          errorLogFilePath,
+          JSON.stringify({ error: errorMessage }, null, 2),
+          "utf-8"
+        );
+        console.log(`Error logged to ${errorLogFilePath}`);
+  
+        return { error: "An unexpected error occurred while fetching commodity buy prices." };
+      }
     },
-},
+  },
+
 
 getSellCommodityPrices: {
-    description: "Retrieve commodity sell prices and demand for a specific commodity or location. Use this tool to help the user find the best sell location for a specific commodity.",
-    parameters: z.object({
-        id_commodity: z.number().optional(),
-    }),
-    execute: async (args: { id_commodity?: number }) => {
-        // console.log("Fetching sell commodity prices with arguments:", args);
+  description:
+    "Retrieve commodity sell prices and demand for a specific commodity or location. Use this tool to help the user find the best sell location for a specific commodity.",
+  parameters: z.object({
+    id_commodity: z.number().optional().describe("ID of the commodity to sell"),
+    userSCU: z.number().min(1).describe("SCU capacity of the user's cargo"),
+  }),
+  execute: async (args: { id_commodity?: number; userSCU: number }) => {
+    console.log("Fetching sell commodity prices with arguments:", args);
 
-        // Construct query parameters dynamically
-        const queryParams = new URLSearchParams();
-        Object.entries(args).forEach(([key, value]) => {
-            if (value !== undefined) {
-                queryParams.append(key, value.toString());
-            }
+    // Construct query parameters dynamically
+    const queryParams = new URLSearchParams();
+    Object.entries(args).forEach(([key, value]) => {
+      if (value !== undefined && key !== "userSCU") {
+        queryParams.append(key, value.toString());
+      }
+    });
+
+    const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
+    console.log("API URL:", apiUrl);
+
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        console.error("Failed to fetch commodity sell prices:", response.statusText);
+        return { error: `Failed to fetch data: ${response.statusText}` };
+      }
+
+      const responseData = await response.json();
+
+      // Updated Zod schema with required fields for sell data
+      const schema = z.object({
+        status: z.literal("ok"),
+        data: z.array(
+          z.object({
+            terminal_name: z.string().nullable(),
+            terminal_code: z.string().nullable(),
+            price_sell: z.number().nullable(),
+            scu_sell: z.number().nullable(),
+            star_system_name: z.string().nullable(),
+          })
+        ),
+      });
+
+      const parsedData = schema.safeParse(responseData);
+      if (!parsedData.success) {
+        console.warn("Invalid sell data format:", parsedData.error.errors);
+        return { error: "Invalid sell data format received from the API." };
+      }
+
+      // Filter and prioritize sell locations
+      const userSCU = args.userSCU; // SCU capacity provided by the user
+      const filteredData = parsedData.data.data
+        .filter(
+          (item) =>
+            item.price_sell !== null &&
+            item.scu_sell !== null &&
+            item.scu_sell > 0 // Ensure there is sell demand
+        )
+        .map((item) => {
+          const maxSCU = Math.min(item.scu_sell!, userSCU); // Consider partial sales
+          const totalIncome = item.price_sell! * maxSCU;
+
+          return {
+            terminal_name: item.terminal_name,
+            terminal_code: item.terminal_code,
+            price_sell: item.price_sell,
+            star_system_name: item.star_system_name,
+            scu_sell: item.scu_sell,
+            max_scu_sellable: maxSCU,
+            total_income: totalIncome,
+          };
         });
 
-        const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
-        // console.log("API URL:", apiUrl);
-
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                console.error("Failed to fetch commodity sell prices:", response.statusText);
-                return { error: `Failed to fetch data: ${response.statusText}` };
-            }
-
-            const responseData = await response.json();
-
-            // Updated Zod schema with required fields for sell data
-            const schema = z.object({
-                status: z.literal("ok"),
-                data: z.array(
-                    z.object({
-                        terminal_name: z.string().nullable(),
-                        terminal_code: z.string().nullable(),
-                        price_sell: z.number().nullable(),
-                        scu_sell: z.number().nullable(),
-                        star_system_name: z.string().nullable(),
-                    })
-                ),
-            });
-
-            const parsedData = schema.safeParse(responseData);
-            if (!parsedData.success) {
-                console.warn("Invalid sell data format:", parsedData.error.errors);
-                return { error: "Invalid sell data format received from the API." };
-            }
-
-            // Extract and return the filtered sell data
-            const data = parsedData.data.data.map(item => ({
-                terminal_name: item.terminal_name,
-                terminal_code: item.terminal_code,
-                price_sell: `${item.price_sell} aUEC`,
-                scu_sell: `${item.scu_sell} SCU`,
-                star_system_name: item.star_system_name,
-            }));
-
-            // console.log("Filtered Sell JSON Output:", JSON.stringify(data, null, 2));
-            // console.log(`Filtered ${data.length} commodity sell price records.`);
-            return { result: data };
-        } catch (error) {
-            console.error("Error fetching commodity sell prices:", error);
-            return { error: "An unexpected error occurred while fetching commodity sell prices." };
+      // Sort by total income (or price_sell as a secondary sort)
+      const sortedData = filteredData.sort((a, b) => {
+        if (b.total_income !== a.total_income) {
+          return b.total_income - a.total_income; // Prioritize higher income
         }
-    },
+        return b.price_sell! - a.price_sell!; // Tie-break by higher price
+      });
+
+      // Return the best sell location
+      const bestSellLocation = sortedData.length > 0 ? sortedData[0] : null;
+
+      if (!bestSellLocation) {
+        return { error: "No sell locations found with sufficient demand for the commodity." };
+      }
+
+      console.log("Best sell location calculated:", bestSellLocation);
+
+      // Log the result to a JSON file
+      const logFilePath = "./getSellCommodityPrices_output.json";
+      fs.writeFileSync(
+        logFilePath,
+        JSON.stringify({ best_sell_location: bestSellLocation }, null, 2),
+        "utf-8"
+      );
+      console.log(`Output logged to ${logFilePath}`);
+
+      return { best_sell_location: bestSellLocation };
+    } catch (error) {
+      console.error("Error fetching commodity sell prices:", error);
+
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+
+      const errorLogFilePath = "./getSellCommodityPrices_error.json";
+      fs.writeFileSync(
+        errorLogFilePath,
+        JSON.stringify({ error: errorMessage }, null, 2),
+        "utf-8"
+      );
+      console.log(`Error logged to ${errorLogFilePath}`);
+
+      return { error: "An unexpected error occurred while fetching commodity sell prices." };
+    }
+  },
 },
 
   
@@ -651,6 +755,156 @@ getSellCommodityPrices: {
         }
     },
   },
+
+  getCommoditiesPricesAll: {
+    description: "Retrieve a list of all commodity prices and calculate the most profitable trade route.",
+    parameters: z.object({
+      userSCU: z.number().min(1).describe("Ship SCU capacity"),
+      userFunds: z.number().min(1).describe("User's available funds in aUEC"),
+    }),
+    execute: async ({ userSCU, userFunds }: { userSCU: number; userFunds: number }) => {
+      console.log("Fetching getCommoditiesPricesAll...");
+  
+      const apiUrl = "https://api.uexcorp.space/2.0/commodities_prices_all";
+      console.log("API URL for getCommoditiesPricesAll:", apiUrl);
+  
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          console.error("Failed to fetch all commodity prices:", response.statusText);
+          return { error: `Failed to fetch data: ${response.statusText}` };
+        }
+  
+        const responseData = await response.json();
+  
+        // Define Zod schema for validation
+        const schema = z.object({
+          status: z.literal("ok"),
+          data: z.array(
+            z.object({
+              price_buy: z.number().nullable(),
+              price_sell: z.number().nullable(),
+              scu_buy: z.number().nullable(),
+              scu_sell: z.number().nullable(),
+              commodity_name: z.string().nullable(),
+              terminal_name: z.string().nullable(),
+            })
+          ),
+        });
+  
+        // Validate the response data against the schema
+        const parsedData = schema.safeParse(responseData);
+        if (!parsedData.success) {
+          console.warn("Invalid data format:", parsedData.error.errors);
+          return { error: "Invalid data format received from the API." };
+        }
+  
+        const filteredData = parsedData.data.data.filter(
+          (item) => !(item.price_buy === 0 && item.price_sell === 0) // Exclude items where both prices are 0
+        );
+  
+        interface Route {
+          commodity_name: string;
+          buy_location: string;
+          sell_location: string;
+          buy_price_per_scu: number;
+          sell_price_per_scu: number;
+          scu_traded: number;
+          total_investment: number;
+          expected_profit: number;
+          profit_per_scu: number;
+          buy_stock_available: number;
+          sell_stock_available: number;
+        }
+  
+        const calculateMostProfitableRoute = (
+          data: any[],
+          userSCU: number,
+          userFunds: number
+        ): Route | null => {
+          const routes: Route[] = [];
+  
+          data.forEach((buy) => {
+            if (!buy.price_buy || !buy.scu_buy) return;
+  
+            data.forEach((sell) => {
+              if (
+                buy.commodity_name === sell.commodity_name &&
+                sell.price_sell &&
+                sell.scu_sell &&
+                buy.terminal_name !== sell.terminal_name
+              ) {
+                // Iterate over all possible SCU values up to the user's SCU limit
+                for (let tradedSCU = 1; tradedSCU <= Math.min(buy.scu_buy, sell.scu_sell, userSCU); tradedSCU++) {
+                  const totalCost = buy.price_buy * tradedSCU;
+  
+                  if (totalCost > userFunds) continue;
+  
+                  const totalIncome = sell.price_sell * tradedSCU;
+                  const totalProfit = totalIncome - totalCost;
+                  const profitPerSCU = sell.price_sell - buy.price_buy;
+  
+                  routes.push({
+                    commodity_name: buy.commodity_name,
+                    buy_location: buy.terminal_name,
+                    sell_location: sell.terminal_name,
+                    buy_price_per_scu: buy.price_buy,
+                    sell_price_per_scu: sell.price_sell,
+                    scu_traded: tradedSCU,
+                    total_investment: totalCost,
+                    expected_profit: totalProfit,
+                    profit_per_scu: profitPerSCU,
+                    buy_stock_available: buy.scu_buy, // Include stock available at buy location
+                    sell_stock_available: sell.scu_sell, // Include stock available at sell location
+                  });
+                }
+              }
+            });
+          });
+  
+          // Sort by total profit, prioritize higher profits regardless of SCU used
+          routes.sort((a, b) => b.expected_profit - a.expected_profit);
+  
+          return routes.length > 0 ? routes[0] : null;
+        };
+  
+        const bestRoute = calculateMostProfitableRoute(filteredData, userSCU, userFunds);
+  
+        // Log the output to a JSON file
+        const logFilePath = "./getCommoditiesPricesAll_output.json";
+        const outputData = bestRoute
+          ? { best_route: bestRoute }
+          : { error: "No profitable routes found with the current constraints." };
+  
+        fs.writeFileSync(logFilePath, JSON.stringify(outputData, null, 2), "utf-8");
+        console.log(`Output logged to ${logFilePath}`);
+  
+        if (!bestRoute) {
+          return { error: "No profitable routes found with the current constraints." };
+        }
+  
+        console.log("Most profitable route calculated:", bestRoute);
+  
+        return { best_route: bestRoute };
+      } catch (error) {
+        console.error("Error fetching or processing data:", error);
+  
+        const errorMessage = error instanceof Error ? error.message : "Unknown error";
+  
+        const errorLogFilePath = "./getCommoditiesPricesAll_error.json";
+        fs.writeFileSync(
+          errorLogFilePath,
+          JSON.stringify({ error: errorMessage }, null, 2),
+          "utf-8"
+        );
+        console.log(`Error logged to ${errorLogFilePath}`);
+  
+        return { error: "An error occurred while processing the request." };
+      }
+    },
+  },  
+
+  
 
   getPlanets: {
     description: "Retrieve a list of planets.",

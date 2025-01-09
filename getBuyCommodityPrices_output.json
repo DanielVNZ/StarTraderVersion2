@@ -1,0 +1,11 @@
+{
+  "best_buy_location": {
+    "terminal_name": "Commodities - Bueno Ravine",
+    "terminal_code": "BUENO",
+    "price_buy": 5368,
+    "star_system_name": "Pyro",
+    "scu_buy": 180,
+    "user_scu": 150,
+    "total_cost": 805200
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "best_route": {
+    "commodity_name": "Gold",
+    "buy_location": "HDMS-Bezdek",
+    "sell_location": "ARC-L1",
+    "buy_price_per_scu": 2291,
+    "sell_price_per_scu": 6383,
+    "scu_traded": 128,
+    "total_investment": 293248,
+    "expected_profit": 523776,
+    "profit_per_scu": 4092,
+    "buy_stock_available": 200,
+    "sell_stock_available": 397
+  }
+}
