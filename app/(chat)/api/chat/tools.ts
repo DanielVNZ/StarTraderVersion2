@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+// At the top of the file, add a storage object
+const commodityLocationsCache = {
+  buyLocations: new Map<string, any[]>(),  // Store by commodity ID
+  sellLocations: new Map<string, any[]>(),
+  lastCommodityId: null as number | null,  // Add this to track the last commodity ID
+  lastSellCommodityId: null as number | null  // Add this
+};
+
 export const tools = {
 
   getCommodities: {
@@ -12,6 +20,7 @@ export const tools = {
   
       try {
         const response = await fetch(apiUrl);
+        console.log("Fetching getCommodities...");
         if (!response.ok) {
           console.error("Failed to fetch commodities:", response.statusText);
           return { error: `Failed to fetch data: ${response.statusText}` };
@@ -59,8 +68,10 @@ export const tools = {
           return { error: "Invalid data format received from the API." };
         }
   
-        const data = parsedData.data.data; // Extract validated data
-        //console.log(`Fetched ${data.length} commodities.`);
+        const data = parsedData.data.data.map(item => ({
+          ...item,
+          is_illegal: item.is_illegal === 1 // Convert to boolean for easier use
+        }));
   
         // Chunk the data into smaller parts if necessary
         const chunkSize = 150;
@@ -163,7 +174,7 @@ export const tools = {
 
   getBuyCommodityPrices: {
     description:
-      "Retrieve commodity buy prices and available stock for a specific commodity or location. Use this tool to help the user find the best buy location for a specific commodity.",
+      "Retrieve commodity buy prices and available stock for a specific commodity or location. Use this tool to help the user find the best buy locations for a specific commodity.",
     parameters: z.object({
       id_commodity: z.number().optional().describe("ID of the commodity to buy"),
       userSCU: z.number().min(1).describe("SCU capacity of the user's cargo"),
@@ -212,16 +223,16 @@ export const tools = {
         }
   
         // Filter and prioritize buy locations
-        const userSCU = args.userSCU; // SCU capacity provided by the user
+        const userSCU = args.userSCU;
         const filteredData = parsedData.data.data
           .filter(
             (item) =>
               item.price_buy !== null &&
               item.scu_buy !== null &&
-              item.scu_buy >= userSCU // Strict check for sufficient stock
+              item.scu_buy >= userSCU
           )
           .map((item) => {
-            const totalCost = item.price_buy! * userSCU; // Total cost for the specified SCU
+            const totalCost = item.price_buy! * userSCU;
   
             return {
               terminal_name: item.terminal_name,
@@ -229,7 +240,7 @@ export const tools = {
               price_buy: item.price_buy,
               star_system_name: item.star_system_name,
               scu_buy: item.scu_buy,
-              user_scu: userSCU, // Include the user's SCU in the output
+              user_scu: userSCU,
               total_cost: totalCost,
             };
           });
@@ -237,26 +248,37 @@ export const tools = {
         // Sort by total cost (or price_buy as a secondary sort)
         const sortedData = filteredData.sort((a, b) => {
           if (a.total_cost !== b.total_cost) {
-            return a.total_cost - b.total_cost; // Prioritize lower total cost
+            return a.total_cost - b.total_cost;
           }
-          return a.price_buy! - b.price_buy!; // Tie-break by lower price
+          return a.price_buy! - b.price_buy!;
         });
   
-        // Return the best buy location
-        const bestBuyLocation = sortedData.length > 0 ? sortedData[0] : null;
+        // Store all locations in cache and save commodity ID
+        if (args.id_commodity) {
+          commodityLocationsCache.buyLocations.set(
+            args.id_commodity.toString(),
+            sortedData
+          );
+          commodityLocationsCache.lastCommodityId = args.id_commodity;
+        }
   
-        if (!bestBuyLocation) {
+        // Get top 3 buy locations
+        const topBuyLocations = sortedData.slice(0, 3);
+  
+        if (topBuyLocations.length === 0) {
           return { error: "No buy locations found with sufficient stock for the commodity." };
         }
   
-        console.log("Best buy location calculated:", bestBuyLocation);
+        console.log("Top buy locations calculated:", topBuyLocations);
+        console.log(`Cached ${sortedData.length} buy locations for commodity ${args.id_commodity}`);
   
-       
-        return { best_buy_location: bestBuyLocation };
+        return { 
+          best_buy_location: topBuyLocations[0],
+          alternative_buy_locations: topBuyLocations.slice(1),
+          remaining_locations: Math.max(0, sortedData.length - 3)
+        };
       } catch (error) {
         console.error("Error fetching commodity buy prices:", error);
-  
-  
         return { error: "An unexpected error occurred while fetching commodity buy prices." };
       }
     },
@@ -265,7 +287,7 @@ export const tools = {
 
 getSellCommodityPrices: {
   description:
-    "Retrieve commodity sell prices and demand for a specific commodity or location. Use this tool to help the user find the best sell location for a specific commodity.",
+    "Retrieve commodity sell prices and demand for a specific commodity or location. Use this tool to help the user find the best sell locations for a specific commodity.",
   parameters: z.object({
     id_commodity: z.number().optional().describe("ID of the commodity to sell"),
     userSCU: z.number().min(1).describe("SCU capacity of the user's cargo"),
@@ -273,7 +295,6 @@ getSellCommodityPrices: {
   execute: async (args: { id_commodity?: number; userSCU: number }) => {
     console.log("Fetching sell commodity prices with arguments:", args);
 
-    // Construct query parameters dynamically
     const queryParams = new URLSearchParams();
     Object.entries(args).forEach(([key, value]) => {
       if (value !== undefined && key !== "userSCU") {
@@ -293,7 +314,6 @@ getSellCommodityPrices: {
 
       const responseData = await response.json();
 
-      // Updated Zod schema with required fields for sell data
       const schema = z.object({
         status: z.literal("ok"),
         data: z.array(
@@ -314,16 +334,16 @@ getSellCommodityPrices: {
       }
 
       // Filter and prioritize sell locations
-      const userSCU = args.userSCU; // SCU capacity provided by the user
+      const userSCU = args.userSCU;
       const filteredData = parsedData.data.data
         .filter(
           (item) =>
             item.price_sell !== null &&
             item.scu_sell !== null &&
-            item.scu_sell > 0 // Ensure there is sell demand
+            item.scu_sell > 0
         )
         .map((item) => {
-          const maxSCU = Math.min(item.scu_sell!, userSCU); // Consider partial sales
+          const maxSCU = Math.min(item.scu_sell!, userSCU);
           const totalIncome = item.price_sell! * maxSCU;
 
           return {
@@ -340,24 +360,37 @@ getSellCommodityPrices: {
       // Sort by total income (or price_sell as a secondary sort)
       const sortedData = filteredData.sort((a, b) => {
         if (b.total_income !== a.total_income) {
-          return b.total_income - a.total_income; // Prioritize higher income
+          return b.total_income - a.total_income;
         }
-        return b.price_sell! - a.price_sell!; // Tie-break by higher price
+        return b.price_sell! - a.price_sell!;
       });
 
-      // Return the best sell location
-      const bestSellLocation = sortedData.length > 0 ? sortedData[0] : null;
+      // Store all locations in cache and save commodity ID
+      if (args.id_commodity) {
+        commodityLocationsCache.sellLocations.set(
+          args.id_commodity.toString(),
+          sortedData
+        );
+        commodityLocationsCache.lastSellCommodityId = args.id_commodity;
+      }
 
-      if (!bestSellLocation) {
+      // Get top 3 sell locations
+      const topSellLocations = sortedData.slice(0, 3);
+
+      if (topSellLocations.length === 0) {
         return { error: "No sell locations found with sufficient demand for the commodity." };
       }
 
-      console.log("Best sell location calculated:", bestSellLocation);
+      console.log("Top sell locations calculated:", topSellLocations);
+      console.log(`Cached ${sortedData.length} sell locations for commodity ${args.id_commodity}`);
 
-      return { best_sell_location: bestSellLocation };
+      return { 
+        best_sell_location: topSellLocations[0],
+        alternative_sell_locations: topSellLocations.slice(1),
+        remaining_locations: Math.max(0, sortedData.length - 3)
+      };
     } catch (error) {
       console.error("Error fetching commodity sell prices:", error);
-
       return { error: "An unexpected error occurred while fetching commodity sell prices." };
     }
   },
@@ -720,17 +753,46 @@ getSellCommodityPrices: {
   },
 
   getCommoditiesPricesAll: {
-    description: "Retrieve a list of all commodity prices and calculate the most profitable trade route.",
+    description: "Retrieve a list of all commodity prices and calculate the top 3 most profitable trade routes with different commodities. Requires running getCommodities first to get commodity information. Can filter for legal commodities only. Set legalOnly: true for legal-only routes, false for illegal-only routes, or undefined for all routes.",
     parameters: z.object({
       userSCU: z.number().min(1).describe("Ship SCU capacity"),
       userFunds: z.number().min(1).describe("User's available funds in aUEC"),
+      legalOnly: z.boolean().optional().describe("If true, show only legal routes. If false, show only illegal routes. If undefined, show all routes."),
     }),
-    execute: async ({ userSCU, userFunds }: { userSCU: number; userFunds: number }) => {
+    execute: async ({ 
+      userSCU, 
+      userFunds, 
+      legalOnly 
+    }: { 
+      userSCU: number; 
+      userFunds: number;
+      legalOnly?: boolean;
+    }) => {
       console.log("Fetching getCommoditiesPricesAll...");
-  
+
+      // First, fetch commodities to ensure we have the data
+      const commoditiesResult = await tools.getCommodities.execute({});
+      
+      if ('error' in commoditiesResult) {
+        return { error: "Must fetch commodity data first: " + commoditiesResult.error };
+      }
+
+      if (!commoditiesResult.result || !Array.isArray(commoditiesResult.result)) {
+        return { error: "Failed to get required commodity data" };
+      }
+
+      // Create a map of commodity names to their legality status
+      const commodityLegalityMap = new Map<string, boolean>();
+      commoditiesResult.result.flat().forEach(commodity => {
+        if (commodity.name) {
+          // Store the actual is_illegal value (true if illegal, false if legal)
+          commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
+        }
+      });
+
       const apiUrl = "https://api.uexcorp.space/2.0/commodities_prices_all";
       console.log("API URL for getCommoditiesPricesAll:", apiUrl);
-  
+
       try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -762,9 +824,22 @@ getSellCommodityPrices: {
           return { error: "Invalid data format received from the API." };
         }
   
-        const filteredData = parsedData.data.data.filter(
-          (item) => !(item.price_buy === 0 && item.price_sell === 0) // Exclude items where both prices are 0
-        );
+        const filteredData = parsedData.data.data
+          .filter((item) => {
+            // Filter out items where both prices are 0
+            if (item.price_buy === 0 && item.price_sell === 0) return false;
+            
+            // Only apply legality filter if legalOnly is defined
+            if (legalOnly !== undefined && item.commodity_name) {
+              const isIllegal = commodityLegalityMap.get(item.commodity_name);
+              
+              // If legalOnly is true, keep only legal commodities (not illegal)
+              // If legalOnly is false, keep only illegal commodities
+              return legalOnly ? !isIllegal : isIllegal;
+            }
+            
+            return true; // Include all items if legalOnly is undefined
+          });
   
         interface Route {
           commodity_name: string;
@@ -780,16 +855,17 @@ getSellCommodityPrices: {
           sell_stock_available: number;
         }
   
-        const calculateMostProfitableRoute = (
+        const calculateTopProfitableRoutes = (
           data: any[],
           userSCU: number,
           userFunds: number
-        ): Route | null => {
+        ): Route[] => {
           const routes: Route[] = [];
-  
+          const seenCommodities = new Set<string>();
+
           data.forEach((buy) => {
             if (!buy.price_buy || !buy.scu_buy) return;
-  
+
             data.forEach((sell) => {
               if (
                 buy.commodity_name === sell.commodity_name &&
@@ -800,13 +876,13 @@ getSellCommodityPrices: {
                 // Iterate over all possible SCU values up to the user's SCU limit
                 for (let tradedSCU = 1; tradedSCU <= Math.min(buy.scu_buy, sell.scu_sell, userSCU); tradedSCU++) {
                   const totalCost = buy.price_buy * tradedSCU;
-  
+
                   if (totalCost > userFunds) continue;
-  
+
                   const totalIncome = sell.price_sell * tradedSCU;
                   const totalProfit = totalIncome - totalCost;
                   const profitPerSCU = sell.price_sell - buy.price_buy;
-  
+
                   routes.push({
                     commodity_name: buy.commodity_name,
                     buy_location: buy.terminal_name,
@@ -817,33 +893,48 @@ getSellCommodityPrices: {
                     total_investment: totalCost,
                     expected_profit: totalProfit,
                     profit_per_scu: profitPerSCU,
-                    buy_stock_available: buy.scu_buy, // Include stock available at buy location
-                    sell_stock_available: sell.scu_sell, // Include stock available at sell location
+                    buy_stock_available: buy.scu_buy,
+                    sell_stock_available: sell.scu_sell,
                   });
                 }
               }
             });
           });
-  
-          // Sort by total profit, prioritize higher profits regardless of SCU used
+
+          // Sort by total profit
           routes.sort((a, b) => b.expected_profit - a.expected_profit);
-  
-          return routes.length > 0 ? routes[0] : null;
+
+          // Get top 3 routes with different commodities
+          const topRoutes: Route[] = [];
+          for (const route of routes) {
+            if (!seenCommodities.has(route.commodity_name)) {
+              seenCommodities.add(route.commodity_name);
+              topRoutes.push(route);
+              if (topRoutes.length === 3) break;
+            }
+          }
+
+          return topRoutes;
         };
-  
-        const bestRoute = calculateMostProfitableRoute(filteredData, userSCU, userFunds);
+
+        const bestRoutes = calculateTopProfitableRoutes(filteredData, userSCU, userFunds);
       
-        if (!bestRoute) {
-          return { error: "No profitable routes found with the current constraints." };
+        if (bestRoutes.length === 0) {
+          return { 
+            error: legalOnly !== undefined
+              ? `No ${legalOnly ? 'legal' : 'illegal'} profitable routes found with the current constraints.`
+              : "No profitable routes found with the current constraints." 
+          };
         }
-  
-        console.log("Most profitable route calculated:", bestRoute);
-  
-        return { best_route: bestRoute };
+
+        console.log(`Top ${legalOnly !== undefined ? (legalOnly ? 'legal' : 'illegal') : ''} profitable routes calculated:`, bestRoutes);
+
+        return { 
+          best_route: bestRoutes[0],
+          alternative_routes: bestRoutes.slice(1)
+        };
       } catch (error) {
-        console.error("Error fetching or processing data:", error)
-  
-  
+        console.error("Error fetching or processing data:", error);
         return { error: "An error occurred while processing the request." };
       }
     },
@@ -904,6 +995,73 @@ getSellCommodityPrices: {
   },
   
 
+  getAlternativeBuyLocations: {
+    description: "Retrieve alternative buy locations for a specific commodity from cached data.",
+    parameters: z.object({
+      skip: z.number().min(0).describe("Number of locations to skip"),
+      take: z.number().min(1).describe("Number of locations to return"),
+    }),
+    execute: async (args: { skip: number; take: number }) => {
+      if (!commodityLocationsCache.lastCommodityId) {
+        return { error: "No recent commodity lookup found. Please search for a commodity first." };
+      }
+
+      const cachedLocations = commodityLocationsCache.buyLocations.get(
+        commodityLocationsCache.lastCommodityId.toString()
+      );
+      
+      if (!cachedLocations) {
+        return { error: "No cached locations found for this commodity. Please fetch prices first." };
+      }
+
+      // Get locations after the ones we've already shown
+      const remainingLocations = cachedLocations.slice(args.skip);
+      const nextLocations = remainingLocations.slice(0, args.take);
+      
+      if (nextLocations.length === 0) {
+        return { error: "No more alternative locations available." };
+      }
+
+      return {
+        locations: nextLocations,
+        remaining: Math.max(0, remainingLocations.length - args.take)
+      };
+    },
+  },
+
+  getAlternativeSellLocations: {
+    description: "Retrieve alternative sell locations for a specific commodity from cached data.",
+    parameters: z.object({
+      skip: z.number().min(0).describe("Number of locations to skip"),
+      take: z.number().min(1).describe("Number of locations to return"),
+    }),
+    execute: async (args: { skip: number; take: number }) => {
+      if (!commodityLocationsCache.lastSellCommodityId) {
+        return { error: "No recent commodity lookup found. Please search for a commodity first." };
+      }
+
+      const cachedLocations = commodityLocationsCache.sellLocations.get(
+        commodityLocationsCache.lastSellCommodityId.toString()
+      );
+      
+      if (!cachedLocations) {
+        return { error: "No cached locations found for this commodity. Please fetch prices first." };
+      }
+
+      const remainingLocations = cachedLocations.slice(args.skip);
+      const nextLocations = remainingLocations.slice(0, args.take);
+      
+      if (nextLocations.length === 0) {
+        return { error: "No more alternative locations available." };
+      }
+
+      return {
+        locations: nextLocations,
+        remaining: Math.max(0, remainingLocations.length - args.take)
+      };
+    },
+  },
+
 };
 
 export type Instruction = string;
@@ -929,3 +1087,17 @@ export type Location = {
   spaceStation_name: string;
   city_name: string;
 };
+
+interface TradeRoute {
+  commodity_name: string;
+  buy_location: string;
+  sell_location: string;
+  buy_price_per_scu: number;
+  sell_price_per_scu: number;
+  scu_traded: number;
+  total_investment: number;
+  expected_profit: number;
+  profit_per_scu: number;
+  buy_stock_available: number;
+  sell_stock_available: number;
+}

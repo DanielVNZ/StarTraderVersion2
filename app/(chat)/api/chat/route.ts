@@ -27,6 +27,7 @@ import { generateTitleFromUserMessage } from '../../actions';
 
 
 import { createClient } from '@supabase/supabase-js';
+import { NextRequest } from "next/server";
 
 const supabaseUrl = process.env.SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_ANON_KEY || '';
@@ -46,7 +47,9 @@ type AllowedTools =
 'getPlanets' |
 'getStarSystems' |
 'getCommoditiesPricesAll' |
-'getSpaceStations'
+'getSpaceStations' |
+'getAlternativeBuyLocations' |
+'getAlternativeSellLocations'
 
 
 const myTools: AllowedTools[] = [
@@ -62,137 +65,171 @@ const myTools: AllowedTools[] = [
   'getStarSystems',
   'getSpaceStations',
   'getCommoditiesPricesAll',
+  'getAlternativeBuyLocations',
+  'getAlternativeSellLocations'
 ];
 
 const allTools: AllowedTools[] = [...myTools];
 
-export async function POST(request: Request) {
-  const {
-    id,
-    messages,
-    modelId,
-  }: { id: string; messages: Array<Message>; modelId: string } = await request.json();
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { messages } = body;
 
-  const session = await auth();
+    // Add context tracking for commodity searches
+    const recentMessages = messages.slice(-5); // Look at last 5 messages
+    const lastCommodityContext = recentMessages.find((msg: Message) => 
+      typeof msg.content === 'string' && 
+      msg.content.toLowerCase().includes('commodity:')
+    );
 
-  if (!session || !session.user || !session.user.id) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+    // If this is a "show more" request, ensure we have context
+    const isShowMoreRequest = typeof messages[messages.length - 1].content === 'string' &&
+      messages[messages.length - 1].content
+        .toLowerCase()
+        .includes('show more');
 
-  const model = models.find((model) => model.id === modelId);
+    if (isShowMoreRequest && !lastCommodityContext) {
+      return new Response(
+        JSON.stringify({
+          error: "Please search for a commodity first before requesting more locations."
+        }),
+        { status: 400 }
+      );
+    }
 
-  if (!model) {
-    return new Response('Model not found', { status: 404 });
-  }
+    const {
+      id,
+      modelId,
+    }: { id: string; messages: Array<Message>; modelId: string } = body;
 
-  const coreMessages = convertToCoreMessages(messages);
-  const userMessage = getMostRecentUserMessage(coreMessages);
+    const session = await auth();
 
-  if (!userMessage) {
-    return new Response('No user message found', { status: 400 });
-  }
+    if (!session || !session.user || !session.user.id) {
+      return new Response('Unauthorized', { status: 401 });
+    }
 
-  const chat = await getChatById({ id });
+    const model = models.find((model) => model.id === modelId);
 
-  if (!chat) {
-    const title = await generateTitleFromUserMessage({ message: userMessage });
-    await saveChat({ id, userId: session.user.id, title });
-  }
+    if (!model) {
+      return new Response('Model not found', { status: 404 });
+    }
 
-  const userMessageId = generateUUID();
+    const coreMessages = convertToCoreMessages(messages);
+    const userMessage = getMostRecentUserMessage(coreMessages);
 
-  await saveMessages({
-    messages: [
-      { ...userMessage, id: userMessageId, createdAt: new Date(), chatId: id },
-    ],
-  });
+    if (!userMessage) {
+      return new Response('No user message found', { status: 400 });
+    }
 
-  return createDataStreamResponse({
-    execute: async (dataStream) => {
-      dataStream.writeData({
-        type: 'user-message-id',
-        content: userMessageId,
-      });
+    const chat = await getChatById({ id });
 
-      try {
-        // Fetch data from Supabase
-       // const { data: commodities, error: commoditiesError } = await supabase
-       //   .from('Commodities')
-       //   .select('*');
-       //   console.log('Fetched Commodities...');
+    if (!chat) {
+      const title = await generateTitleFromUserMessage({ message: userMessage });
+      await saveChat({ id, userId: session.user.id, title });
+    }
 
-        const { data: locations, error: locationsError } = await supabase
-          .from('Locations')
-          .select('*');
-          console.log('Fetched Locations...');
-        if (locationsError) {
-          throw new Error(
-            `Error fetching data: ${
-              locationsError?.message || ''
-            }`
-          );
-        }
+    const userMessageId = generateUUID();
 
+    await saveMessages({
+      messages: [
+        { ...userMessage, id: userMessageId, createdAt: new Date(), chatId: id },
+      ],
+    });
+
+    return createDataStreamResponse({
+      execute: async (dataStream) => {
         dataStream.writeData({
-          type: 'supabase-data',
-          content: { locations },
+          type: 'user-message-id',
+          content: userMessageId,
         });
 
-        // Proceed with message generation
-        const result = await streamText({
-          model: customModel(model.apiIdentifier),
-          system: systemPrompt,
-          messages: coreMessages,
-          maxSteps: 5,
-          experimental_activeTools: allTools,
-          tools,
-          toolChoice: 'auto',
-          maxTokens: 2500,
-          experimental_toolCallStreaming: true,
-          maxRetries: 3,
-          experimental_telemetry: {
-            isEnabled: true,
-            functionId: 'stream-text',
-          },
-          onFinish: async ({ response, usage }) => {
-            if (session.user?.id) {
-              try { 
-                console.log('Token usage:', usage);
+        try {
+          // Fetch data from Supabase
+         // const { data: commodities, error: commoditiesError } = await supabase
+         //   .from('Commodities')
+         //   .select('*');
+         //   console.log('Fetched Commodities...');
 
-                const sanitizedMessages = sanitizeResponseMessages(
-                  response.messages
-                );
-                await saveMessages({
-                  messages: sanitizedMessages.map((message) => ({
-                    id: generateUUID(),
-                    chatId: id,
-                    role: message.role,
-                    content: message.content,
-                    createdAt: new Date(),
-                  })),
-                });
-              } catch (error) {
-                console.error('Failed to save messages:', error);
-              }
-            }
-          },
-        });
+          const { data: locations, error: locationsError } = await supabase
+            .from('Locations')
+            .select('*');
+            console.log('Fetched Locations...');
+          if (locationsError) {
+            throw new Error(
+              `Error fetching data: ${
+                locationsError?.message || ''
+              }`
+            );
+          }
 
-        result.mergeIntoDataStream(dataStream);
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error('Error during execution:', error.message);
-          dataStream.writeData({ type: 'error', content: error.message });
-        } else {
-          console.error('Unknown error during execution:', error);
           dataStream.writeData({
-            type: 'error',
-            content: 'An unknown error occurred',
+            type: 'supabase-data',
+            content: { locations },
           });
+
+          // Proceed with message generation
+          const result = await streamText({
+            model: customModel(model.apiIdentifier),
+            system: systemPrompt,
+            messages: coreMessages,
+            maxSteps: 5,
+            experimental_activeTools: allTools,
+            tools,
+            toolChoice: 'auto',
+            maxTokens: 2500,
+            experimental_toolCallStreaming: true,
+            maxRetries: 3,
+            experimental_telemetry: {
+              isEnabled: true,
+              functionId: 'stream-text',
+            },
+            onFinish: async ({ response, usage }) => {
+              if (session.user?.id) {
+                try { 
+                  console.log('Token usage:', usage);
+
+                  const sanitizedMessages = sanitizeResponseMessages(
+                    response.messages
+                  );
+                  await saveMessages({
+                    messages: sanitizedMessages.map((message) => ({
+                      id: generateUUID(),
+                      chatId: id,
+                      role: message.role,
+                      content: message.content,
+                      createdAt: new Date(),
+                    })),
+                  });
+                } catch (error) {
+                  console.error('Failed to save messages:', error);
+                }
+              }
+            },
+          });
+
+          result.mergeIntoDataStream(dataStream);
+        } catch (error) {
+          if (error instanceof Error) {
+            console.error('Error during execution:', error.message);
+            dataStream.writeData({ type: 'error', content: error.message });
+          } else {
+            console.error('Unknown error during execution:', error);
+            dataStream.writeData({
+              type: 'error',
+              content: 'An unknown error occurred',
+            });
+          }
         }
-      }
-    },
-  });
+      },
+    });
+  } catch (error) {
+    console.error('Error in chat route:', error);
+    return new Response(
+      JSON.stringify({ error: "An error occurred processing your request" }),
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE(request: Request) {

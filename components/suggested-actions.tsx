@@ -26,14 +26,14 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
       action: `Plan a trade route for Gold within the Stanton system. I have 100 SCU of storage and looking for the most profitable route`,
     },
     {
-      title: 'How can I donate?',
-      label: `Show Donation Info for DanielVNZ`,
-      action: `Show Donation Info for DanielVNZ`,
+      title: 'Most profitable trade route?',
+      label: `Plans the most profitable trade route`,
+      action: `Whats the most profitable trade route?`,
     },
     {
-      title: 'How can I donate?',
-      label: 'Show Donation Info for UEX CORP',
-      action: 'Show Donation information for UEX Corp',
+      title: 'Most profitable commodity?',
+      label: 'Locates the most profitable commodity to trade',
+      action: 'Whats the most profitable commodity to trade?',
     },
   ];
 
