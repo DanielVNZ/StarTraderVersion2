@@ -14,7 +14,7 @@ export const authConfig = {
 
       // Publicly accessible routes
       const isOnPublicRoute =
-        ['/sitemap.xml', '/api/sitemap', '/information'].some((route) =>
+        ['/sitemap.xml', '/api/sitemap', '/information', '/api/cleanup'].some((route) =>
           nextUrl.pathname.startsWith(route)
         ) ||
         /^\/sitemap-\d+\.xml$/.test(nextUrl.pathname) || // Dynamic sitemaps
