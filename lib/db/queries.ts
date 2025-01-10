@@ -363,7 +363,7 @@ export async function updateChatVisiblityById({
   }
 }
 
-export async function deleteOldChats(days: number = 7) {
+export async function deleteOldChats(days: number = 1) {
   try {
     const daysAgo = new Date();
     daysAgo.setDate(daysAgo.getDate() - days);
