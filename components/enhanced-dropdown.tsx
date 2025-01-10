@@ -34,6 +34,7 @@ export function EnhancedDropdown({ toggleIframe, router }: EnhancedDropdownProps
     { icon: '🏃', label: 'Sign Out', action: () => signOut({ redirectTo: '/', }) },  
     ]
 
+
   return (
     <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger
@@ -54,33 +55,36 @@ export function EnhancedDropdown({ toggleIframe, router }: EnhancedDropdownProps
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        align="start"
-        className="min-w-[300px] bg-background border border-border rounded-md shadow-lg p-2 space-y-1"
+  align="start"
+  className="min-w-[300px] bg-background border border-border rounded-md shadow-lg p-2 space-y-1"
+>
+  {menuItems.map((item, index) => (
+    <DropdownMenuItem
+      key={item.label}
+      className={cn(
+        'px-1 py-1 rounded-sm focus:bg-accent focus:text-accent-foreground border border-border',
+        item.label === 'Buy me a Coffee' && 'bg-orange-400 text-black' // Apply color conditionally
+      )}
+      onClick={item.action}
+    >
+      <motion.div
+        className="flex items-center gap-3 w-full"
+        initial={{ x: -10, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: index * 0.05 }}
       >
-        {menuItems.map((item, index) => (
-          <DropdownMenuItem
-            key={item.label}
-            className="px-1 py-1 rounded-sm focus:bg-accent focus:text-accent-foreground border border-border"
-            onClick={item.action}
-          >
-            <motion.div
-              className="flex items-center gap-3 w-full"
-              initial={{ x: -10, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: index * 0.05 }}
-            >
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-left font-normal px-2 py-1.5"
-              >
-                <span className="text-xl mr-2">{item.icon}</span>
-                <span className="text-sm">{item.label}</span>
-              </Button>
-              
-            </motion.div>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
+        <Button
+          variant="ghost"
+          className="w-full justify-start text-left font-normal px-2 py-1.5"
+        >
+          <span className="text-xl mr-2">{item.icon}</span>
+          <span className="text-sm">{item.label}</span>
+        </Button>
+      </motion.div>
+    </DropdownMenuItem>
+  ))}
+</DropdownMenuContent>
+
     </DropdownMenu>
   )
 }
