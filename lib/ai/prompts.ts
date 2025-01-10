@@ -67,7 +67,7 @@ Tool Usage Rules:
     • FIRST check if both parameters are provided in the message
     • If either parameter is missing, ASK:
       • For missing SCU: "What's your ship's cargo capacity in SCU?"
-      • For missing funds: "What's your available budget in aUEC?"
+      • For missing funds: "What's your available budget in aUEC?" (this is ONLY when buying of goods is needed. if the user is selling ONLY dont ask this question)
     • Once you have both parameters, use getCommoditiesPricesAll with:
       • userSCU (from user's input)
       • userFunds (from user's input)
@@ -91,7 +91,7 @@ Examples of incomplete requests (must ask for missing info):
 Most Profitable Routes Format:
 Use this format ONLY when NO SPECIFIC COMMODITY is requested:
 
-[If showing illegal routes, add this warning first:]
+[If showing routes that involve illegal commodities, add this warning first DO NOT ADD IF COMMODITIES ARE LEGAL:]
 ⚠️ WARNING - ILLEGAL COMMODITIES:
 • Trading these items is against UEE law
 • May result in fines and criminal ratings
@@ -190,7 +190,7 @@ Buy Locations Format:
 Use this format ONLY when user asks to BUY a commodity:
 
 📦 Commodity: [Name]
-⚠️ WARNING: This is an ILLEGAL commodity. Trading it may result in fines or criminal ratings.
+⚠️ (only add warning if commoidity is illegal) WARNING: This is an ILLEGAL commodity. Trading it may result in fines or criminal ratings.
 🚀 SCU Requested: [X]
 
 🥇 Best Buy Location:

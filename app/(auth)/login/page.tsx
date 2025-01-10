@@ -9,7 +9,7 @@ import { createPortal } from 'react-dom';
 import { useFormStatus } from 'react-dom';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
-
+import { EnhancedDropdown } from '@/components/enhanced-dropdown'
 import { AuthForm } from '@/components/auth-form';
 import { SubmitButton } from '@/components/submit-button';
 import {
@@ -69,6 +69,9 @@ export default function Page() {
     }
   };
 
+  const toggleIframe = () => setShowIframe((prev) => !prev);
+
+
   const handleGuestLogin = () => {
     setIsLoading(true); // Set loading state to true
     setGuestState({ status: 'in_progress' });
@@ -118,74 +121,110 @@ export default function Page() {
   }
 
   return (
+    
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 relative">
-      {/* Theme Toggle Button */}
-      <div className="absolute top-4 left-4">
-        <Button
-          variant="default"
-          className="px-4 py-2 text-sm"
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        >
-          {theme === 'light' ? 'Toggle Dark Theme 🌙' : 'Toggle Light Theme ☀️'}
-        </Button>
-      </div>
+  {/* Top Bar */}
+  <div className="w-full fixed top-0 left-0 z-20 bg-background px-4 py-2 flex flex-wrap items-center justify-between gap-4">
+    {/* Left Section - Dropdown and Theme Toggle */}
+    <div className="flex items-center gap-4">
+      <EnhancedDropdown toggleIframe={toggleIframe} router={router} />
+      <Button
+        variant="default"
+        className="px-4 py-2 text-sm"
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      >
+        {theme === 'light' ? 'Toggle Dark Theme 🌙' : 'Toggle Light Theme ☀️'}
+      </Button>
+    </div>
 
-      {/* Desktop Buttons - Top Right */}
-      <div className="hidden md:flex gap-4 absolute top-4 right-4">
-        <Button
-          variant="default"
-          className="px-4 py-2 text-sm"
-          onClick={() => setShowIframe(!showIframe)}
-        >
-          Buy me a ☕ ($3 NZD)
-        </Button>
+    {/* Right Section - Desktop Buttons */}
+    <div className="hidden md:flex items-center gap-4">
+      <Button
+        variant="default"
+        className="px-4 py-2 text-sm"
+        onClick={() => setShowIframe(!showIframe)}
+      >
+        Buy me a ☕ ($3 NZD)
+      </Button>
+      <Button
+        variant="default"
+        className="px-4 py-2 text-sm"
+        onClick={() => window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')}
+      >
+        ⭐ on GitHub
+      </Button>
+      <Button
+        variant="default"
+        className="px-4 py-2 text-sm"
+        onClick={() => window.open('https://discord.gg/zy9x4UKwsw', '_blank')}
+      >
+        👋 Join our Discord
+      </Button>
+    </div>
 
-        <Button
-          variant="default"
-          className="px-4 py-2 text-sm"
-          onClick={() => window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')}
-        >
-          ⭐ on GitHub
-        </Button>
+    {/* Mobile Buttons */}
+    <div className="flex md:hidden items-center gap-2 justify-center w-full">
+      <Button
+        variant="default"
+        className="p-2 text-sm min-w-0"
+        onClick={() => window.open('https://ko-fi.com/danielvnz', '_blank')}
+      >
+        ☕
+      </Button>
+      <Button
+        variant="default"
+        className="p-2 text-sm min-w-0"
+        onClick={() => window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')}
+      >
+        ⭐
+      </Button>
+      <Button
+        variant="default"
+        className="p-2 text-sm min-w-0"
+        onClick={() => window.open('https://discord.gg/zy9x4UKwsw', '_blank')}
+      >
+        👋
+      </Button>
+    </div>
+  </div>
 
-        <Button
-          variant="default"
-          className="px-4 py-2 text-sm"
-          onClick={() => window.open('https://discord.gg/zy9x4UKwsw', '_blank')}
-        >
-          👋 Join our Discord
-        </Button>
-      </div>
 
-      {/* Mobile Buttons - Top Center */}
-      <div className="flex gap-2 md:hidden justify-center fixed top-4 left-1/2 -translate-x-1/2 z-10">
-        {/* Mobile Ko-fi Button */}
-        <Button
-          variant="default"
-          className="p-2 text-sm min-w-0"
-          onClick={() => window.open('https://ko-fi.com/danielvnz', '_blank')}
-        >
-          ☕
-        </Button>
-
-        {/* Mobile GitHub Button */}
-        <Button
-          variant="default"
-          className="p-2 text-sm min-w-0"
-          onClick={() => window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')}
-        >
-          ⭐
-        </Button>
-
-        {/* Mobile Discord Button */}
-        <Button
-          variant="default"
-          className="p-2 text-sm min-w-0"
-          onClick={() => window.open('https://discord.gg/zy9x4UKwsw', '_blank')}
-        >
-          👋
-        </Button>
-      </div>
+      {/* Buy Me a Coffee Iframe */}
+      {showIframe && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+            onClick={toggleIframe}
+          >
+            <div
+              className="bg-white shadow-lg rounded-md relative max-h-[90vh] max-w-[95vw]"
+              style={{
+                width: '400px',
+                height: '680px',
+                border: '5px solid #11CADF',
+                borderRadius: '20px',
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                src="https://ko-fi.com/danielvnz/?hidefeed=true&widget=true&embed=true&preview=true"
+                style={{
+                  border: 'none',
+                  width: '100%',
+                  height: 'calc(100% - 50px)',
+                  background: '#f9f9f9',
+                  borderRadius: '16px',
+                }}
+                title="Buy me a coffee"
+              />
+              <Button
+                className="bg-red-500 hover:bg-red-700 text-white absolute bottom-2 left-1/2 transform -translate-x-1/2 py-1.5 px-2 h-fit"
+                onClick={toggleIframe}
+              >
+                😭 Close Window
+              </Button>
+            </div>
+          </div>
+        )}
 
       {/* Main Content */}
       <div className="mx-auto flex w-full flex-col justify-center items-center sm:w-[450px] md:w-[1000px] mt-16 md:mt-0">

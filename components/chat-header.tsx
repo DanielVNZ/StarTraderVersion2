@@ -21,12 +21,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ChevronDownIcon } from './icons';
 import { cn } from '@/lib/utils';
-
+import { EnhancedDropdown } from '@/components/enhanced-dropdown'
 
 posthog.init('phc_hf6aHkwqcMFrKU4jQf1o4laa4ROxMJtzyWFfCid0dNT', {
   api_host: 'https://us.i.posthog.com',
   person_profiles: 'always',
 });
+
+
 
 function PureChatHeader({
   chatId,
@@ -46,6 +48,8 @@ function PureChatHeader({
   const [showIframe, setShowIframe] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [daysToDelete, setDaysToDelete] = useState('3');
+
+  const toggleIframe = () => setShowIframe((prev) => !prev);
 
   const handleDeleteOldChats = async () => {
     try {
@@ -74,59 +78,7 @@ function PureChatHeader({
       <header className="flex top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2">
         <div className="flex items-center gap-2">
           {/* Dropdown Button - Far Left */}
-          <DropdownMenu open={open2} onOpenChange={setOpen}>
-  <DropdownMenuTrigger 
-  asChild 
-  className={cn(
-    'w-fit data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
-  )}
-  >
-    <Button variant="outline" className="md:px-2 md:h-[34px]">
-      <span className="text-sm font-medium">Menu</span>
-      <ChevronDownIcon size={12} />
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent
-align="start" 
-className="min-w-[300px]"
-  >
-    <DropdownMenuItem
-      className="gap-2 group/item flex flex-row justify-left items-center"
-      onClick={() => router.push('/information')}
-    >
-      <span>ℹ️</span>
-      <span>Information</span>
-    </DropdownMenuItem>
-    <hr className="border-t border-gray-200" />
-    <DropdownMenuItem
-      className="gap-2 group/item flex flex-row justify-left items-center"
-      onClick={() => setShowIframe(!showIframe)}
-    >
-      <span>☕</span>
-      <span>Buy me a Coffee</span>
-    </DropdownMenuItem>
-    <hr className="border-t border-gray-200" />
-    <DropdownMenuItem
-      className="gap-2 group/item flex flex-row justify-left items-cente"
-      onClick={() =>
-        window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
-      }
-    >
-      <span>⭐</span>
-      <span>Star on GitHub</span>
-    </DropdownMenuItem>
-    <hr className="border-t border-gray-200" />
-    <DropdownMenuItem
-      className="gap-2 group/item flex flex-row justify-left items-cente"
-      onClick={() =>
-        window.open('https://discord.gg/zy9x4UKwsw', '_blank')
-      }
-    >
-      <span>👋</span>
-      <span>Join our Discord</span>
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
+          <EnhancedDropdown toggleIframe={toggleIframe} router={router} />
 
 
         </div>
@@ -205,23 +157,11 @@ className="min-w-[300px]"
         </DialogContent>
       </Dialog>
 
-      {showIframe &&
-        createPortal(
+      {/* Buy Me a Coffee Iframe */}
+      {showIframe && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50"
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 2147483647,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '20px',
-            }}
-            onClick={() => setShowIframe(false)}
+            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+            onClick={toggleIframe}
           >
             <div
               className="bg-white shadow-lg rounded-md relative max-h-[90vh] max-w-[95vw]"
@@ -230,12 +170,10 @@ className="min-w-[300px]"
                 height: '680px',
                 border: '5px solid #11CADF',
                 borderRadius: '20px',
-                position: 'relative',
               }}
               onClick={(e) => e.stopPropagation()}
             >
               <iframe
-                id="kofiframe"
                 src="https://ko-fi.com/danielvnz/?hidefeed=true&widget=true&embed=true&preview=true"
                 style={{
                   border: 'none',
@@ -244,17 +182,16 @@ className="min-w-[300px]"
                   background: '#f9f9f9',
                   borderRadius: '16px',
                 }}
-                title="danielvnz"
+                title="Buy me a coffee"
               />
               <Button
                 className="bg-red-500 hover:bg-red-700 text-white absolute bottom-2 left-1/2 transform -translate-x-1/2 py-1.5 px-2 h-fit"
-                onClick={() => setShowIframe(false)}
+                onClick={toggleIframe}
               >
                 😭 Close Window
               </Button>
             </div>
-          </div>,
-          document.body
+          </div>
         )}
     </>
   );
