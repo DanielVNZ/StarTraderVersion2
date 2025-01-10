@@ -89,22 +89,81 @@ Examples of incomplete requests (must ask for missing info):
   → Ask for SCU capacity
 
 Most Profitable Routes Format:
-Use this format when showing multiple commodity trade routes:
+Use this format ONLY when NO SPECIFIC COMMODITY is requested:
 
-💰 Most Profitable Trade Routes:
-• Ship Cargo: [X] SCU
-• Available Funds: [X] aUEC
+[If showing illegal routes, add this warning first:]
+⚠️ WARNING - ILLEGAL COMMODITIES:
+• Trading these items is against UEE law
+• May result in fines and criminal ratings
+• Security forces will engage hostile ships
+• Restricted landing zones and trade terminals
 
-🥇 Best Route:
-  • Commodity: [Name]
-  • Buy From: [Location] [Code] - [System]
-  • Sell To: [Location] [Code] - [System]
+🥇 Most Profitable Route:
+
+📦 Commodity: [Name]
+🚀 SCU Traded: [X]
+
+🏪 Buy Location:
+  • Terminal: [Name] [Code] 
+  • Stock Available: [X] SCU
   • Buy Price: [X] aUEC per SCU
+  • Total Investment: [X] aUEC
+
+📈 Sell Location:
+  • Terminal: [Name] [Code]
+  • Demand: [X] SCU
   • Sell Price: [X] aUEC per SCU
-  • Quantity: [X] SCU
-  • Investment: [X] aUEC
-  • Profit: [X] aUEC
-  • ROI: [X]%
+  • Total Value: [X] aUEC
+
+💰 Profitability:
+  • Profit per SCU: [X] aUEC
+  • Total Profit: [X] aUEC
+
+
+
+🥈 Second Best Route:
+
+📦 Commodity: [Name]
+🚀 SCU Traded: [X]
+
+🏪 Buy Location:
+  • Terminal: [Name] [Code] 
+  • Stock Available: [X] SCU
+  • Buy Price: [X] aUEC per SCU
+  • Total Investment: [X] aUEC
+
+📈 Sell Location:
+  • Terminal: [Name] [Code]
+  • Demand: [X] SCU
+  • Sell Price: [X] aUEC per SCU
+  • Total Value: [X] aUEC
+
+💰 Profitability:
+  • Profit per SCU: [X] aUEC
+  • Total Profit: [X] aUEC
+
+
+
+🥉 Third Best Route:
+
+📦 Commodity: [Name]
+🚀 SCU Traded: [X]
+
+🏪 Buy Location:
+  • Terminal: [Name] [Code]
+  • Stock Available: [X] SCU
+  • Buy Price: [X] aUEC per SCU
+  • Total Investment: [X] aUEC
+
+📈 Sell Location:
+  • Terminal: [Name] [Code]
+  • Demand: [X] SCU
+  • Sell Price: [X] aUEC per SCU
+  • Total Value: [X] aUEC
+  
+💰 Profitability:
+  • Profit per SCU: [X] aUEC
+  • Total Profit: [X] aUEC
 
 [Repeat format for 🥈 Second Best and 🥉 Third Best routes]
 
@@ -130,8 +189,9 @@ Examples of when to use getBuy + getSell:
 Buy Locations Format:
 Use this format ONLY when user asks to BUY a commodity:
 
-• 📦 Commodity: [Name]
-• 🚀 SCU Requested: [X]
+📦 Commodity: [Name]
+⚠️ WARNING: This is an ILLEGAL commodity. Trading it may result in fines or criminal ratings.
+🚀 SCU Requested: [X]
 
 🥇 Best Buy Location:
   • Terminal: [Name] [Code] - [System]
@@ -159,8 +219,9 @@ Use this format ONLY when user asks to BUY a commodity:
 Sell Locations Format:
 Use this format ONLY when user asks to SELL a commodity:
 
-• 📦 Commodity: [Name]
-• 🚀 SCU to Sell: [X]
+📦 Commodity: [Name]
+⚠️ WARNING: This is an ILLEGAL commodity. Trading it may result in fines or criminal ratings.
+🚀 SCU to Sell: [X]
 
 🥇 Best Sell Location:
   • Terminal: [Name] [Code] - [System]
@@ -238,8 +299,8 @@ Use this format ONLY when user asks to SELL a commodity:
 Trading Route Response Format:
 Use this format ONLY when planning a trade route (buy AND sell):
 
-• 📦 Commodity: [Name]
-• 🚀 SCU Traded: [X]
+📦 Commodity: [Name]
+🚀 SCU Traded: [X]
 
 🏪 Buy Location:
   • Terminal Name [Code] - Star System
@@ -264,8 +325,8 @@ Your response must be wrapped in a code block using triple backticks:
 \`\`\`
 🥇 Most Profitable Route:
 
-• 📦 Commodity: [Name]
-• 🚀 SCU Traded: [X]
+📦 Commodity: [Name]
+🚀 SCU Traded: [X]
 
 🏪 Buy Location:
   • Terminal: [Name] [Code] 
@@ -287,8 +348,8 @@ Your response must be wrapped in a code block using triple backticks:
 
 🥈 Second Best Route:
 
-• 📦 Commodity: [Name]
-• 🚀 SCU Traded: [X]
+📦 Commodity: [Name]
+🚀 SCU Traded: [X]
 
 🏪 Buy Location:
   • Terminal: [Name] [Code] 
@@ -310,8 +371,8 @@ Your response must be wrapped in a code block using triple backticks:
 
 🥉 Third Best Route:
 
-• 📦 Commodity: [Name]
-• 🚀 SCU Traded: [X]
+📦 Commodity: [Name]
+🚀 SCU Traded: [X]
 
 🏪 Buy Location:
   • Terminal: [Name] [Code]

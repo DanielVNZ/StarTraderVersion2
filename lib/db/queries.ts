@@ -1,9 +1,8 @@
-import 'server-only';
-
-import { genSaltSync, hashSync } from 'bcrypt-ts';
-import { and, asc, desc, eq, gt, gte } from 'drizzle-orm';
+import { genSaltSync, hashSync, hash } from 'bcrypt-ts';
+import { and, asc, desc, eq, gt, gte, lt, inArray, like } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   user,
@@ -36,13 +35,27 @@ export async function getUser(email: string): Promise<Array<User>> {
 }
 
 export async function createUser(email: string, password: string) {
-  const salt = genSaltSync(10);
-  const hash = hashSync(password, salt);
-
   try {
-    return await db.insert(user).values({ email, password: hash });
+    const hashedPassword = await hash(password, 10);
+    
+    const userId = uuidv4();
+    
+    const result = await db
+      .insert(user)
+      .values({
+        id: userId,
+        email,
+        password: hashedPassword,
+      })
+      .returning();
+
+    if (!result || result.length === 0) {
+      throw new Error('Failed to create user');
+    }
+
+    return result;
   } catch (error) {
-    console.error('Failed to create user in database');
+    console.error('Failed to create user:', error);
     throw error;
   }
 }
@@ -57,6 +70,27 @@ export async function saveChat({
   title: string;
 }) {
   try {
+    // First verify the user exists
+    const userExists = await db
+      .select()
+      .from(user)
+      .where(eq(user.id, userId));
+
+    if (!userExists || userExists.length === 0) {
+      // Try to get user by email as fallback
+      const userByEmail = await db
+        .select()
+        .from(user)
+        .where(like(user.email, 'guest_%'));
+      
+      if (userByEmail && userByEmail.length > 0) {
+        // Use the first matching guest user
+        userId = userByEmail[0].id;
+      } else {
+        throw new Error(`User with ID ${userId} does not exist and no guest user found`);
+      }
+    }
+
     return await db.insert(chat).values({
       id,
       createdAt: new Date(),
@@ -64,7 +98,7 @@ export async function saveChat({
       title,
     });
   } catch (error) {
-    console.error('Failed to save chat in database');
+    console.error('Failed to save chat in database:', error);
     throw error;
   }
 }
@@ -325,6 +359,49 @@ export async function updateChatVisiblityById({
     return await db.update(chat).set({ visibility }).where(eq(chat.id, chatId));
   } catch (error) {
     console.error('Failed to update chat visibility in database');
+    throw error;
+  }
+}
+
+export async function deleteOldChats(days: number = 7) {
+  try {
+    const daysAgo = new Date();
+    daysAgo.setDate(daysAgo.getDate() - days);
+
+    // Get all old chat IDs from guest accounts only
+    const oldChats = await db
+      .select({ id: chat.id })
+      .from(chat)
+      .innerJoin(user, eq(chat.userId, user.id))
+      .where(
+        and(
+          lt(chat.createdAt, daysAgo),
+          like(user.email, 'guest_%') // Only select chats from guest accounts
+        )
+      );
+
+    const chatIds = oldChats.map(chat => chat.id);
+
+    if (chatIds.length === 0) {
+      return []; // No chats to delete
+    }
+
+    // Delete related records using IN clause
+    await db.delete(vote)
+      .where(inArray(vote.chatId, chatIds));
+
+    await db.delete(message)
+      .where(inArray(message.chatId, chatIds));
+
+    // Delete the chats
+    const result = await db.delete(chat)
+      .where(inArray(chat.id, chatIds))
+      .returning();
+
+    console.log(`Deleted ${result.length} old guest chats`);
+    return result;
+  } catch (error) {
+    console.error('Failed to delete old guest chats from database:', error);
     throw error;
   }
 }

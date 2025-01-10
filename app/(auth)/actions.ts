@@ -92,45 +92,32 @@ export const guestLogin = async (
   _: GuestLoginActionState,
 ): Promise<GuestLoginActionState> => {
   try {
-    // Generate a random email and password for the guest
-    const guestEmail = `${uuidv4()}@example.com`;  // Generate a unique email
-    const guestPassword = uuidv4();  // Generate a random password
+    // Generate a unique ID and use it consistently
+    const guestUuid = uuidv4();
+    const guestEmail = `guest_${guestUuid}@example.com`;
+    const guestPassword = uuidv4();
 
-    // Validate the guest credentials using the same schema as in the register function
+    // Validate the guest credentials
     const validatedData = authFormSchema.parse({
       email: guestEmail,
       password: guestPassword,
     });
 
-    // Check if the guest user already exists
-    const existingGuest = await getUser(validatedData.email);
-    if (existingGuest.length > 0) {
-      console.log('Returning existing guest user:', existingGuest[0]);
-      // If the guest exists, sign in the user
-      await signIn('credentials', {
-        email: validatedData.email,
-        password: validatedData.password,
-        redirect: false, // Prevent redirection
-      });
-      return { status: 'success' }; // Return success
-    }
-
-    // Create a new guest user if one does not exist
+    // Create a new guest user
     await createUser(validatedData.email, validatedData.password);
 
     // Sign in the newly created guest user
-    await signIn('credentials', {
+    await signIn('guest', {
       email: validatedData.email,
       password: validatedData.password,
-      redirect: false, // Prevent redirection
+      redirect: false,
     });
 
     console.log('Guest user registered and logged in:', validatedData.email);
-
-    return { status: 'success' }; // Return success after guest login
+    return { status: 'success' };
 
   } catch (error) {
     console.error('Error during guest login:', error);
-    return { status: 'failed' }; // Return failure status if any error occurs
+    return { status: 'failed' };
   }
 };

@@ -5,6 +5,10 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect, startTransition } from 'react';
 import { toast } from 'sonner';
 import { Button as Button2, } from '@nextui-org/react';
+import { createPortal } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
 
 import { AuthForm } from '@/components/auth-form';
 import { SubmitButton } from '@/components/submit-button';
@@ -17,6 +21,7 @@ import {
 
 export default function Page() {
   const router = useRouter();
+  const { setTheme, theme } = useTheme();
 
   const [email, setEmail] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);
@@ -80,162 +85,242 @@ export default function Page() {
     });
   };
 
+  function StartTradingButton({ isSuccessful }: { isSuccessful: boolean }) {
+    const { pending } = useFormStatus();
+
+    return (
+      <Button
+        type="submit"
+        variant="default"
+        className="w-full px-5 py-4 text-base"
+        disabled={pending || isSuccessful}
+      >
+        {pending ? (
+          <svg
+            className="animate-spin h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"
+            />
+          </svg>
+        ) : (
+          'Start Trading'
+        )}
+      </Button>
+    );
+  }
+
   return (
-    
-    <div className="relative flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
-      {/* Top-Right Buttons for Desktop */}
-      <div className="absolute top-4 right-4 hidden md:flex gap-4">
-        {/* Ko-fi Button */}
-        <Button2
-          className="rounded-full hover:bg-secondary-light hover:text-brown-600 transition text-lg"
-          color="secondary"
-          onPress={() => setShowIframe(!showIframe)} // Toggle iframe visibility
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 relative">
+      {/* Theme Toggle Button */}
+      <div className="absolute top-4 left-4">
+        <Button
+          variant="default"
+          className="px-4 py-2 text-sm"
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        >
+          {theme === 'light' ? 'Toggle Dark Theme 🌙' : 'Toggle Light Theme ☀️'}
+        </Button>
+      </div>
+
+      {/* Desktop Buttons - Top Right */}
+      <div className="hidden md:flex gap-4 absolute top-4 right-4">
+        <Button
+          variant="default"
+          className="px-4 py-2 text-sm"
+          onClick={() => setShowIframe(!showIframe)}
         >
           Buy me a ☕ ($3 NZD)
-        </Button2>
+        </Button>
 
-        {/* GitHub Button */}
-        <Button2
-          className="rounded-full hover:bg-secondary-light hover:text-yellow-400 transition text-lg"
-          color="secondary"
-          onPress={() =>
-            window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
-          } // Open GitHub in a new tab
+        <Button
+          variant="default"
+          className="px-4 py-2 text-sm"
+          onClick={() => window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')}
         >
           ⭐ on GitHub
-        </Button2>
-        <Button2
-            className="rounded-full hover:bg-secondary-light hover:text-yellow-400 transition text-lg"
-            color="secondary"
-            onPress={() =>
-              window.open(
-                'https://discord.gg/zy9x4UKwsw',
-                '_blank'
-              )
-            } // Open GitHub in a new tab
-          >
-            👋 Join our Discord
-          </Button2>
+        </Button>
+
+        <Button
+          variant="default"
+          className="px-4 py-2 text-sm"
+          onClick={() => window.open('https://discord.gg/zy9x4UKwsw', '_blank')}
+        >
+          👋 Join our Discord
+        </Button>
+      </div>
+
+      {/* Mobile Buttons - Top Center */}
+      <div className="flex gap-2 md:hidden justify-center fixed top-4 left-1/2 -translate-x-1/2 z-10">
+        {/* Mobile Ko-fi Button */}
+        <Button
+          variant="default"
+          className="p-2 text-sm min-w-0"
+          onClick={() => window.open('https://ko-fi.com/danielvnz', '_blank')}
+        >
+          ☕
+        </Button>
+
+        {/* Mobile GitHub Button */}
+        <Button
+          variant="default"
+          className="p-2 text-sm min-w-0"
+          onClick={() => window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')}
+        >
+          ⭐
+        </Button>
+
+        {/* Mobile Discord Button */}
+        <Button
+          variant="default"
+          className="p-2 text-sm min-w-0"
+          onClick={() => window.open('https://discord.gg/zy9x4UKwsw', '_blank')}
+        >
+          👋
+        </Button>
       </div>
 
       {/* Main Content */}
-<div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12">
-  <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
-    <h3 className="text-xl font-semibold dark:text-zinc-50">Welcome back to Star Trader</h3>
-    <p className="text-sm text-gray-500 dark:text-zinc-400">
-      Use your email and password to sign in or continue as a guest.
-    </p>
-  </div>
-  <AuthForm action={handleSubmit} defaultEmail={email}>
-    {/* Standard Sign-In Button */}
-    <SubmitButton isSuccessful={isSuccessful}>Start Trading</SubmitButton>
-  </AuthForm>
-
-  {/* Guest Login Button */}
-  <div className="text-center">
-    <button
-      onClick={handleGuestLogin}
-      className="relative inline-flex items-center justify-center rounded-md bg-blue-500 px-5 py-3 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-600"
-      style={{ margin: '0 auto' }}
-      disabled={isLoading} // Disable the button while loading
-    >
-      {isLoading ? (
-        <svg
-          className="animate-spin h-5 w-5 text-white"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"
-          />
-        </svg>
-      ) : (
-        'Continue as Guest'
-      )}
-    </button>
-  </div>
-
-  <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
-    {"Don't have an account? "}
-    <Link
-      href="/register"
-      className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
-    >
-      Sign up
-    </Link>
-    {' for free. No email verification required!'}
-  </p>
-
-  {/* Mobile Buttons Below the Text */}
-  <div className="flex flex-col md:hidden justify-center gap-4 mt-4 items-center bg-background">
-    {/* Mobile Ko-fi Button */}
-    <Button2
-      className="rounded-full bg-secondary hover:bg-secondary-light text-white transition text-lg px-6 py-6 flex items-center justify-center"
-      color="secondary"
-      onPress={() => window.open('https://ko-fi.com/danielvnz', '_blank')} // Open Ko-fi link in a new tab
-    >
-      Buy me a ☕
-    </Button2>
-
-    {/* Mobile GitHub Button */}
-    <Button2
-      className="rounded-full bg-secondary hover:bg-secondary-light text-white transition text-lg px-6 py-6 flex items-center justify-center"
-      color="secondary"
-      onPress={() =>
-        window.open('https://github.com/DanielVNZ/StarTraderVersion2', '_blank')
-      } // Open GitHub in a new tab
-    >
-      ⭐ on GitHub
-    </Button2>
-
-    {/* Mobile Discord Button */}
-    <Button2
-      className="rounded-full bg-secondary hover:bg-secondary-light text-white transition text-lg px-6 py-6 flex items-center justify-center"
-      color="secondary"
-      onPress={() =>
-        window.open('https://discord.gg/zy9x4UKwsw', '_blank')
-      } // Open Discord in a new tab
-    >
-      👋 Join our Discord
-    </Button2>
-  </div>
-</div>
-
-
-      {/* Conditionally render the iframe */}
-      {showIframe && (
-        <div
-          className="fixed top-0 right-0 bg-white shadow-lg rounded-md"
-          style={{
-            width: '400px',
-            height: '500px',
-            border: '1px solid #ccc',
-            zIndex: 1000,
-          }}
-        >
-          <Button2
-            className="absolute top-2 right-2 py-1.5 px-2 h-fit"
-            onPress={() => setShowIframe(false)} // Close iframe
-          >
-            Close
-          </Button2>
-          <iframe
-            id="kofiframe"
-            src="https://ko-fi.com/danielvnz/?hidefeed=true&widget=true&embed=true&preview=true"
-            style={{
-              border: 'none',
-              width: '100%',
-              height: '100%',
-              background: '#f9f9f9',
-            }}
-            title="Support me on Ko-fi"
-          />
+      <div className="mx-auto flex w-full flex-col justify-center items-center sm:w-[450px] md:w-[1000px] mt-16 md:mt-0">
+        {/* Title - Centered above everything */}
+        <div className="text-center mb-12 max-w-[600px]">
+          <h3 className="text-2xl font-semibold dark:text-zinc-50">Welcome back to Star Trader</h3>
+          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-2">
+            Sign in with your email and password or continue as a guest
+          </p>
         </div>
+
+        {/* Login Options Container */}
+        <div className="w-full flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-12">
+          {/* Left Side - Login Form */}
+          <div className="w-full md:w-[450px] px-6 flex flex-col items-center">
+            <div className="w-full">
+              <AuthForm action={handleSubmit} defaultEmail={email}>
+                <div className="flex flex-col items-center w-full">
+                  <StartTradingButton isSuccessful={isSuccessful} />
+                </div>
+              </AuthForm>
+            </div>
+
+            {/* Sign up text */}
+            <p className="text-center text-sm text-gray-600 mt-8 dark:text-zinc-400">
+              {"Don't have an account? "}
+              <Link
+                href="/register"
+                className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
+              >
+                Sign up
+              </Link>
+              {' for free'}
+            </p>
+          </div>
+
+          {/* Center Divider - Desktop Only */}
+          <div className="hidden md:flex flex-col items-center justify-center">
+            <div className="relative h-32">
+              <div className="absolute top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-zinc-700 w-[1px] h-full"></div>
+            </div>
+            <span className="bg-background dark:text-zinc-400 text-gray-500 px-4 text-base font-medium">
+              or
+            </span>
+            <div className="relative h-32">
+              <div className="absolute top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-zinc-700 w-[1px] h-full"></div>
+            </div>
+          </div>
+
+          {/* Right Side - Guest Login */}
+          <div className="w-full md:w-[450px] px-6 flex flex-col items-center">
+            <div className="w-full" style={{ maxWidth: '280px' }}>
+              <Button
+                variant="default"
+                onClick={handleGuestLogin}
+                className="w-full px-5 py-4 text-base"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <svg
+                    className="animate-spin h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"
+                    />
+                  </svg>
+                ) : (
+                  'Continue as Guest'
+                )}
+              </Button>
+              <p className="text-center text-sm text-gray-500 dark:text-zinc-400 mt-3">
+                Consider creating an account to save your chat history
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Render iframe in a portal */}
+      {showIframe && createPortal(
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 2147483647, // Maximum possible z-index
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px'
+          }}
+          onClick={() => setShowIframe(false)}
+        >
+          <div
+            className="bg-white shadow-lg rounded-md relative max-h-[90vh] max-w-[95vw]"
+            style={{
+              width: '400px',
+              height: '680px',
+              border: '5px solid #11CADF',
+              borderRadius: '20px',
+              position: 'relative',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <iframe
+              id="kofiframe"
+              src="https://ko-fi.com/danielvnz/?hidefeed=true&widget=true&embed=true&preview=true"
+              style={{
+                border: 'none',
+                width: '100%',
+                height: 'calc(100% - 50px)',
+                background: '#f9f9f9',
+                borderRadius: '16px',
+              }}
+              title="Support me on Ko-fi"
+            />
+            <Button2
+              className="bg-red-500 hover:bg-red-700 text-white absolute bottom-2 left-1/2 transform -translate-x-1/2 py-1.5 px-2 h-fit"
+              onPress={() => setShowIframe(false)}
+            >
+              😭 Close Window
+            </Button2>
+          </div>
+        </div>,
+        document.body
       )}
     </div>
   );

@@ -16,23 +16,12 @@ export function SubmitButton({
   const { pending } = useFormStatus();
 
   return (
-    <Button
-      type={pending ? 'button' : 'submit'}
-      aria-disabled={pending || isSuccessful}
-      disabled={pending || isSuccessful}
-      className="relative"
+    <button
+      className="w-full max-w-[350px] relative inline-flex items-center justify-center rounded-md bg-blue-500 px-5 py-4 text-base font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-blue-600"
+      type="submit"
+      disabled={isSuccessful}
     >
       {children}
-
-      {(pending || isSuccessful) && (
-        <span className="animate-spin absolute right-4">
-          <LoaderIcon />
-        </span>
-      )}
-
-      <output aria-live="polite" className="sr-only">
-        {pending || isSuccessful ? 'Loading' : 'Submit form'}
-      </output>
-    </Button>
+    </button>
   );
 }

@@ -61,32 +61,24 @@ export const {
       credentials: {},
       async authorize() {
         try {
-          console.log('Guest login initiated');
-    
-          // Generate a temporary UUID for guest email and password
-          const guestEmail = `${uuidv4()}@example.com`;
-          const guestPassword = uuidv4(); // Temporary password
-    
-          // Check if the guest user already exists
-          const existingGuest = await getUser(guestEmail);
-          if (existingGuest.length > 0) {
-            console.log('Returning existing guest user:', existingGuest[0]);
-            return existingGuest[0] as User; // Return the existing guest user
+          const guestUuid = uuidv4();
+          const guestEmail = `guest_${guestUuid}@example.com`;
+          const guestPassword = uuidv4();
+
+          const [createdUser] = await createUser(guestEmail, guestPassword);
+
+          if (!createdUser || !createdUser.id) {
+            console.error('Failed to create guest user - no user ID returned');
+            return null;
           }
-    
-          // Insert guest user into the User table
-          const guestId = uuidv4(); // Unique guest ID
-          await createUser(guestEmail, guestPassword); // Ensure createUser inserts a user with guestId
-    
-          // Construct the guest user object
+
           const guestUser = {
-            id: guestId,  // Use the newly generated guestId
+            id: createdUser.id,
             email: guestEmail,
             name: 'Guest User',
           };
-    
-          console.log('Guest user created:', guestUser);
-          return guestUser as User; // Return the guest user object
+
+          return guestUser as User;
         } catch (error) {
           console.error('Error during guest login:', error);
           return null;

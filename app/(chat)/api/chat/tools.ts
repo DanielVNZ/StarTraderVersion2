@@ -5,7 +5,8 @@ const commodityLocationsCache = {
   buyLocations: new Map<string, any[]>(),  // Store by commodity ID
   sellLocations: new Map<string, any[]>(),
   lastCommodityId: null as number | null,  // Add this to track the last commodity ID
-  lastSellCommodityId: null as number | null  // Add this
+  lastSellCommodityId: null as number | null,  // Add this
+  commodityLegalityMap: new Map<string, boolean>()
 };
 
 export const tools = {
@@ -176,10 +177,23 @@ export const tools = {
     description:
       "Retrieve commodity buy prices and available stock for a specific commodity or location. Use this tool to help the user find the best buy locations for a specific commodity.",
     parameters: z.object({
-      id_commodity: z.number().optional().describe("ID of the commodity to buy"),
-      userSCU: z.number().min(1).describe("SCU capacity of the user's cargo"),
+      id_commodity: z.number().optional(),
+      userSCU: z.number().min(1),
     }),
     execute: async (args: { id_commodity?: number; userSCU: number }) => {
+      // First get commodity details if we have an ID
+      let commodityName = null;
+      if (args.id_commodity) {
+        const commoditiesResult = await tools.getCommodities.execute({});
+        if (!('error' in commoditiesResult) && commoditiesResult.result) {
+          const commodity = commoditiesResult.result.flat().find(c => c.id === args.id_commodity);
+          if (commodity && commodity.name) {
+            commodityName = commodity.name;
+            commodityLocationsCache.commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
+          }
+        }
+      }
+
       console.log("Fetching buy commodity prices with arguments:", args);
   
       // Construct query parameters dynamically
@@ -275,7 +289,8 @@ export const tools = {
         return { 
           best_buy_location: topBuyLocations[0],
           alternative_buy_locations: topBuyLocations.slice(1),
-          remaining_locations: Math.max(0, sortedData.length - 3)
+          remaining_locations: Math.max(0, sortedData.length - 3),
+          is_illegal: commodityName ? commodityLocationsCache.commodityLegalityMap.get(commodityName) || false : false
         };
       } catch (error) {
         console.error("Error fetching commodity buy prices:", error);
@@ -289,10 +304,23 @@ getSellCommodityPrices: {
   description:
     "Retrieve commodity sell prices and demand for a specific commodity or location. Use this tool to help the user find the best sell locations for a specific commodity.",
   parameters: z.object({
-    id_commodity: z.number().optional().describe("ID of the commodity to sell"),
-    userSCU: z.number().min(1).describe("SCU capacity of the user's cargo"),
+    id_commodity: z.number().optional(),
+    userSCU: z.number().min(1),
   }),
   execute: async (args: { id_commodity?: number; userSCU: number }) => {
+    // First get commodity details if we have an ID
+    let commodityName = null;
+    if (args.id_commodity) {
+      const commoditiesResult = await tools.getCommodities.execute({});
+      if (!('error' in commoditiesResult) && commoditiesResult.result) {
+        const commodity = commoditiesResult.result.flat().find(c => c.id === args.id_commodity);
+        if (commodity && commodity.name) {
+          commodityName = commodity.name;
+          commodityLocationsCache.commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
+        }
+      }
+    }
+
     console.log("Fetching sell commodity prices with arguments:", args);
 
     const queryParams = new URLSearchParams();
@@ -387,7 +415,8 @@ getSellCommodityPrices: {
       return { 
         best_sell_location: topSellLocations[0],
         alternative_sell_locations: topSellLocations.slice(1),
-        remaining_locations: Math.max(0, sortedData.length - 3)
+        remaining_locations: Math.max(0, sortedData.length - 3),
+        is_illegal: commodityName ? commodityLocationsCache.commodityLegalityMap.get(commodityName) || false : false
       };
     } catch (error) {
       console.error("Error fetching commodity sell prices:", error);
@@ -781,12 +810,11 @@ getSellCommodityPrices: {
         return { error: "Failed to get required commodity data" };
       }
 
-      // Create a map of commodity names to their legality status
-      const commodityLegalityMap = new Map<string, boolean>();
+      // Update the commodity legality map
+      commodityLocationsCache.commodityLegalityMap.clear(); // Clear existing entries
       commoditiesResult.result.flat().forEach(commodity => {
         if (commodity.name) {
-          // Store the actual is_illegal value (true if illegal, false if legal)
-          commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
+          commodityLocationsCache.commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
         }
       });
 
@@ -831,7 +859,7 @@ getSellCommodityPrices: {
             
             // Only apply legality filter if legalOnly is defined
             if (legalOnly !== undefined && item.commodity_name) {
-              const isIllegal = commodityLegalityMap.get(item.commodity_name);
+              const isIllegal = commodityLocationsCache.commodityLegalityMap.get(item.commodity_name);
               
               // If legalOnly is true, keep only legal commodities (not illegal)
               // If legalOnly is false, keep only illegal commodities
@@ -843,6 +871,7 @@ getSellCommodityPrices: {
   
         interface Route {
           commodity_name: string;
+          is_illegal: boolean;
           buy_location: string;
           sell_location: string;
           buy_price_per_scu: number;
@@ -885,6 +914,7 @@ getSellCommodityPrices: {
 
                   routes.push({
                     commodity_name: buy.commodity_name,
+                    is_illegal: commodityLocationsCache.commodityLegalityMap.get(buy.commodity_name) || false,
                     buy_location: buy.terminal_name,
                     sell_location: sell.terminal_name,
                     buy_price_per_scu: buy.price_buy,
@@ -929,10 +959,23 @@ getSellCommodityPrices: {
 
         console.log(`Top ${legalOnly !== undefined ? (legalOnly ? 'legal' : 'illegal') : ''} profitable routes calculated:`, bestRoutes);
 
-        return { 
-          best_route: bestRoutes[0],
-          alternative_routes: bestRoutes.slice(1)
-        };
+        if (legalOnly === false) {
+          // Add warning prefix for illegal-only routes
+          return { 
+            warning: `⚠️ WARNING: You have requested illegal trade routes. Trading these commodities:
+            • Is against UEE law
+            • May result in fines and criminal ratings
+            • Will cause security forces to engage hostile ships
+            • Restricts access to legal landing zones`,
+            best_route: bestRoutes[0],
+            alternative_routes: bestRoutes.slice(1)
+          };
+        } else {
+          return { 
+            best_route: bestRoutes[0],
+            alternative_routes: bestRoutes.slice(1)
+          };
+        }
       } catch (error) {
         console.error("Error fetching or processing data:", error);
         return { error: "An error occurred while processing the request." };
@@ -1090,6 +1133,7 @@ export type Location = {
 
 interface TradeRoute {
   commodity_name: string;
+  is_illegal: boolean;
   buy_location: string;
   sell_location: string;
   buy_price_per_scu: number;
@@ -1101,3 +1145,4 @@ interface TradeRoute {
   buy_stock_available: number;
   sell_stock_available: number;
 }
+

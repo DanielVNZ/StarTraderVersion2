@@ -13,9 +13,11 @@ import {
   useCallback,
   useEffect,
   useState,
+  useRef,
 } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import { useDebounceCallback, useWindowSize } from 'usehooks-ts';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import type { Document, Suggestion, Vote } from '@/lib/db/schema';
 import { cn, fetcher } from '@/lib/utils';
@@ -34,6 +36,8 @@ import { Console } from './console';
 import { useSidebar } from './ui/sidebar';
 import { useBlock } from '@/hooks/use-block';
 import equal from 'fast-deep-equal';
+import { SuggestedActions } from './suggested-actions';
+import { SendIcon } from './icons';
 
 export type BlockKind = 'text' | 'code';
 
@@ -262,6 +266,19 @@ function PureBlock({
   const { width: windowWidth, height: windowHeight } = useWindowSize();
   const isMobile = windowWidth ? windowWidth < 768 : false;
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(event.target.value);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
+
   return (
     <AnimatePresence>
       {block.isVisible && (
@@ -331,22 +348,58 @@ function PureBlock({
                   blockStatus={block.status}
                 />
 
-                <form className="flex flex-row gap-2 relative items-end w-full px-4 pb-4">
-                  <MultimodalInput
-                    chatId={chatId}
-                    input={input}
-                    setInput={setInput}
-                    handleSubmit={handleSubmit}
-                    isLoading={isLoading}
-                    stop={stop}
-                    attachments={attachments}
-                    setAttachments={setAttachments}
-                    messages={messages}
-                    append={append}
-                    className="bg-background dark:bg-muted"
-                    setMessages={setMessages}
-                  />
-                </form>
+                <div className="relative flex h-dvh w-screen max-w-full overflow-x-hidden">
+                  {/* Message input area */}
+                  <div className="absolute bottom-0 left-0 right-0 w-full px-4 py-2 space-y-4 bg-background">
+                    {!isReadonly && (
+                      <>
+                        <div className="relative w-full max-w-full overflow-hidden">
+                          {/* Suggested actions */}
+                          {messages.length === 0 && (
+                            <div className="mb-4 w-full">
+                              <SuggestedActions chatId={chatId} append={append} />
+                            </div>
+                          )}
+                          
+                          {/* Message input */}
+                          <form
+                            onSubmit={handleSubmit}
+                            className="flex items-end gap-2 w-full max-w-full"
+                          >
+                            <div className="relative flex-1 overflow-hidden">
+                              <TextareaAutosize
+                                ref={textareaRef}
+                                tabIndex={0}
+                                rows={1}
+                                value={input}
+                                onChange={handleInputChange}
+                                onKeyDown={handleKeyDown}
+                                placeholder="Send a message to Star Trader..."
+                                spellCheck={false}
+                                className="w-full resize-none bg-background pr-12 text-base py-3 px-4 rounded-xl border focus:outline-none focus:ring-1 focus:ring-neutral-300 dark:focus:ring-neutral-700 dark:border-neutral-700 max-h-[400px] overflow-y-auto"
+                                style={{
+                                  wordWrap: 'break-word'
+                                }}
+                              />
+                              <div className="absolute right-2 bottom-1">
+                                <button
+                                  disabled={isLoading || input.length === 0}
+                                  className={`p-2 rounded-lg ${
+                                    isLoading || input.length === 0
+                                      ? 'opacity-40'
+                                      : 'opacity-100 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+                                  }`}
+                                >
+                                  <SendIcon />
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
