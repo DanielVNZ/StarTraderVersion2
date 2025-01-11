@@ -29,7 +29,12 @@ interface TerminalData {
     planet_name: string;
     orbit_name: string;
     is_auto_load: boolean; // convert to boolean
-
+    habitation_services: boolean;
+    has_refinery: boolean;
+    has_cargo_center: boolean;
+    has_loading_dock: boolean;
+    has_docking_port: boolean;
+    moon_name: string;
 }
 
 async function readJSONFile(filePath: string): Promise<any> {
@@ -48,37 +53,53 @@ async function mergeCommodityData(): Promise<any> {
         const prices: CommodityPriceData[] = await readJSONFile(pricesPath);
         const terminals: TerminalData[] = await readJSONFile(terminalsPath);
 
+        // Filter terminals to include only those in Stanton or Pyro star systems
+        const filteredTerminals = terminals.filter((terminal) => {
+            return (
+                terminal.star_system_name === 'Stanton' ||
+                terminal.star_system_name === 'Pyro'
+            );
+        });
+
         // Create a map for commodities based on id_commodity
         const commodityMap = new Map<number, CommodityData>();
         commodities.forEach(commodity => {
             commodityMap.set(commodity.id_commodity, commodity);
         });
 
-        // Create a map for terminals based on terminal_id
+        // Create a map for filtered terminals based on terminal_id
         const terminalMap = new Map<number, TerminalData>();
-        terminals.forEach(terminal => {
+        filteredTerminals.forEach(terminal => {
             terminalMap.set(terminal.terminal_id, terminal);
         });
 
         // Merge data using terminal_id
-        const mergedData = prices.map(price => {
-            const commodity = commodityMap.get(price.id_commodity);
-            const terminal = terminalMap.get(price.terminal_id);
+        const mergedData = prices
+            .filter((price) => terminalMap.has(price.terminal_id)) // Only include prices for filtered terminals
+            .map((price) => {
+                const commodity = commodityMap.get(price.id_commodity);
+                const terminal = terminalMap.get(price.terminal_id);
 
-            return {
-                ...price,
-                commodity_name: commodity ? commodity.name : price.commodity_name,
-                commodity_code: commodity ? commodity.code : undefined,
-                is_buyable: commodity ? commodity.is_buyable : undefined,
-                is_sellable: commodity ? commodity.is_sellable : undefined,
-                is_illegal: commodity ? commodity.is_illegal : undefined,
-                wiki: commodity ? commodity.wiki : undefined,
-                star_system_name: terminal ? terminal.star_system_name : undefined,
-                planet_name: terminal ? terminal.planet_name : undefined,
-                orbit_name: terminal ? terminal.orbit_name : undefined,
-                is_auto_load: terminal ? terminal.is_auto_load : undefined,
-            };
-        });
+                return {
+                    ...price,
+                    commodity_name: commodity ? commodity.name : price.commodity_name,
+                    commodity_code: commodity ? commodity.code : undefined,
+                    is_buyable: commodity ? commodity.is_buyable : undefined,
+                    is_sellable: commodity ? commodity.is_sellable : undefined,
+                    is_illegal: commodity ? commodity.is_illegal : undefined,
+                    wiki: commodity ? commodity.wiki : undefined,
+                    moon_name: terminal ? terminal.moon_name : undefined,
+                    star_system_name: terminal ? terminal.star_system_name : undefined,
+                    planet_name: terminal ? terminal.planet_name : undefined,
+                    orbit_name: terminal ? terminal.orbit_name : undefined,
+                    is_auto_load: terminal ? terminal.is_auto_load : undefined,
+                    habitation_services: terminal ? terminal.habitation_services : undefined,
+                    has_refinery: terminal ? terminal.has_refinery : undefined,
+                    has_cargo_center: terminal ? terminal.has_cargo_center : undefined,
+                    has_loading_dock: terminal ? terminal.has_loading_dock : undefined,
+                    has_docking_port: terminal ? terminal.has_docking_port : undefined,
+                };
+            });
 
         // Write merged data to a new JSON file
         await fs.writeFile(outputPath, JSON.stringify(mergedData, null, 2));

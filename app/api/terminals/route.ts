@@ -10,6 +10,11 @@ interface TerminalData {
     planet_name: string;
     orbit_name: string;
     is_auto_load: boolean; // convert to boolean
+    habitation_services: boolean;
+    has_refinery: boolean;
+    has_cargo_center: boolean;
+    has_loading_dock: boolean;
+    has_docking_port: boolean;
 }
 
 const cache = new NodeCache({ stdTTL: 1800 });
@@ -48,7 +53,15 @@ async function fetchTerminalData(): Promise<TerminalData[] | null> {
             star_system_name: data.star_system_name,
             planet_name: data.planet_name,
             orbit_name: data.orbit_name,
+            moon_name: data.moon_name,
             is_auto_load: data.is_auto_load === 1, // convert to boolean: 1 is true, 0 is false
+            habitation_services: data.is_habitation === 1,
+            has_refinery: data.is_refinery === 1,
+            has_cargo_center: data.is_cargo_center === 1,
+            has_loading_dock: data.is_loading_dock === 1,
+            has_docking_port: data.is_docking_port === 1,
+
+
         }));
 
         cache.set(cacheKey, filteredData);

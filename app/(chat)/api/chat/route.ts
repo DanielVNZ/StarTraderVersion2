@@ -37,13 +37,18 @@ export const maxDuration = 60;
 
 type AllowedTools =
   'getMostProfitableCommodity' |
-  'getCommodityLocations'
-
+  'getCommodityLocations' |
+  'getTerminalInfo' |
+  'getCommoditiesByTerminal' |
+  'getBestTradeRouteForCommodity'
 
 
 const myTools: AllowedTools[] = [
   'getMostProfitableCommodity',
-  'getCommodityLocations' 
+  'getCommodityLocations',
+  'getTerminalInfo',
+  'getCommoditiesByTerminal',
+  'getBestTradeRouteForCommodity'
 ];
 
 const allTools: AllowedTools[] = [...myTools];

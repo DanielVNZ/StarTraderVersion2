@@ -5,7 +5,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 2,
@@ -13,7 +19,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 2",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 3,
@@ -21,7 +33,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 3",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 4,
@@ -29,7 +47,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 4",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 5,
@@ -37,7 +61,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 5",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 6,
@@ -45,7 +75,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Wala",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 7,
@@ -53,7 +89,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Wala",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 8,
@@ -61,7 +103,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Wala",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 9,
@@ -69,7 +117,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Wala",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 10,
@@ -77,7 +131,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Daymar",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 11,
@@ -85,7 +145,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Yela",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 12,
@@ -93,7 +159,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 13,
@@ -101,7 +173,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 14,
@@ -109,7 +187,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Yela",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 15,
@@ -117,7 +201,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Daymar",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 16,
@@ -125,7 +215,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Daymar",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 17,
@@ -133,7 +229,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Euterpe",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 18,
@@ -141,7 +243,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 19,
@@ -149,7 +257,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 20,
@@ -157,7 +271,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 4",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 21,
@@ -165,7 +285,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 4",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 22,
@@ -173,7 +299,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 5",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 23,
@@ -181,7 +313,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Yela",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 24,
@@ -189,7 +327,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Euterpe",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 25,
@@ -197,7 +341,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 26,
@@ -205,7 +355,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Cellin",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 27,
@@ -213,7 +369,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": true
+    "moon_name": "Yela",
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 28,
@@ -221,7 +383,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Aberdeen",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 29,
@@ -229,7 +397,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Arial",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 30,
@@ -237,7 +411,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 31,
@@ -245,7 +425,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 32,
@@ -253,7 +439,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Magda",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 33,
@@ -261,7 +453,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Arial",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 34,
@@ -269,7 +467,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Aberdeen",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 35,
@@ -277,7 +481,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 36,
@@ -285,7 +495,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Magda",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 37,
@@ -293,7 +509,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 38,
@@ -301,7 +523,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Ita",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 39,
@@ -309,7 +537,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 40,
@@ -317,7 +551,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 41,
@@ -325,7 +565,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": "Ita",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 42,
@@ -333,7 +579,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Cellin",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 43,
@@ -341,7 +593,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Lyria",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 44,
@@ -349,7 +607,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 45,
@@ -357,7 +621,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 2",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 46,
@@ -365,7 +635,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 3",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 47,
@@ -373,7 +649,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 4",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 48,
@@ -381,7 +663,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 5",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 49,
@@ -389,7 +677,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 50,
@@ -397,7 +691,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Daymar",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 51,
@@ -405,7 +705,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 52,
@@ -413,7 +719,13 @@
     "star_system_name": "Nyx",
     "planet_name": null,
     "orbit_name": "Delamar",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 53,
@@ -421,7 +733,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Lyria",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 54,
@@ -429,7 +747,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 55,
@@ -437,7 +761,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 2",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 56,
@@ -445,7 +775,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 3",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 57,
@@ -453,7 +789,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 4",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 58,
@@ -461,7 +803,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 5",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 59,
@@ -469,7 +817,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 60,
@@ -477,7 +831,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Yela",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 61,
@@ -485,7 +845,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Daymar",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 62,
@@ -493,7 +859,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 63,
@@ -501,7 +873,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 64,
@@ -509,7 +887,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Wala",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 65,
@@ -517,7 +901,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 66,
@@ -525,7 +915,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 67,
@@ -533,7 +929,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Cellin",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 68,
@@ -541,7 +943,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 69,
@@ -549,7 +957,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Calliope",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 70,
@@ -557,7 +971,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Clio",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 71,
@@ -565,7 +985,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 72,
@@ -573,7 +999,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Calliope",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 73,
@@ -581,7 +1013,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Clio",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 74,
@@ -589,7 +1027,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 75,
@@ -597,7 +1041,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Wala",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 76,
@@ -605,7 +1055,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Wala",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 77,
@@ -613,7 +1069,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Lyria",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 78,
@@ -621,7 +1083,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Lyria",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 79,
@@ -629,7 +1097,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Daymar",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 80,
@@ -637,7 +1111,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 81,
@@ -645,7 +1125,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 82,
@@ -653,7 +1139,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 83,
@@ -661,7 +1153,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 84,
@@ -669,7 +1167,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Calliope",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 85,
@@ -677,7 +1181,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": "Calliope",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 86,
@@ -685,7 +1195,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Cellin",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 87,
@@ -693,7 +1209,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 88,
@@ -701,7 +1223,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": false
+    "moon_name": "Lyria",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 89,
@@ -709,7 +1237,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 90,
@@ -717,7 +1251,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 91,
@@ -725,7 +1265,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Cellin",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 251,
@@ -733,7 +1279,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Terra Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 252,
@@ -741,7 +1293,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Pyro Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 253,
@@ -749,7 +1307,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Magnus Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 257,
@@ -757,7 +1321,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Magnus Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 258,
@@ -765,7 +1335,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Terra Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 259,
@@ -773,7 +1349,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 262,
@@ -781,7 +1363,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 263,
@@ -789,7 +1377,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 270,
@@ -797,7 +1391,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 274,
@@ -805,7 +1405,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 276,
@@ -813,7 +1419,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 280,
@@ -821,7 +1433,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Yela",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 282,
@@ -829,7 +1447,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 5",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 283,
@@ -837,7 +1461,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 4",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 301,
@@ -845,7 +1475,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 302,
@@ -853,7 +1489,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 303,
@@ -861,7 +1503,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 304,
@@ -869,7 +1517,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 2",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 305,
@@ -877,7 +1531,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 3",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 306,
@@ -885,7 +1545,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 5",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 318,
@@ -893,7 +1559,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Pyro Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 329,
@@ -901,7 +1573,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Pyro Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 331,
@@ -909,7 +1587,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 332,
@@ -917,7 +1601,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": false
+    "moon_name": "Daymar",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 333,
@@ -925,7 +1615,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "MicroTech",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 344,
@@ -933,7 +1629,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader",
-    "is_auto_load": true
+    "moon_name": "Yela",
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 352,
@@ -941,7 +1643,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 5",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 422,
@@ -949,7 +1657,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": null,
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 436,
@@ -957,7 +1671,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Monox",
     "orbit_name": "Checkmate",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": true,
+    "has_refinery": true,
+    "has_cargo_center": true,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 443,
@@ -965,7 +1685,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Bloom",
     "orbit_name": "Bloom",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": true,
+    "has_refinery": true,
+    "has_cargo_center": true,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 450,
@@ -973,7 +1699,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Bloom",
     "orbit_name": "Starlight Service Station",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": true,
+    "has_refinery": true,
+    "has_cargo_center": true,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 453,
@@ -981,7 +1713,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Bloom",
     "orbit_name": "Patch City",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": true,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 466,
@@ -989,7 +1727,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Terminus",
     "orbit_name": "Terminus",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": true,
+    "has_refinery": true,
+    "has_cargo_center": true,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 477,
@@ -997,7 +1741,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Terminus",
     "orbit_name": "Terminus",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 479,
@@ -1005,7 +1755,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro IV",
     "orbit_name": "Megumi Refueling",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 482,
@@ -1013,7 +1769,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro IV",
     "orbit_name": "Endgame",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": true,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 486,
@@ -1021,7 +1783,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro V",
     "orbit_name": "Rod's Fuel & Supplies",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 504,
@@ -1029,7 +1797,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Monox",
     "orbit_name": "Monox",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 507,
@@ -1037,7 +1811,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro V",
     "orbit_name": "Pyro V",
-    "is_auto_load": false
+    "moon_name": "Ignis",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 510,
@@ -1045,7 +1825,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro V",
     "orbit_name": "Pyro V",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 511,
@@ -1053,7 +1839,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro V",
     "orbit_name": "Gaslight",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 518,
@@ -1061,7 +1853,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro V",
     "orbit_name": "Pyro V",
-    "is_auto_load": false
+    "moon_name": "Vatra",
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 520,
@@ -1069,7 +1867,13 @@
     "star_system_name": "Pyro",
     "planet_name": null,
     "orbit_name": "Stanton Gateway",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 521,
@@ -1077,7 +1881,13 @@
     "star_system_name": "Pyro",
     "planet_name": null,
     "orbit_name": "Stanton Gateway",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 523,
@@ -1085,7 +1895,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro V",
     "orbit_name": "Rat's Nest",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 549,
@@ -1093,7 +1909,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro IV",
     "orbit_name": "Dudley & Daughters",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 551,
@@ -1101,7 +1923,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Bloom",
     "orbit_name": "Bloom",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 555,
@@ -1109,7 +1937,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Bloom",
     "orbit_name": "Bloom",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 565,
@@ -1117,7 +1951,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Terminus",
     "orbit_name": "Terminus",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 590,
@@ -1125,7 +1965,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro I",
     "orbit_name": "Pyro I",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 591,
@@ -1133,7 +1979,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Terminus",
     "orbit_name": "Terminus",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 599,
@@ -1141,7 +1993,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Monox",
     "orbit_name": "Monox",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 605,
@@ -1149,7 +2007,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Pyro V",
     "orbit_name": "Pyro V",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 234,
@@ -1157,7 +2021,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 235,
@@ -1165,7 +2035,13 @@
     "star_system_name": "Stanton",
     "planet_name": "ArcCorp",
     "orbit_name": "ArcCorp Lagrange Point 2",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 236,
@@ -1173,7 +2049,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Crusader",
     "orbit_name": "Crusader Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 237,
@@ -1181,7 +2063,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 238,
@@ -1189,7 +2077,13 @@
     "star_system_name": "Stanton",
     "planet_name": "Hurston",
     "orbit_name": "Hurston Lagrange Point 2",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 239,
@@ -1197,7 +2091,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 1",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 240,
@@ -1205,7 +2105,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 2",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 241,
@@ -1213,7 +2119,13 @@
     "star_system_name": "Stanton",
     "planet_name": "MicroTech",
     "orbit_name": "microTech Lagrange Point 5",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 300,
@@ -1221,7 +2133,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Terra Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 308,
@@ -1229,7 +2147,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Magnus Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 309,
@@ -1237,7 +2161,13 @@
     "star_system_name": "Stanton",
     "planet_name": null,
     "orbit_name": "Pyro Jump Point",
-    "is_auto_load": true
+    "moon_name": null,
+    "is_auto_load": true,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 442,
@@ -1245,7 +2175,13 @@
     "star_system_name": "Pyro",
     "planet_name": "Monox",
     "orbit_name": "Checkmate",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": false,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   },
   {
     "terminal_id": 471,
@@ -1253,6 +2189,12 @@
     "star_system_name": "Pyro",
     "planet_name": "Terminus",
     "orbit_name": "Terminus",
-    "is_auto_load": false
+    "moon_name": null,
+    "is_auto_load": false,
+    "habitation_services": false,
+    "has_refinery": true,
+    "has_cargo_center": false,
+    "has_loading_dock": false,
+    "has_docking_port": false
   }
 ]
