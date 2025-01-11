@@ -3,6 +3,8 @@ import { and, asc, desc, eq, gt, gte, lt, inArray, like } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import { v4 as uuidv4 } from 'uuid';
+import { authConfig } from '@/app/(auth)/auth.config';
+import getServerSession, { Session } from 'next-auth';
 
 import {
   user,
@@ -24,6 +26,18 @@ import type { BlockKind } from '@/components/block';
 // biome-ignore lint: Forbidden non-null assertion.
 const client = postgres(process.env.POSTGRES_URL!);
 const db = drizzle(client);
+
+// Define a custom type that extends the NextAuth session
+interface CustomSession extends Session {
+  user: {
+    id: string; // Define the user ID type
+  };
+}
+
+// Type guard to check if session is of type CustomSession
+function isCustomSession(session: any): session is CustomSession {
+  return session && session.user && typeof session.user.id === 'string';
+}
 
 export async function getUser(email: string): Promise<Array<User>> {
   try {
@@ -359,6 +373,56 @@ export async function updateChatVisiblityById({
     return await db.update(chat).set({ visibility }).where(eq(chat.id, chatId));
   } catch (error) {
     console.error('Failed to update chat visibility in database');
+    throw error;
+  }
+}
+
+export async function manualDeleteOldChats(days: number = 1) {
+  try {
+    // Get the session
+    const session = await getServerSession(authConfig);
+    if (!isCustomSession(session)) {
+      throw new Error('User not authenticated');
+    }
+    const userId = session.user.id;
+
+    const daysAgo = new Date();
+    daysAgo.setDate(daysAgo.getDate() - days);
+
+    // Get all old chat IDs for the logged-in user
+    const oldChats = await db
+      .select({ id: chat.id })
+      .from(chat)
+      .innerJoin(user, eq(chat.userId, user.id))
+      .where(
+        and(
+          lt(chat.createdAt, daysAgo),
+          eq(chat.userId, userId) // Only select chats for the logged-in user
+        )
+      );
+
+    const chatIds = oldChats.map(chat => chat.id);
+
+    if (chatIds.length === 0) {
+      return []; // No chats to delete
+    }
+
+    // Delete related records using IN clause
+    await db.delete(vote)
+      .where(inArray(vote.chatId, chatIds));
+
+    await db.delete(message)
+      .where(inArray(message.chatId, chatIds));
+
+    // Delete the chats
+    const result = await db.delete(chat)
+      .where(inArray(chat.id, chatIds))
+      .returning();
+
+    console.log(`Deleted ${result.length} old chats for user ID ${userId}`);
+    return result;
+  } catch (error) {
+    console.error('Failed to delete old chats from database:', error);
     throw error;
   }
 }

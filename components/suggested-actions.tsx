@@ -17,14 +17,14 @@ interface SuggestedActionsProps {
 function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
   const suggestedActions = [
     {
-      title: 'Most profitable location to sell',
-      label: '200 SCU of Gold in Stanton',
-      action: 'Most profitable location to sell 200 SCU of Gold in Stanton',
+      title: 'Where can I buy Gold?',
+      label: 'Search a buy location of any commodity',
+      action: 'Where can I buy Gold?',
     },
     {
-      title: 'Plan a trade route',
-      label: `for Gold within the Stanton system`,
-      action: `Plan a trade route for Gold within the Stanton system. I have 100 SCU of storage and looking for the most profitable route`,
+      title: 'Where can I sell Gold?',
+      label: `Search a sell location of any commodity`,
+      action: `Where can I sell Gold?`,
     },
     {
       title: 'Most profitable trade route?',

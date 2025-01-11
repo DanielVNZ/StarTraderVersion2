@@ -1,0 +1,1397 @@
+[
+  {
+    "id_commodity": 1,
+    "name": "Agricium",
+    "code": "AGRI",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Agricium"
+  },
+  {
+    "id_commodity": 2,
+    "name": "Agricium (Ore)",
+    "code": "AGRI",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Agricium"
+  },
+  {
+    "id_commodity": 3,
+    "name": "Agricultural Supplies",
+    "code": "AGRS",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Agricultural_supplies"
+  },
+  {
+    "id_commodity": 4,
+    "name": "Altruciatoxin",
+    "code": "AUTR",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Altruciatoxin"
+  },
+  {
+    "id_commodity": 5,
+    "name": "Aluminum",
+    "code": "ALUM",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Aluminium"
+  },
+  {
+    "id_commodity": 6,
+    "name": "Aluminum (Ore)",
+    "code": "ALUM",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Aluminium"
+  },
+  {
+    "id_commodity": 7,
+    "name": "Amioshi Plague",
+    "code": "AMIP",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Amioshi_Plague"
+  },
+  {
+    "id_commodity": 8,
+    "name": "Aphorite",
+    "code": "APHO",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Aphorite"
+  },
+  {
+    "id_commodity": 9,
+    "name": "Astatine",
+    "code": "ASTA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Astatine"
+  },
+  {
+    "id_commodity": 10,
+    "name": "Audio Visual Equipment",
+    "code": "AUDI",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 11,
+    "name": "Beryl",
+    "code": "BERY",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Beryl"
+  },
+  {
+    "id_commodity": 12,
+    "name": "Beryl (Raw)",
+    "code": "BERY",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Beryl"
+  },
+  {
+    "id_commodity": 13,
+    "name": "Bexalite",
+    "code": "BEXA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Bexalite"
+  },
+  {
+    "id_commodity": 14,
+    "name": "Bexalite (Raw)",
+    "code": "BEXA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Bexalite"
+  },
+  {
+    "id_commodity": 15,
+    "name": "Borase",
+    "code": "BORA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Borase"
+  },
+  {
+    "id_commodity": 16,
+    "name": "Borase (Ore)",
+    "code": "BORA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Borase"
+  },
+  {
+    "id_commodity": 17,
+    "name": "Chlorine",
+    "code": "CHLO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Chlorine"
+  },
+  {
+    "id_commodity": 18,
+    "name": "Compboard",
+    "code": "COMP",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Compboard"
+  },
+  {
+    "id_commodity": 19,
+    "name": "Construction Materials",
+    "code": "CMAT",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 20,
+    "name": "Copper",
+    "code": "COPP",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Copper"
+  },
+  {
+    "id_commodity": 21,
+    "name": "Copper (Ore)",
+    "code": "COPP",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Copper"
+  },
+  {
+    "id_commodity": 22,
+    "name": "Corundum",
+    "code": "CORU",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Corundum"
+  },
+  {
+    "id_commodity": 23,
+    "name": "Corundum (Raw)",
+    "code": "CORU",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Corundum"
+  },
+  {
+    "id_commodity": 24,
+    "name": "Degnous Root",
+    "code": "DEGR",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Degnous_Root"
+  },
+  {
+    "id_commodity": 25,
+    "name": "Diamond",
+    "code": "DIAM",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Diamond"
+  },
+  {
+    "id_commodity": 26,
+    "name": "Diamond (Ore)",
+    "code": "DIAM",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Diamond"
+  },
+  {
+    "id_commodity": 27,
+    "name": "Distilled Spirits",
+    "code": "DIST",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Distilled_Spirits"
+  },
+  {
+    "id_commodity": 28,
+    "name": "Dolivine",
+    "code": "DOLI",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Dolivine"
+  },
+  {
+    "id_commodity": 29,
+    "name": "E'tam",
+    "code": "ETAM",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/E%27tam"
+  },
+  {
+    "id_commodity": 30,
+    "name": "Fireworks",
+    "code": "FIRE",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 31,
+    "name": "Fluorine",
+    "code": "FLUO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Fluorine"
+  },
+  {
+    "id_commodity": 32,
+    "name": "Gasping Weevil Eggs",
+    "code": "GAWE",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Gasping_weevil_eggs"
+  },
+  {
+    "id_commodity": 33,
+    "name": "Gold",
+    "code": "GOLD",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Gold"
+  },
+  {
+    "id_commodity": 34,
+    "name": "Gold (Ore)",
+    "code": "GOLD",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Gold"
+  },
+  {
+    "id_commodity": 35,
+    "name": "Golden Medmon",
+    "code": "GOLM",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Golden_Medmon"
+  },
+  {
+    "id_commodity": 36,
+    "name": "Hadanite",
+    "code": "HADA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Hadanite"
+  },
+  {
+    "id_commodity": 37,
+    "name": "Heart of the Woods",
+    "code": "HOTW",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Heart_of_the_Woods"
+  },
+  {
+    "id_commodity": 38,
+    "name": "Helium",
+    "code": "HELI",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Helium"
+  },
+  {
+    "id_commodity": 39,
+    "name": "Hephaestanite",
+    "code": "HEPH",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Hephaestanite"
+  },
+  {
+    "id_commodity": 40,
+    "name": "Hephaestanite (Raw)",
+    "code": "HEPH",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Hephaestanite"
+  },
+  {
+    "id_commodity": 41,
+    "name": "Hydrogen",
+    "code": "HYDR",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Hydrogen"
+  },
+  {
+    "id_commodity": 42,
+    "name": "Inert Materials",
+    "code": "INER",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Inert_materials"
+  },
+  {
+    "id_commodity": 43,
+    "name": "Iodine",
+    "code": "IODI",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Iodine"
+  },
+  {
+    "id_commodity": 44,
+    "name": "Iron",
+    "code": "IRON",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 45,
+    "name": "Iron (Ore)",
+    "code": "IRON",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 46,
+    "name": "Janalite",
+    "code": "JANA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Janalite"
+  },
+  {
+    "id_commodity": 47,
+    "name": "Laranite",
+    "code": "LARA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Laranite"
+  },
+  {
+    "id_commodity": 48,
+    "name": "Laranite (Ore)",
+    "code": "LARA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Laranite"
+  },
+  {
+    "id_commodity": 49,
+    "name": "Luminalia Gift",
+    "code": "LUMG",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Luminalia_gift"
+  },
+  {
+    "id_commodity": 50,
+    "name": "Maze",
+    "code": "MAZE",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Maze"
+  },
+  {
+    "id_commodity": 51,
+    "name": "Medical Supplies",
+    "code": "MEDS",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Medical_Supplies"
+  },
+  {
+    "id_commodity": 52,
+    "name": "Neon",
+    "code": "NEON",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Neon"
+  },
+  {
+    "id_commodity": 53,
+    "name": "Osoian Hides",
+    "code": "OSOH",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Osoian_hides"
+  },
+  {
+    "id_commodity": 54,
+    "name": "Party Favors",
+    "code": "PART",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 55,
+    "name": "Pitambu",
+    "code": "PITA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Pitambu"
+  },
+  {
+    "id_commodity": 56,
+    "name": "Processed Food",
+    "code": "PFOO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Processed_Food"
+  },
+  {
+    "id_commodity": 57,
+    "name": "Prota",
+    "code": "PROT",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Prota"
+  },
+  {
+    "id_commodity": 58,
+    "name": "Quantanium",
+    "code": "QUAN",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Quantanium"
+  },
+  {
+    "id_commodity": 59,
+    "name": "Quantanium (Raw)",
+    "code": "QUAN",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Quantanium"
+  },
+  {
+    "id_commodity": 60,
+    "name": "Quartz",
+    "code": "QUAR",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Quartz"
+  },
+  {
+    "id_commodity": 61,
+    "name": "Quartz (Ore)",
+    "code": "QUAR",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Quartz"
+  },
+  {
+    "id_commodity": 62,
+    "name": "Ranta Dung",
+    "code": "RAND",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Ranta_Dung"
+  },
+  {
+    "id_commodity": 63,
+    "name": "Recycled Material Composite",
+    "code": "RMC",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Recycled_Material_Composite"
+  },
+  {
+    "id_commodity": 64,
+    "name": "Year Of The Monkey Envelope",
+    "code": "YTMO",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Red_Festival_Envelope"
+  },
+  {
+    "id_commodity": 65,
+    "name": "Revenant Pod",
+    "code": "REVP",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Revenant_Pod"
+  },
+  {
+    "id_commodity": 66,
+    "name": "Revenant Tree Pollen",
+    "code": "REVE",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Revenant_Tree"
+  },
+  {
+    "id_commodity": 67,
+    "name": "Scrap",
+    "code": "SCRA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Scrap"
+  },
+  {
+    "id_commodity": 68,
+    "name": "SLAM",
+    "code": "SLAM",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/SLAM"
+  },
+  {
+    "id_commodity": 69,
+    "name": "Souvenirs",
+    "code": "SOUV",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 70,
+    "name": "Stims",
+    "code": "STIM",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Stims"
+  },
+  {
+    "id_commodity": 71,
+    "name": "Stone Bug Shell",
+    "code": "STBS",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Stone_bug_shell"
+  },
+  {
+    "id_commodity": 72,
+    "name": "Sunset Berries",
+    "code": "SUNB",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Sunset_berries"
+  },
+  {
+    "id_commodity": 73,
+    "name": "Taranite",
+    "code": "TARA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Taranite"
+  },
+  {
+    "id_commodity": 74,
+    "name": "Taranite (Raw)",
+    "code": "TARA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Taranite"
+  },
+  {
+    "id_commodity": 75,
+    "name": "Titanium",
+    "code": "TITA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Titanium"
+  },
+  {
+    "id_commodity": 76,
+    "name": "Titanium (Ore)",
+    "code": "TITA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Titanium"
+  },
+  {
+    "id_commodity": 77,
+    "name": "Tungsten",
+    "code": "TUNG",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Tungsten"
+  },
+  {
+    "id_commodity": 78,
+    "name": "Tungsten (Ore)",
+    "code": "TUNG",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Tungsten"
+  },
+  {
+    "id_commodity": 79,
+    "name": "Waste",
+    "code": "WAST",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Waste"
+  },
+  {
+    "id_commodity": 80,
+    "name": "WiDoW",
+    "code": "WIDO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/WiDoW"
+  },
+  {
+    "id_commodity": 81,
+    "name": "Year Of The Rooster Envelope",
+    "code": "YTRO",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Red_Festival_Envelope"
+  },
+  {
+    "id_commodity": 82,
+    "name": "AcryliPlex Composite",
+    "code": "ACCO",
+    "is_buyable": true,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/AcryliPlex_Composite"
+  },
+  {
+    "id_commodity": 83,
+    "name": "Diluthermex",
+    "code": "DILU",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Diluthermex"
+  },
+  {
+    "id_commodity": 84,
+    "name": "Zeta-Prolanide",
+    "code": "ZEPR",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Zeta-Prolanide"
+  },
+  {
+    "id_commodity": 85,
+    "name": "Ammonia",
+    "code": "AMMO",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 87,
+    "name": "Quantum Fuel",
+    "code": "QFUE",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 88,
+    "name": "Year Of The Dog Envelope",
+    "code": "YTDO",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Red_Festival_Envelope"
+  },
+  {
+    "id_commodity": 91,
+    "name": "Marok Gem",
+    "code": "MARG",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 92,
+    "name": "Kopion Horn",
+    "code": "KOPH",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 93,
+    "name": "DynaFlex",
+    "code": "DYNF",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/DynaFlex"
+  },
+  {
+    "id_commodity": 95,
+    "name": "Redfin Energy Modulators",
+    "code": "REMO",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 96,
+    "name": "Lifecure Medsticks",
+    "code": "LMED",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 97,
+    "name": "Human Food Bars",
+    "code": "HFBA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Human_Food_Bars"
+  },
+  {
+    "id_commodity": 98,
+    "name": "DCSR2",
+    "code": "DCSR2",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/DCSR2"
+  },
+  {
+    "id_commodity": 100,
+    "name": "Silicon",
+    "code": "SILI",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 101,
+    "name": "Pressurized Ice",
+    "code": "PICE",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 102,
+    "name": "Carbon",
+    "code": "CARB",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 103,
+    "name": "Tin",
+    "code": "TIN",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 104,
+    "name": "Hydrogen Fuel",
+    "code": "HYDF",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 105,
+    "name": "Decari Pod",
+    "code": "DECA",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Decari_Pod"
+  },
+  {
+    "id_commodity": 106,
+    "name": "Nitrogen",
+    "code": "NITR",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Nitrogen"
+  },
+  {
+    "id_commodity": 108,
+    "name": "Apoxygenite",
+    "code": "APOX",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 109,
+    "name": "Steel",
+    "code": "STEE",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Steel"
+  },
+  {
+    "id_commodity": 110,
+    "name": "Cobalt",
+    "code": "COBA",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 111,
+    "name": "Argon",
+    "code": "ARGO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Argon"
+  },
+  {
+    "id_commodity": 112,
+    "name": "Bioplastic",
+    "code": "BIOPL",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Bioplastic"
+  },
+  {
+    "id_commodity": 113,
+    "name": "Carbon-Silk",
+    "code": "CSIL",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Carbon-Silk"
+  },
+  {
+    "id_commodity": 114,
+    "name": "Methane",
+    "code": "METH",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Methane"
+  },
+  {
+    "id_commodity": 115,
+    "name": "Omnapoxy",
+    "code": "OMPO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Omnapoxy"
+  },
+  {
+    "id_commodity": 116,
+    "name": "Potassium",
+    "code": "POTA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 118,
+    "name": "Xa'Pyen",
+    "code": "XAPY",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Xa%27Pyen"
+  },
+  {
+    "id_commodity": 119,
+    "name": "Diamond Laminate",
+    "code": "DIAL",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Diamond_laminate"
+  },
+  {
+    "id_commodity": 120,
+    "name": "Fresh Food",
+    "code": "FFOO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 121,
+    "name": "Partillium",
+    "code": "PRTL",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Partillium"
+  },
+  {
+    "id_commodity": 122,
+    "name": "Stileron",
+    "code": "STIL",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 123,
+    "name": "Mercury",
+    "code": "MERC",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 124,
+    "name": "Riccite",
+    "code": "RICCT",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 125,
+    "name": "Raw Ice",
+    "code": "RWIC",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 126,
+    "name": "CK13-GID Seed Blend",
+    "code": "CK13",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 127,
+    "name": "Dymantium",
+    "code": "DYMA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Dymantium"
+  },
+  {
+    "id_commodity": 128,
+    "name": "Ship Ammunition",
+    "code": "SHPA",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 129,
+    "name": "HexaPolyMesh Coating",
+    "code": "HPMC",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 130,
+    "name": "Atlasium",
+    "code": "ATLA",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Atlasium"
+  },
+  {
+    "id_commodity": 132,
+    "name": "Thermalfoam",
+    "code": "FOAM",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/ThermalFoam"
+  },
+  {
+    "id_commodity": 133,
+    "name": "Neograph",
+    "code": "NEOG",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Neograph"
+  },
+  {
+    "id_commodity": 134,
+    "name": "Sarilus",
+    "code": "SARI",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Sarilus"
+  },
+  {
+    "id_commodity": 135,
+    "name": "Silnex",
+    "code": "SILN",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Silnex"
+  },
+  {
+    "id_commodity": 136,
+    "name": "Lycara",
+    "code": "LYCA",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Lycara"
+  },
+  {
+    "id_commodity": 137,
+    "name": "Lastaphrene",
+    "code": "LAST",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Lastaprene"
+  },
+  {
+    "id_commodity": 138,
+    "name": "Elespo",
+    "code": "ELES",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Elespo"
+  },
+  {
+    "id_commodity": 139,
+    "name": "Cadmium Allinide",
+    "code": "CAAL",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Cadmium_allinide"
+  },
+  {
+    "id_commodity": 140,
+    "name": "Krypton",
+    "code": "KRYP",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Krypton"
+  },
+  {
+    "id_commodity": 141,
+    "name": "Anti-Hydrogen",
+    "code": "AHYD",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Anti-Hydrogen"
+  },
+  {
+    "id_commodity": 142,
+    "name": "Jahlium",
+    "code": "JAHL",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Jahlium"
+  },
+  {
+    "id_commodity": 143,
+    "name": "Magnesium",
+    "code": "MAGN",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Magnesium"
+  },
+  {
+    "id_commodity": 144,
+    "name": "Jumping Limes",
+    "code": "JUMP",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Jumping_limes"
+  },
+  {
+    "id_commodity": 145,
+    "name": "Lunes",
+    "code": "LUNE",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": "https://starcitizen.tools/Lunes_(fruit)"
+  },
+  {
+    "id_commodity": 146,
+    "name": "Arsenic",
+    "code": "ARSE",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 147,
+    "name": "Boron",
+    "code": "BORO",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 148,
+    "name": "Coal",
+    "code": "COAL",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 149,
+    "name": "Crude Oil",
+    "code": "COIL",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 150,
+    "name": "Phosphorus",
+    "code": "PHOS",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 151,
+    "name": "Selenium",
+    "code": "SELE",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 152,
+    "name": "Tellurium",
+    "code": "TELL",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 153,
+    "name": "Tritium",
+    "code": "TRIT",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 154,
+    "name": "Xenon",
+    "code": "XENO",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 155,
+    "name": "Dopple",
+    "code": "DOPP",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Dopple"
+  },
+  {
+    "id_commodity": 156,
+    "name": "Freeze",
+    "code": "FREE",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Freeze"
+  },
+  {
+    "id_commodity": 157,
+    "name": "Glow",
+    "code": "GLOW",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Glow"
+  },
+  {
+    "id_commodity": 158,
+    "name": "Mala",
+    "code": "MALA",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 159,
+    "name": "Thrust",
+    "code": "THRU",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Thrust"
+  },
+  {
+    "id_commodity": 160,
+    "name": "Zip",
+    "code": "ZIP",
+    "is_buyable": false,
+    "is_sellable": false,
+    "is_illegal": true,
+    "wiki": "https://starcitizen.tools/Zip"
+  },
+  {
+    "id_commodity": 161,
+    "name": "Silicon (Raw)",
+    "code": "SILI",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 162,
+    "name": "Stileron (Ore)",
+    "code": "STILO",
+    "is_buyable": true,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  },
+  {
+    "id_commodity": 163,
+    "name": "Riccite (Ore)",
+    "code": "RICCT",
+    "is_buyable": false,
+    "is_sellable": true,
+    "is_illegal": false,
+    "wiki": ""
+  }
+]

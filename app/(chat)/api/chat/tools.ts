@@ -1,1148 +1,328 @@
 import { z } from "zod";
+import fs from 'fs/promises';
+import path from 'path';
+import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
 
-// At the top of the file, add a storage object
-const commodityLocationsCache = {
-  buyLocations: new Map<string, any[]>(),  // Store by commodity ID
-  sellLocations: new Map<string, any[]>(),
-  lastCommodityId: null as number | null,  // Add this to track the last commodity ID
-  lastSellCommodityId: null as number | null,  // Add this
-  commodityLegalityMap: new Map<string, boolean>()
+// Cache to store trade routes and current index
+const tradeRoutesCache: {
+  routes: any[];
+  index: number;
+} = {
+  routes: [],
+  index: 0,
 };
 
-export const tools = {
-
-  getCommodities: {
-    description: "Retrieve a list of all commodities.",
-    parameters: z.object({}),
-    execute: async (_args: {}) => {
-      // console.log("Fetching commodities...");
-  
-      const apiUrl = "https://api.uexcorp.space/2.0/commodities";
-  
-      try {
-        const response = await fetch(apiUrl);
-        console.log("Fetching getCommodities...");
-        if (!response.ok) {
-          console.error("Failed to fetch commodities:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        // Define Zod schema for validation
-        const schema = z.object({
-          status: z.literal("ok"),
-          data: z.array(
-            z.object({
-              id: z.number().nullable(),
-              id_parent: z.number().nullable(),
-              name: z.string().nullable(),
-              code: z.string().nullable(),
-              kind: z.string().nullable(),
-              weight_scu: z.number().nullable(),
-              price_buy: z.number().nullable(),
-              price_sell: z.number().nullable(),
-              is_available: z.number().nullable(),
-              is_available_live: z.number().nullable(),
-              is_visible: z.number().nullable(),
-              is_mineral: z.number().nullable(),
-              is_raw: z.number().nullable(),
-              is_refined: z.number().nullable(),
-              is_harvestable: z.number().nullable(),
-              is_buyable: z.number().nullable(),
-              is_sellable: z.number().nullable(),
-              is_temporary: z.number().nullable(),
-              is_illegal: z.number().nullable(),
-              is_fuel: z.number().nullable(),
-              wiki: z.string().nullable(),
-              date_added: z.number().nullable(),
-              date_modified: z.number().nullable(),
-            })
-          ),
-        });
-  
-        // Validate the response data against the schema
-        const parsedData = schema.safeParse(responseData);
-        if (!parsedData.success) {
-          console.warn("Invalid data format:", parsedData.error.errors);
-          return { error: "Invalid data format received from the API." };
-        }
-  
-        const data = parsedData.data.data.map(item => ({
-          ...item,
-          is_illegal: item.is_illegal === 1 // Convert to boolean for easier use
-        }));
-  
-        // Chunk the data into smaller parts if necessary
-        const chunkSize = 150;
-        const chunks = [];
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        //console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks };
-      } catch (error) {
-        console.error("Error fetching commodities:", error);
-        return { error: "An unexpected error occurred while fetching commodities." };
-      }
-    },
-  },  
-
-  getStarSystems: {
-    description: "Retrieve a list of star systems.",
-    parameters: z.object({}),
-    execute: async () => {
-      console.log("Fetching star systems...");
-  
-      try {
-        const response = await fetch(`https://api.uexcorp.space/2.0/star_systems`);
-        if (!response.ok) {
-          console.error("Failed to fetch star systems:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        if (responseData.status !== "ok" || !Array.isArray(responseData.data)) {
-          console.warn("Star systems API returned empty or invalid data:", responseData);
-          return { error: "No valid data available in response." };
-        }
-  
-        const data = responseData.data; // Extract the actual array
-        //console.log(`Fetched ${data.length} entries from star systems API`);
-  
-        const chunkSize = 200; // Define the size of each chunk
-        const chunks = [];
-  
-        // Create chunks from the data
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks }; // Return the data in chunks
-      } catch (error) {
-        console.error("Error fetching star systems:", error);
-        return { error: "An unexpected error occurred" };
-      }
-    },
-  },  
-
-  getSpaceStations: {
-    description: "Retrieve a list of space stations.",
-    parameters: z.object({}),
-    execute: async () => {
-      console.log("Fetching space stations...");
-  
-      try {
-        const response = await fetch(`https://api.uexcorp.space/2.0/space_stations`);
-        if (!response.ok) {
-          console.error("Failed to fetch space stations:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        if (responseData.status !== "ok" || !Array.isArray(responseData.data)) {
-          console.warn("Space stations API returned empty or invalid data:", responseData);
-          return { error: "No valid data available in response." };
-        }
-  
-        const data = responseData.data; // Extract the actual array
-        // // console.log(`Fetched ${data.length} entries from space stations API`);
-  
-        const chunkSize = 200; // Define the size of each chunk
-        const chunks = [];
-  
-        // Create chunks from the data
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks }; // Return the data in chunks
-      } catch (error) {
-        console.error("Error fetching space stations:", error);
-        return { error: "An unexpected error occurred" };
-      }
-    },
-  },
-  
-
-  getBuyCommodityPrices: {
-    description:
-      "Retrieve commodity buy prices and available stock for a specific commodity or location. Use this tool to help the user find the best buy locations for a specific commodity.",
-    parameters: z.object({
-      id_commodity: z.number().optional(),
-      userSCU: z.number().min(1),
-    }),
-    execute: async (args: { id_commodity?: number; userSCU: number }) => {
-      // First get commodity details if we have an ID
-      let commodityName = null;
-      if (args.id_commodity) {
-        const commoditiesResult = await tools.getCommodities.execute({});
-        if (!('error' in commoditiesResult) && commoditiesResult.result) {
-          const commodity = commoditiesResult.result.flat().find(c => c.id === args.id_commodity);
-          if (commodity && commodity.name) {
-            commodityName = commodity.name;
-            commodityLocationsCache.commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
-          }
-        }
-      }
-
-      console.log("Fetching buy commodity prices with arguments:", args);
-  
-      // Construct query parameters dynamically
-      const queryParams = new URLSearchParams();
-      Object.entries(args).forEach(([key, value]) => {
-        if (value !== undefined && key !== "userSCU") {
-          queryParams.append(key, value.toString());
-        }
-      });
-  
-      const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
-      console.log("API URL:", apiUrl);
-  
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          console.error("Failed to fetch commodity buy prices:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-  
-        // Updated Zod schema with required fields for buy data
-        const schema = z.object({
-          status: z.literal("ok"),
-          data: z.array(
-            z.object({
-              terminal_name: z.string().nullable(),
-              terminal_code: z.string().nullable(),
-              price_buy: z.number().nullable(),
-              scu_buy: z.number().nullable(),
-              star_system_name: z.string().nullable(),
-            })
-          ),
-        });
-  
-        const parsedData = schema.safeParse(responseData);
-        if (!parsedData.success) {
-          console.warn("Invalid buy data format:", parsedData.error.errors);
-          return { error: "Invalid buy data format received from the API." };
-        }
-  
-        // Filter and prioritize buy locations
-        const userSCU = args.userSCU;
-        const filteredData = parsedData.data.data
-          .filter(
-            (item) =>
-              item.price_buy !== null &&
-              item.scu_buy !== null &&
-              item.scu_buy >= userSCU
-          )
-          .map((item) => {
-            const totalCost = item.price_buy! * userSCU;
-  
-            return {
-              terminal_name: item.terminal_name,
-              terminal_code: item.terminal_code,
-              price_buy: item.price_buy,
-              star_system_name: item.star_system_name,
-              scu_buy: item.scu_buy,
-              user_scu: userSCU,
-              total_cost: totalCost,
-            };
-          });
-  
-        // Sort by total cost (or price_buy as a secondary sort)
-        const sortedData = filteredData.sort((a, b) => {
-          if (a.total_cost !== b.total_cost) {
-            return a.total_cost - b.total_cost;
-          }
-          return a.price_buy! - b.price_buy!;
-        });
-  
-        // Store all locations in cache and save commodity ID
-        if (args.id_commodity) {
-          commodityLocationsCache.buyLocations.set(
-            args.id_commodity.toString(),
-            sortedData
-          );
-          commodityLocationsCache.lastCommodityId = args.id_commodity;
-        }
-  
-        // Get top 3 buy locations
-        const topBuyLocations = sortedData.slice(0, 3);
-  
-        if (topBuyLocations.length === 0) {
-          return { error: "No buy locations found with sufficient stock for the commodity." };
-        }
-  
-        console.log("Top buy locations calculated:", topBuyLocations);
-        console.log(`Cached ${sortedData.length} buy locations for commodity ${args.id_commodity}`);
-  
-        return { 
-          best_buy_location: topBuyLocations[0],
-          alternative_buy_locations: topBuyLocations.slice(1),
-          remaining_locations: Math.max(0, sortedData.length - 3),
-          is_illegal: commodityName ? commodityLocationsCache.commodityLegalityMap.get(commodityName) || false : false
-        };
-      } catch (error) {
-        console.error("Error fetching commodity buy prices:", error);
-        return { error: "An unexpected error occurred while fetching commodity buy prices." };
-      }
-    },
-  },
-
-
-getSellCommodityPrices: {
-  description:
-    "Retrieve commodity sell prices and demand for a specific commodity or location. Use this tool to help the user find the best sell locations for a specific commodity.",
-  parameters: z.object({
-    id_commodity: z.number().optional(),
-    userSCU: z.number().min(1),
-  }),
-  execute: async (args: { id_commodity?: number; userSCU: number }) => {
-    // First get commodity details if we have an ID
-    let commodityName = null;
-    if (args.id_commodity) {
-      const commoditiesResult = await tools.getCommodities.execute({});
-      if (!('error' in commoditiesResult) && commoditiesResult.result) {
-        const commodity = commoditiesResult.result.flat().find(c => c.id === args.id_commodity);
-        if (commodity && commodity.name) {
-          commodityName = commodity.name;
-          commodityLocationsCache.commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
-        }
-      }
-    }
-
-    console.log("Fetching sell commodity prices with arguments:", args);
-
-    const queryParams = new URLSearchParams();
-    Object.entries(args).forEach(([key, value]) => {
-      if (value !== undefined && key !== "userSCU") {
-        queryParams.append(key, value.toString());
-      }
-    });
-
-    const apiUrl = `https://api.uexcorp.space/2.0/commodities_prices?${queryParams.toString()}`;
-    console.log("API URL:", apiUrl);
-
-    try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        console.error("Failed to fetch commodity sell prices:", response.statusText);
-        return { error: `Failed to fetch data: ${response.statusText}` };
-      }
-
-      const responseData = await response.json();
-
-      const schema = z.object({
-        status: z.literal("ok"),
-        data: z.array(
-          z.object({
-            terminal_name: z.string().nullable(),
-            terminal_code: z.string().nullable(),
-            price_sell: z.number().nullable(),
-            scu_sell: z.number().nullable(),
-            star_system_name: z.string().nullable(),
-          })
-        ),
-      });
-
-      const parsedData = schema.safeParse(responseData);
-      if (!parsedData.success) {
-        console.warn("Invalid sell data format:", parsedData.error.errors);
-        return { error: "Invalid sell data format received from the API." };
-      }
-
-      // Filter and prioritize sell locations
-      const userSCU = args.userSCU;
-      const filteredData = parsedData.data.data
-        .filter(
-          (item) =>
-            item.price_sell !== null &&
-            item.scu_sell !== null &&
-            item.scu_sell > 0
-        )
-        .map((item) => {
-          const maxSCU = Math.min(item.scu_sell!, userSCU);
-          const totalIncome = item.price_sell! * maxSCU;
-
-          return {
-            terminal_name: item.terminal_name,
-            terminal_code: item.terminal_code,
-            price_sell: item.price_sell,
-            star_system_name: item.star_system_name,
-            scu_sell: item.scu_sell,
-            max_scu_sellable: maxSCU,
-            total_income: totalIncome,
-          };
-        });
-
-      // Sort by total income (or price_sell as a secondary sort)
-      const sortedData = filteredData.sort((a, b) => {
-        if (b.total_income !== a.total_income) {
-          return b.total_income - a.total_income;
-        }
-        return b.price_sell! - a.price_sell!;
-      });
-
-      // Store all locations in cache and save commodity ID
-      if (args.id_commodity) {
-        commodityLocationsCache.sellLocations.set(
-          args.id_commodity.toString(),
-          sortedData
-        );
-        commodityLocationsCache.lastSellCommodityId = args.id_commodity;
-      }
-
-      // Get top 3 sell locations
-      const topSellLocations = sortedData.slice(0, 3);
-
-      if (topSellLocations.length === 0) {
-        return { error: "No sell locations found with sufficient demand for the commodity." };
-      }
-
-      console.log("Top sell locations calculated:", topSellLocations);
-      console.log(`Cached ${sortedData.length} sell locations for commodity ${args.id_commodity}`);
-
-      return { 
-        best_sell_location: topSellLocations[0],
-        alternative_sell_locations: topSellLocations.slice(1),
-        remaining_locations: Math.max(0, sortedData.length - 3),
-        is_illegal: commodityName ? commodityLocationsCache.commodityLegalityMap.get(commodityName) || false : false
-      };
-    } catch (error) {
-      console.error("Error fetching commodity sell prices:", error);
-      return { error: "An unexpected error occurred while fetching commodity sell prices." };
-    }
-  },
-},
-
-  
-
-  getCities: {
-    description: "Retrieve a list of cities. Stanton star system ID is 68. Pyro star system ID is 64",
-    parameters: z.object({
-      id_star_system: z.number().optional(),
-    }),
-    additionalProperties: false,
-    execute: async (args: { id_star_system?: number }) => {
-      // console.log("Fetching cities with arguments:", args);
-  
-      const queryParams = new URLSearchParams();
-      if (args.id_star_system !== undefined) {
-        queryParams.append("id_star_system", args.id_star_system.toString());
-      }
-         
-  
-      // console.log("Query parameters for cities API:", queryParams.toString());
-  
-      try {
-        const response = await fetch(`https://api.uexcorp.space/2.0/cities?${queryParams.toString()}`);
-        if (!response.ok) {
-          console.error("Failed to fetch cities:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        if (responseData.status !== 'ok' || !Array.isArray(responseData.data)) {
-          console.warn("Cities API returned empty or invalid data:", responseData);
-          return { error: "No valid data available in response." };
-        }
-  
-        const data = responseData.data; // Extract the actual array
-        // console.log(`Fetched ${data.length} entries from cities API`);
-  
-        const chunkSize = 200; // Define the size of each chunk
-        const chunks = [];
-  
-        // Create chunks from the data
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks }; // Return the data in chunks
-      } catch (error) {
-        console.error("Error fetching cities:", error);
-        return { error: "An unexpected error occurred" };
-      }
-    },
-  },  
-
-  getMoons: {
-    description: "Retrieve a list of moons.",
-    parameters: z.object({
-      id_star_system: z.number().optional(),
-      id_planet: z.number().optional(),
-    }),
-    execute: async (args: { id_star_system?: number; id_planet?: number }) => {
-      // console.log("Fetching moons with arguments:", args);
-  
-      const queryParams = new URLSearchParams();
-      if (args.id_star_system !== undefined) queryParams.append("id_star_system", args.id_star_system.toString());
-      if (args.id_planet !== undefined) queryParams.append("id_planet", args.id_planet.toString());
-  
-      // console.log("Query parameters for moons API:", queryParams.toString());
-  
-      try {
-        const response = await fetch(`https://api.uexcorp.space/2.0/moons?${queryParams.toString()}`);
-        if (!response.ok) {
-          console.error("Failed to fetch moons:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        if (responseData.status !== 'ok' || !Array.isArray(responseData.data)) {
-          console.warn("Moons API returned empty or invalid data:", responseData);
-          return { error: "No valid data available in response." };
-        }
-  
-        const data = responseData.data; // Extract the actual array
-        // console.log(`Fetched ${data.length} entries from moons API`);
-  
-        const chunkSize = 200; // Define the size of each chunk
-        const chunks = [];
-  
-        // Create chunks from the data
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks }; // Return the data in chunks
-      } catch (error) {
-        console.error("Error fetching moons:", error);
-        return { error: "An unexpected error occurred" };
-      }
-    },
-  },  
-
-  getOrbits: {
-    description: "Retrieve a list of orbits.",
-    parameters: z.object({
-      id_star_system: z.number().optional(),
-    }),
-    execute: async (args: {
-      id_star_system?: number;
-    }) => {
-      // console.log("Fetching orbits with arguments:", args);
-  
-      // Construct query parameters dynamically
-      const queryParams = new URLSearchParams();
-      Object.entries(args).forEach(([key, value]) => {
-        if (value !== undefined) {
-          queryParams.append(key, value.toString());
-        }
-      });
-  
-      const queryString = queryParams.toString();
-      const apiUrl = `https://api.uexcorp.space/2.0/orbits${queryString ? `?${queryString}` : ''}`;
-      // console.log("API URL:", apiUrl);
-  
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          console.error("Failed to fetch orbits:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        // Define Zod schema for validation
-        const schema = z.object({
-          status: z.literal("ok"),
-          data: z.array(
-            z.object({
-              id: z.number(),
-              id_star_system: z.number().nullable(),
-              id_faction: z.number().nullable(),
-              id_jurisdiction: z.number().nullable(),
-              name: z.string(),
-              name_origin: z.string().nullable(),
-              code: z.string().nullable(),
-              is_available: z.number().nullable(),
-              is_available_live: z.number().nullable(),
-              is_visible: z.number().nullable(),
-              is_default: z.number().nullable(),
-              is_lagrange: z.number().nullable(),
-              is_man_made: z.number().nullable(),
-              is_asteroid: z.number().nullable(),
-              is_planet: z.number().nullable(),
-              is_star: z.number().nullable(),
-              date_added: z.number().nullable(),
-              date_modified: z.number().nullable(),
-              star_system_name: z.string().nullable(),
-              faction_name: z.string().nullable(),
-              jurisdiction_name: z.string().nullable(),
-            })
-          ),
-        });
-  
-        // Validate the response data against the schema
-        const parsedData = schema.safeParse(responseData);
-        if (!parsedData.success) {
-          console.warn("Invalid data format:", parsedData.error.errors);
-          return { error: "Invalid data format received from the API." };
-        }
-  
-        const data = parsedData.data.data; // Extract validated data
-        // console.log(`Fetched ${data.length} entries from orbits API.`);
-  
-        // Chunk the data into smaller parts if necessary
-        const chunkSize = 200;
-        const chunks = [];
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks };
-      } catch (error) {
-        console.error("Error fetching orbits:", error);
-        return { error: "An unexpected error occurred while fetching orbits." };
-      }
-    },
-  },    
-
-  getOutposts: {
-    description: "Retrieve a list of outposts.",
-    parameters: z.object({
-      id_star_system: z.number().optional(),
-      id_faction: z.number().optional(),
-      id_jurisdiction: z.number().optional(),
-      id_planet: z.number().optional(),
-      id_orbit: z.number().optional(),
-      id_moon: z.number().optional(),
-    }),
-    execute: async (args: {
-      id_star_system?: number;
-      id_faction?: number;
-      id_jurisdiction?: number;
-      id_planet?: number;
-      id_orbit?: number;
-      id_moon?: number;
-    }) => {
-      // console.log("Fetching outposts with arguments:", args);
-  
-      // Construct query parameters dynamically
-      const queryParams = new URLSearchParams();
-      Object.entries(args).forEach(([key, value]) => {
-        if (value !== undefined) {
-          queryParams.append(key, value.toString());
-        }
-      });
-  
-      const queryString = queryParams.toString();
-      const apiUrl = `https://api.uexcorp.space/2.0/outposts${queryString ? `?${queryString}` : ''}`;
-      // console.log("API URL:", apiUrl);
-  
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          console.error("Failed to fetch outposts:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        // Define Zod schema for validation
-        const schema = z.object({
-          status: z.literal("ok"),
-          data: z.array(
-            z.object({
-              id: z.number(),
-              id_star_system: z.number().nullable(),
-              id_planet: z.number().nullable(),
-              id_orbit: z.number().nullable(),
-              id_moon: z.number().nullable(),
-              id_faction: z.number().nullable(),
-              id_jurisdiction: z.number().nullable(),
-              name: z.string(),
-              nickname: z.string().nullable(),
-              is_available: z.number().nullable(),
-              is_available_live: z.number().nullable(),
-              is_visible: z.number().nullable(),
-              is_default: z.number().nullable(),
-              is_monitored: z.number().nullable(),
-              is_armistice: z.number().nullable(),
-              is_landable: z.number().nullable(),
-              is_decommissioned: z.number().nullable(),
-              has_quantum_marker: z.number().nullable(),
-              has_trade_terminal: z.number().nullable(),
-              has_habitation: z.number().nullable(),
-              has_refinery: z.number().nullable(),
-              has_cargo_center: z.number().nullable(),
-              has_clinic: z.number().nullable(),
-              has_food: z.number().nullable(),
-              has_shops: z.number().nullable(),
-              has_refuel: z.number().nullable(),
-              has_repair: z.number().nullable(),
-              has_gravity: z.number().nullable(),
-              has_loading_dock: z.number().nullable(),
-              has_docking_port: z.number().nullable(),
-              has_freight_elevator: z.number().nullable(),
-              pad_types: z.string().nullable(),
-              date_added: z.number().nullable(),
-              date_modified: z.number().nullable(),
-              star_system_name: z.string().nullable(),
-              planet_name: z.string().nullable(),
-              orbit_name: z.string().nullable(),
-              moon_name: z.string().nullable(),
-              faction_name: z.string().nullable(),
-              jurisdiction_name: z.string().nullable(),
-            })
-          ),
-        });
-  
-        // Validate the response data against the schema
-        const parsedData = schema.safeParse(responseData);
-        if (!parsedData.success) {
-          console.warn("Invalid data format:", parsedData.error.errors);
-          return { error: "Invalid data format received from the API." };
-        }
-  
-        const data = parsedData.data.data; // Extract validated data
-        // console.log(`Fetched ${data.length} entries from outposts API.`);
-  
-        // Chunk the data into smaller parts if necessary
-        const chunkSize = 1000;
-        const chunks = [];
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks };
-      } catch (error) {
-        console.error("Error fetching outposts:", error);
-        return { error: "An unexpected error occurred while fetching outposts." };
-      }
-    },
-  },
-
-  getTerminals: {
-    description: "Retrieve a list of terminals with their names and associated star systems. Use this tool to provide terminal information for commodity trading.",
-    parameters: z.object({}),
-    execute: async () => {
-        // API URL
-        const apiUrl = "https://api.uexcorp.space/2.0/terminals?type=commodity";
-
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                console.error("Failed to fetch terminals:", response.statusText);
-                return { error: `Failed to fetch data: ${response.statusText}` };
-            }
-
-            const responseData = await response.json();
-
-            // Zod schema to validate response
-            const schema = z.object({
-                status: z.literal("ok"),
-                data: z.array(
-                    z.object({
-                        name: z.string().nullable(),
-                        star_system_name: z.string().nullable(),
-                    })
-                ),
-            });
-
-            const parsedData = schema.safeParse(responseData);
-            if (!parsedData.success) {
-                console.warn("Invalid terminal data format:", parsedData.error.errors);
-                return { error: "Invalid terminal data format received from the API." };
-            }
-
-            // Extract and return the terminal data
-            const data = parsedData.data.data.map(item => ({
-                name: item.name,
-                star_system_name: item.star_system_name,
-            }));
-
-            return { result: data };
-        } catch (error) {
-            console.error("Error fetching terminals:", error);
-            return { error: "An unexpected error occurred while fetching terminal data." };
-        }
-    },
-  },
-
-  getCommoditiesPricesAll: {
-    description: "Retrieve a list of all commodity prices and calculate the top 3 most profitable trade routes with different commodities. Requires running getCommodities first to get commodity information. Can filter for legal commodities only. Set legalOnly: true for legal-only routes, false for illegal-only routes, or undefined for all routes.",
-    parameters: z.object({
-      userSCU: z.number().min(1).describe("Ship SCU capacity"),
-      userFunds: z.number().min(1).describe("User's available funds in aUEC"),
-      legalOnly: z.boolean().optional().describe("If true, show only legal routes. If false, show only illegal routes. If undefined, show all routes."),
-    }),
-    execute: async ({ 
-      userSCU, 
-      userFunds, 
-      legalOnly 
-    }: { 
-      userSCU: number; 
-      userFunds: number;
-      legalOnly?: boolean;
-    }) => {
-      console.log("Fetching getCommoditiesPricesAll...");
-
-      // First, fetch commodities to ensure we have the data
-      const commoditiesResult = await tools.getCommodities.execute({});
-      
-      if ('error' in commoditiesResult) {
-        return { error: "Must fetch commodity data first: " + commoditiesResult.error };
-      }
-
-      if (!commoditiesResult.result || !Array.isArray(commoditiesResult.result)) {
-        return { error: "Failed to get required commodity data" };
-      }
-
-      // Update the commodity legality map
-      commodityLocationsCache.commodityLegalityMap.clear(); // Clear existing entries
-      commoditiesResult.result.flat().forEach(commodity => {
-        if (commodity.name) {
-          commodityLocationsCache.commodityLegalityMap.set(commodity.name, Boolean(commodity.is_illegal));
-        }
-      });
-
-      const apiUrl = "https://api.uexcorp.space/2.0/commodities_prices_all";
-      console.log("API URL for getCommoditiesPricesAll:", apiUrl);
-
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          console.error("Failed to fetch all commodity prices:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-  
-        // Define Zod schema for validation
-        const schema = z.object({
-          status: z.literal("ok"),
-          data: z.array(
-            z.object({
-              price_buy: z.number().nullable(),
-              price_sell: z.number().nullable(),
-              scu_buy: z.number().nullable(),
-              scu_sell: z.number().nullable(),
-              commodity_name: z.string().nullable(),
-              terminal_name: z.string().nullable(),
-            })
-          ),
-        });
-  
-        // Validate the response data against the schema
-        const parsedData = schema.safeParse(responseData);
-        if (!parsedData.success) {
-          console.warn("Invalid data format:", parsedData.error.errors);
-          return { error: "Invalid data format received from the API." };
-        }
-  
-        const filteredData = parsedData.data.data
-          .filter((item) => {
-            // Filter out items where both prices are 0
-            if (item.price_buy === 0 && item.price_sell === 0) return false;
-            
-            // Only apply legality filter if legalOnly is defined
-            if (legalOnly !== undefined && item.commodity_name) {
-              const isIllegal = commodityLocationsCache.commodityLegalityMap.get(item.commodity_name);
-              
-              // If legalOnly is true, keep only legal commodities (not illegal)
-              // If legalOnly is false, keep only illegal commodities
-              return legalOnly ? !isIllegal : isIllegal;
-            }
-            
-            return true; // Include all items if legalOnly is undefined
-          });
-  
-        interface Route {
-          commodity_name: string;
-          is_illegal: boolean;
-          buy_location: string;
-          sell_location: string;
-          buy_price_per_scu: number;
-          sell_price_per_scu: number;
-          scu_traded: number;
-          total_investment: number;
-          expected_profit: number;
-          profit_per_scu: number;
-          buy_stock_available: number;
-          sell_stock_available: number;
-        }
-  
-        const calculateTopProfitableRoutes = (
-          data: any[],
-          userSCU: number,
-          userFunds: number
-        ): Route[] => {
-          const routes: Route[] = [];
-          const seenCommodities = new Set<string>();
-
-          data.forEach((buy) => {
-            if (!buy.price_buy || !buy.scu_buy) return;
-
-            data.forEach((sell) => {
-              if (
-                buy.commodity_name === sell.commodity_name &&
-                sell.price_sell &&
-                sell.scu_sell &&
-                buy.terminal_name !== sell.terminal_name
-              ) {
-                // Iterate over all possible SCU values up to the user's SCU limit
-                for (let tradedSCU = 1; tradedSCU <= Math.min(buy.scu_buy, sell.scu_sell, userSCU); tradedSCU++) {
-                  const totalCost = buy.price_buy * tradedSCU;
-
-                  if (totalCost > userFunds) continue;
-
-                  const totalIncome = sell.price_sell * tradedSCU;
-                  const totalProfit = totalIncome - totalCost;
-                  const profitPerSCU = sell.price_sell - buy.price_buy;
-
-                  routes.push({
-                    commodity_name: buy.commodity_name,
-                    is_illegal: commodityLocationsCache.commodityLegalityMap.get(buy.commodity_name) || false,
-                    buy_location: buy.terminal_name,
-                    sell_location: sell.terminal_name,
-                    buy_price_per_scu: buy.price_buy,
-                    sell_price_per_scu: sell.price_sell,
-                    scu_traded: tradedSCU,
-                    total_investment: totalCost,
-                    expected_profit: totalProfit,
-                    profit_per_scu: profitPerSCU,
-                    buy_stock_available: buy.scu_buy,
-                    sell_stock_available: sell.scu_sell,
-                  });
-                }
-              }
-            });
-          });
-
-          // Sort by total profit
-          routes.sort((a, b) => b.expected_profit - a.expected_profit);
-
-          // Get top 3 routes with different commodities
-          const topRoutes: Route[] = [];
-          for (const route of routes) {
-            if (!seenCommodities.has(route.commodity_name)) {
-              seenCommodities.add(route.commodity_name);
-              topRoutes.push(route);
-              if (topRoutes.length === 3) break;
-            }
-          }
-
-          return topRoutes;
-        };
-
-        const bestRoutes = calculateTopProfitableRoutes(filteredData, userSCU, userFunds);
-      
-        if (bestRoutes.length === 0) {
-          return { 
-            error: legalOnly !== undefined
-              ? `No ${legalOnly ? 'legal' : 'illegal'} profitable routes found with the current constraints.`
-              : "No profitable routes found with the current constraints." 
-          };
-        }
-
-        console.log(`Top ${legalOnly !== undefined ? (legalOnly ? 'legal' : 'illegal') : ''} profitable routes calculated:`, bestRoutes);
-
-        if (legalOnly === false) {
-          // Add warning prefix for illegal-only routes
-          return { 
-            warning: `⚠️ WARNING: You have requested illegal trade routes. Trading these commodities:
-            • Is against UEE law
-            • May result in fines and criminal ratings
-            • Will cause security forces to engage hostile ships
-            • Restricts access to legal landing zones`,
-            best_route: bestRoutes[0],
-            alternative_routes: bestRoutes.slice(1)
-          };
-        } else {
-          return { 
-            best_route: bestRoutes[0],
-            alternative_routes: bestRoutes.slice(1)
-          };
-        }
-      } catch (error) {
-        console.error("Error fetching or processing data:", error);
-        return { error: "An error occurred while processing the request." };
-      }
-    },
-  },  
-
-  
-
-  getPlanets: {
-    description: "Retrieve a list of planets.",
-    parameters: z.object({
-      id_star_system: z.number().optional(),
-    }),
-    execute: async (args: { id_star_system?: number }) => {
-      // console.log("Fetching planets with arguments:", args);
-  
-      const queryParams = new URLSearchParams();
-      if (args.id_star_system !== undefined) {
-        queryParams.append("id_star_system", args.id_star_system.toString());
-      }
-  
-      const queryString = queryParams.toString();
-      const apiUrl = `https://api.uexcorp.space/2.0/planets${queryString ? `?${queryString}` : ''}`;
-  
-      // console.log("Query parameters for planets API:", queryString);
-      // console.log("API URL:", apiUrl);
-  
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          console.error("Failed to fetch planets:", response.statusText);
-          return { error: `Failed to fetch data: ${response.statusText}` };
-        }
-  
-        const responseData = await response.json();
-        
-  
-        if (responseData.status !== 'ok' || !Array.isArray(responseData.data)) {
-          console.warn("Planets API returned empty or invalid data:", responseData);
-          return { error: "No valid data available in response." };
-        }
-  
-        const data = responseData.data;
-        // console.log(`Fetched ${data.length} entries from planets API`);
-  
-        const chunkSize = 200;
-        const chunks = [];
-        for (let i = 0; i < data.length; i += chunkSize) {
-          chunks.push(data.slice(i, i + chunkSize));
-        }
-  
-        // console.log(`Chunked data into ${chunks.length} chunks of size ${chunkSize}`);
-        return { result: chunks };
-      } catch (error) {
-        console.error("Error fetching planets:", error);
-        return { error: "An unexpected error occurred" };
-      }
-    },
-  },
-  
-
-  getAlternativeBuyLocations: {
-    description: "Retrieve alternative buy locations for a specific commodity from cached data.",
-    parameters: z.object({
-      skip: z.number().min(0).describe("Number of locations to skip"),
-      take: z.number().min(1).describe("Number of locations to return"),
-    }),
-    execute: async (args: { skip: number; take: number }) => {
-      if (!commodityLocationsCache.lastCommodityId) {
-        return { error: "No recent commodity lookup found. Please search for a commodity first." };
-      }
-
-      const cachedLocations = commodityLocationsCache.buyLocations.get(
-        commodityLocationsCache.lastCommodityId.toString()
-      );
-      
-      if (!cachedLocations) {
-        return { error: "No cached locations found for this commodity. Please fetch prices first." };
-      }
-
-      // Get locations after the ones we've already shown
-      const remainingLocations = cachedLocations.slice(args.skip);
-      const nextLocations = remainingLocations.slice(0, args.take);
-      
-      if (nextLocations.length === 0) {
-        return { error: "No more alternative locations available." };
-      }
-
-      return {
-        locations: nextLocations,
-        remaining: Math.max(0, remainingLocations.length - args.take)
-      };
-    },
-  },
-
-  getAlternativeSellLocations: {
-    description: "Retrieve alternative sell locations for a specific commodity from cached data.",
-    parameters: z.object({
-      skip: z.number().min(0).describe("Number of locations to skip"),
-      take: z.number().min(1).describe("Number of locations to return"),
-    }),
-    execute: async (args: { skip: number; take: number }) => {
-      if (!commodityLocationsCache.lastSellCommodityId) {
-        return { error: "No recent commodity lookup found. Please search for a commodity first." };
-      }
-
-      const cachedLocations = commodityLocationsCache.sellLocations.get(
-        commodityLocationsCache.lastSellCommodityId.toString()
-      );
-      
-      if (!cachedLocations) {
-        return { error: "No cached locations found for this commodity. Please fetch prices first." };
-      }
-
-      const remainingLocations = cachedLocations.slice(args.skip);
-      const nextLocations = remainingLocations.slice(0, args.take);
-      
-      if (nextLocations.length === 0) {
-        return { error: "No more alternative locations available." };
-      }
-
-      return {
-        locations: nextLocations,
-        remaining: Math.max(0, remainingLocations.length - args.take)
-      };
-    },
-  },
-
-};
-
-export type Instruction = string;
-
-export type Commodity = {
-  id: string;
-  name: string;
-  code: string;
-};
-
-export type Location = {
-  id: string;
-  starSystem_id: string;
-  planet_id: string;
-  moon_id: string;
-  spaceStation_id: string;
-  outpost_id: string;
-  city_id: string;
-  name: string;
-  starSystem_name: string;
-  planet_name: string;
-  moon_name: string;
-  spaceStation_name: string;
-  city_name: string;
-};
-
-interface TradeRoute {
+// Define the TradeRoute type
+export interface TradeRoute {
   commodity_name: string;
-  is_illegal: boolean;
-  buy_location: string;
-  sell_location: string;
+  buy_terminal_name: string;
+  buy_star_system_name: string;
   buy_price_per_scu: number;
+  buy_scu_stocklevel: number;
+  total_buy_cost: number;
+  sell_terminal_name: string;
+  sell_star_system_name: string;
   sell_price_per_scu: number;
-  scu_traded: number;
-  total_investment: number;
-  expected_profit: number;
-  profit_per_scu: number;
-  buy_stock_available: number;
-  sell_stock_available: number;
+  sell_scu_capacity: number;
+  total_sell_revenue: number;
+  profit: number;
+  userProvidedSCU?: number; // Optional: SCU amount provided by the user
+  adjustedSCU: number; // Adjusted SCU based on budget and stock/demand
+  is_illegal: boolean; // Whether the commodity is illegal
 }
 
+// Helper function to format trade route responses
+function formatTradeRouteResponse(route: TradeRoute): string {
+  return `
+📦 Commodity: ${route.commodity_name}
+🚀 User Supplied SCU: ${route.userProvidedSCU || 0}
+🚀 Adjusted SCU: ${route.adjustedSCU}
+
+🏪 Buy Location:
+  • Terminal: ${route.buy_terminal_name} - ${route.buy_star_system_name}
+  • Stock Available: ${route.buy_scu_stocklevel} SCU
+  • Buy Price per SCU: ${route.buy_price_per_scu} aUEC 
+  • Buy Price for ${route.adjustedSCU} SCU: ${route.total_buy_cost} aUEC
+
+📈 Sell Location:
+  • Terminal: ${route.sell_terminal_name} - ${route.sell_star_system_name}
+  • Demand: ${route.sell_scu_capacity} SCU
+  • Sell Price per SCU: ${route.sell_price_per_scu} aUEC 
+  • Sell Price for ${route.adjustedSCU} SCU: ${route.total_sell_revenue} aUEC
+  
+💰 Profitability:
+  • Profit per SCU: ${(route.sell_price_per_scu - route.buy_price_per_scu).toFixed(2)} aUEC
+  • Total Profit: ${route.profit} aUEC
+`;
+}
+
+// Function to parse user input for SCU and budget
+function parseUserInput(input: string): { scuAmount: number; budget: number } | null {
+  // Match SCU and budget values in the input
+  const scuMatch = input.match(/(\d+)\s*scu/i);
+  const budgetMatch = input.match(/(\d+)\s*(k|auec)?/i);
+
+  if (!scuMatch || !budgetMatch) {
+    return null; // Invalid input
+  }
+
+  const scuAmount = parseInt(scuMatch[1], 10);
+  let budget = parseInt(budgetMatch[1], 10);
+
+  // Convert "k" to thousands (e.g., 500k -> 500000)
+  if (budgetMatch[2]?.toLowerCase() === 'k') {
+    budget *= 1000;
+  }
+
+  return { scuAmount, budget };
+}
+
+export const tools = {
+  getMostProfitableCommodity: {
+    description: "Find the most profitable commodity trade route based on user input.",
+    parameters: z.object({
+      scuAmount: z.number().min(1).optional().describe("SCU capacity of your ship"), // SCU amount to trade
+      budget: z.number().min(0).optional().describe("Budget in aUEC. Use the money amount provided eg, 100k, 100,000 etc.."), // Budget in aUEC
+      illegal: z.boolean().optional().describe("Include illegal commodities"), // Include illegal commodities
+      starSystem: z.string().optional().describe("Star system (e.g., 'Stanton' or 'Pyro')"), // Star system (e.g., "Stanton" or "Pyro")
+      showMore: z.boolean().optional().describe("Whether to show more routes from the cache"), // Whether to show more routes from the cache
+      showMoreNumber: z.number().optional().describe("Number of routes to show from the cache"), // Number of routes to show
+    }),
+    execute: async (args: { input?: string; scuAmount?: number; budget?: number; illegal?: boolean; starSystem?: string; showMore?: boolean; showMoreNumber?: number }) => {
+      console.log("Input Parameters:", args); // Log input parameters
+
+      // Parse the user's input if SCU and budget are not provided directly
+      if (!args.scuAmount || !args.budget) {
+        console.log(`LOG TO CHECK: ${args.scuAmount} and ${args.budget}`);
+        return { error: "To calculate the most profitable trade route, please provide the SCU capacity of your ship and your budget in aUEC." };
+      }
+
+      // If "Show More" is requested, return the next set of routes from the cache
+      if (args.showMore) {
+        if (args.showMoreNumber == null) {
+          return { error: "Please provide the number of routes to show." };
+        }
+        if (tradeRoutesCache.routes.length === 0) {
+          return { error: "No cached routes found. Please run a new query first." };
+        }
+
+        // Show only 1 additional route
+        const nextRoute = tradeRoutesCache.routes.slice(tradeRoutesCache.index, tradeRoutesCache.index + args.showMoreNumber);
+        tradeRoutesCache.index += 1; // Update the index
+
+        if (nextRoute.length === 0) {
+          return { error: "No more routes to show." };
+        }
+
+        // Format the next route using the helper function
+        const formattedRoute = formatTradeRouteResponse(nextRoute[0]);
+
+        // Calculate the number of remaining routes
+        const remainingRoutes = tradeRoutesCache.routes.length - tradeRoutesCache.index;
+
+        return {
+          routes: formattedRoute,
+          message: `ℹ️ ${remainingRoutes} more routes are available. Type 'Show X more routes' to see additional routes.`,
+        };
+      }
+
+      // Generate unique file paths using UUID
+      const uniqueId = uuidv4();
+      const filePath = path.join(process.cwd(), '/APIOutput/merged_commodities_data.json');
+      const outputFilePath = path.join(process.cwd(), `/APIOutput/tool_response_${uniqueId}.json`);
+      const profitableRoutesFilePath = path.join(process.cwd(), `/APIOutput/profitable_routes_${uniqueId}.json`);
+
+      try {
+        const data = await fs.readFile(filePath, 'utf-8');
+        const commodities: CommodityPriceData[] = JSON.parse(data);
+
+        // Filter commodities based on illegal flag and star system
+        const filteredCommodities = commodities.filter((commodity: CommodityPriceData) => {
+          const isIllegalAllowed = args.illegal ? commodity.is_illegal : true;
+          const isInStarSystem = args.starSystem ? commodity.star_system_name === args.starSystem : true;
+          return isIllegalAllowed && isInStarSystem;
+        });
+
+        // Separate buy and sell locations
+        const buyLocations = filteredCommodities.filter((commodity: CommodityPriceData) => {
+          return commodity.is_buyable && commodity.price_buy > 0 && commodity.scu_buy > 0;
+        });
+
+        const sellLocations = filteredCommodities.filter((commodity: CommodityPriceData) => {
+          return commodity.is_sellable && commodity.price_sell > 0 && commodity.scu_sell > 0;
+        });
+
+        // Match buy and sell locations by commodity name
+        const tradeRoutes: TradeRoute[] = buyLocations.flatMap((buyLocation: CommodityPriceData) => {
+          const matchingSellLocations = sellLocations.filter((sellLocation: CommodityPriceData) => {
+            return sellLocation.commodity_name === buyLocation.commodity_name;
+          });
+
+          return matchingSellLocations.map((sellLocation: CommodityPriceData) => {
+            // Calculate the maximum SCU the user can afford based on budget
+            const maxAffordableSCU = Math.floor(args.budget! / buyLocation.price_buy);
+
+            // Adjust SCU to fit within the budget, SCU capacity, and available stock/demand
+            const adjustedSCU = Math.min(
+              args.scuAmount!, // User's SCU capacity
+              maxAffordableSCU, // Maximum SCU based on budget
+              buyLocation.scu_buy, // Available stock
+              sellLocation.scu_sell // Available demand
+            );
+
+            // Recalculate costs and profits
+            const totalCost = buyLocation.price_buy * adjustedSCU;
+            const totalRevenue = sellLocation.price_sell * adjustedSCU;
+            const profit = totalRevenue - totalCost;
+
+            return {
+              commodity_name: buyLocation.commodity_name,
+              buy_terminal_name: buyLocation.terminal_name,
+              buy_star_system_name: buyLocation.star_system_name,
+              buy_price_per_scu: buyLocation.price_buy,
+              buy_scu_stocklevel: buyLocation.scu_buy,
+              total_buy_cost: totalCost,
+              sell_terminal_name: sellLocation.terminal_name,
+              sell_star_system_name: sellLocation.star_system_name,
+              sell_price_per_scu: sellLocation.price_sell,
+              sell_scu_capacity: sellLocation.scu_sell,
+              total_sell_revenue: totalRevenue,
+              profit,
+              userProvidedSCU: args.scuAmount,
+              adjustedSCU: adjustedSCU,
+              is_illegal: buyLocation.is_illegal || sellLocation.is_illegal, // Include illegal flag
+            };
+          });
+        });
+
+        // Filter out routes with no affordable SCU
+        const profitableRoutes = tradeRoutes.filter((route) => route.adjustedSCU > 0 && route.profit > 0);
+
+        // Sort by profit descending
+        const sortedRoutes = profitableRoutes.sort((a, b) => b.profit - a.profit);
+
+        // Cache the sorted routes and reset the index
+        tradeRoutesCache.routes = sortedRoutes;
+        tradeRoutesCache.index = 0;
+
+        // Output the tool response to a file
+        await fs.writeFile(outputFilePath, JSON.stringify(tradeRoutes, null, 2));
+        console.log(`Tool response saved to: ${outputFilePath}`);
+
+        // Output the most profitable routes to a separate file
+        await fs.writeFile(profitableRoutesFilePath, JSON.stringify(sortedRoutes, null, 2));
+        console.log(`Profitable routes saved to: ${profitableRoutesFilePath}`);
+
+        // Return the first route
+        const initialRoute = sortedRoutes[0];
+        tradeRoutesCache.index = 1; // Update the index
+
+        // Format the initial route using the helper function
+        const formattedRoute = formatTradeRouteResponse(initialRoute);
+
+        // Calculate the number of remaining routes
+        const remainingRoutes = sortedRoutes.length - 1;
+
+        // Add a disclaimer for illegal commodities
+        const disclaimer = initialRoute.is_illegal
+          ? "⚠️ **WARNING:** Trading illegal commodities in Star Citizen carries significant risks. You may face fines, ship impoundment, or even criminal charges. Proceed with caution!"
+          : null;
+
+        // Delete the temporary files after processing
+        await fs.unlink(outputFilePath);
+        await fs.unlink(profitableRoutesFilePath);
+        console.log(`Temporary files deleted: ${outputFilePath}, ${profitableRoutesFilePath}`);
+
+        if (initialRoute) {
+          return {
+            routes: formattedRoute,
+            message: `ℹ️ ${remainingRoutes} more routes are available. Type 'Show x (eg 2) more routes' to see additional routes.`,
+            disclaimer,
+          };
+        } else {
+          return { error: "No profitable routes found based on the provided criteria." };
+        }
+      } catch (error) {
+        console.error("Error fetching merged commodities data:", error);
+        return { error: "An unexpected error occurred while fetching the data." };
+      }
+    },
+  },
+
+  getCommodityLocations: {
+    description: "Find the most profitable locations to buy or sell a specific commodity.",
+    parameters: z.object({
+      commodityName: z.string().describe("Name of the commodity") , // Name of the commodity
+      action: z.enum(["buy", "sell"]).describe("Whether the user wants to buy or sell"), // Whether the user wants to buy or sell
+      scuAmount: z.number().min(1).optional().describe("Optional SCU amount the user wants to buy or sell"), // Optional: SCU amount to trade
+    }),
+    execute: async (args: { commodityName: string; action: "buy" | "sell"; scuAmount?: number }) => {
+      const filePath = path.join(process.cwd(), '/APIOutput/merged_commodities_data.json');
+      try {
+        const data = await fs.readFile(filePath, 'utf-8');
+        const commodities: CommodityPriceData[] = JSON.parse(data);
+
+        // Filter commodities by name, action (buy/sell), and demand/stock
+        const filteredCommodities = commodities.filter((commodity: CommodityPriceData) => {
+          const isMatchingCommodity = commodity.commodity_name.toLowerCase() === args.commodityName.toLowerCase();
+          const isActionValid = args.action === "buy" ? commodity.is_buyable : commodity.is_sellable;
+
+          // Additional filter for selling: exclude locations with 0 demand
+          if (args.action === "sell" && commodity.scu_sell === 0) {
+            return false;
+          }
+
+          // Additional filter for buying: exclude locations with 0 stock
+          if (args.action === "buy" && commodity.scu_buy === 0) {
+            return false;
+          }
+
+          return isMatchingCommodity && isActionValid;
+        });
+
+        if (filteredCommodities.length === 0) {
+          return { error: `No ${args.action} locations found for ${args.commodityName}.` };
+        }
+
+        // Sort by price (lowest for buy, highest for sell)
+        const sortedCommodities = filteredCommodities.sort((a, b) => {
+          return args.action === "buy" ? a.price_buy - b.price_buy : b.price_sell - a.price_sell;
+        });
+
+        // Format the response
+        const formattedLocations = sortedCommodities.slice(0, 3).map((commodity) => {
+          return `
+📦 Commodity: ${commodity.commodity_name}
+📍 Location: ${commodity.terminal_name} - ${commodity.star_system_name}
+💰 ${args.action === "buy" ? "Buy Price per SCU" : "Sell Price per SCU"}: ${args.action === "buy" ? commodity.price_buy : commodity.price_sell} aUEC
+📊 ${args.action === "buy" ? "Stock Available" : "Demand"}: ${args.action === "buy" ? commodity.scu_buy : commodity.scu_sell} SCU
+`;
+        }).join('\n');
+
+        return {
+          locations: formattedLocations,
+          message: `Here are the most profitable locations to ${args.action} ${args.commodityName}:`,
+        };
+      } catch (error) {
+        console.error("Error fetching merged commodities data:", error);
+        return { error: "An unexpected error occurred while fetching the data." };
+      }
+    },
+  },
+};
+
+// Define the CommodityPriceData interface
+export interface CommodityPriceData {
+  id_commodity: number;
+  price_buy: number;
+  scu_buy: number;
+  price_sell: number;
+  scu_sell: number;
+  commodity_name: string;
+  terminal_name: string;
+  terminal_id: number;
+  is_illegal: boolean;
+  star_system_name: string;
+  is_buyable: boolean;
+  is_sellable: boolean;
+}

@@ -1,0 +1,1258 @@
+[
+  {
+    "terminal_id": 1,
+    "terminal_name": "Admin - ARC-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 2,
+    "terminal_name": "Admin - ARC-L2",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 2",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 3,
+    "terminal_name": "Admin - ARC-L3",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 3",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 4,
+    "terminal_name": "Admin - ARC-L4",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 4",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 5,
+    "terminal_name": "Admin - ARC-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 5",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 6,
+    "terminal_name": "ArcCorp Mining Area 045",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 7,
+    "terminal_name": "ArcCorp Mining Area 048",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 8,
+    "terminal_name": "ArcCorp Mining Area 056",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 9,
+    "terminal_name": "ArcCorp Mining Area 061",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 10,
+    "terminal_name": "ArcCorp Mining Area 141",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 11,
+    "terminal_name": "ArcCorp Mining Area 157",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 12,
+    "terminal_name": "TDD - Trade and Development Division - Area 18",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 13,
+    "terminal_name": "Admin - Baijini Point",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 14,
+    "terminal_name": "Benson Mining Outpost",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 15,
+    "terminal_name": "Bountiful Harvest Hydroponics",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 16,
+    "terminal_name": "Brio's Breaker Yard",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 17,
+    "terminal_name": "Bud's Growery",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 18,
+    "terminal_name": "CBD - Central Business District - Lorville",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 19,
+    "terminal_name": "Admin - CRU-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 20,
+    "terminal_name": "Admin - CRU-L4",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 4",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 21,
+    "terminal_name": "Locker Room - CRU-L4",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 4",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 22,
+    "terminal_name": "Admin - CRU-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 5",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 23,
+    "terminal_name": "Deakins Research",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 24,
+    "terminal_name": "Devlin Scrap and Salvage",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 25,
+    "terminal_name": "Admin - Everus Harbor",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 26,
+    "terminal_name": "Gallete Family Farms",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 27,
+    "terminal_name": "Admin - GrimHEX",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 28,
+    "terminal_name": "HDMS-Anderson",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 29,
+    "terminal_name": "HDMS-Bezdek",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 30,
+    "terminal_name": "HDMS-Edmond",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 31,
+    "terminal_name": "HDMS-Hadley",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 32,
+    "terminal_name": "HDMS-Hahn",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 33,
+    "terminal_name": "HDMS-Lathan",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 34,
+    "terminal_name": "HDMS-Norgaard",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 35,
+    "terminal_name": "HDMS-Oparei",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 36,
+    "terminal_name": "HDMS-Perlman",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 37,
+    "terminal_name": "HDMS-Pinewood",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 38,
+    "terminal_name": "HDMS-Ryder",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 39,
+    "terminal_name": "HDMS-Stanhope",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 40,
+    "terminal_name": "HDMS-Thedus",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 41,
+    "terminal_name": "HDMS-Woodruff",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 42,
+    "terminal_name": "Hickes Research Outpost",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 43,
+    "terminal_name": "Humboldt Mines",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 44,
+    "terminal_name": "Admin - HUR-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 45,
+    "terminal_name": "Admin - HUR-L2",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 2",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 46,
+    "terminal_name": "Admin - HUR-L3",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 3",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 47,
+    "terminal_name": "Admin - HUR-L4",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 4",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 48,
+    "terminal_name": "Admin - HUR-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 5",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 49,
+    "terminal_name": "Admin - IO North Tower - Area 18",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 50,
+    "terminal_name": "Kudre Ore",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 51,
+    "terminal_name": "Admin - L19 Residences - Metro Center - Lorville",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 52,
+    "terminal_name": "Levski",
+    "star_system_name": "Nyx",
+    "planet_name": null,
+    "orbit_name": "Delamar",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 53,
+    "terminal_name": "Loveridge Mineral Reserve",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 54,
+    "terminal_name": "Admin - MIC-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 55,
+    "terminal_name": "Admin - MIC-L2",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 2",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 56,
+    "terminal_name": "Admin - MIC-L3",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 3",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 57,
+    "terminal_name": "Admin - MIC-L4",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 4",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 58,
+    "terminal_name": "Admin - MIC-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 5",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 59,
+    "terminal_name": "MicroTech Planetary Services - Commons - New Babbage",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 60,
+    "terminal_name": "NT-999-XX",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 61,
+    "terminal_name": "Nuen Waste Management",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 62,
+    "terminal_name": "Orison Municipal Services - Providence Platform - Orison",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 63,
+    "terminal_name": "Outpost 54",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 64,
+    "terminal_name": "Paradise Cove",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 65,
+    "terminal_name": "Admin - Port Olisar",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 66,
+    "terminal_name": "Admin - Port Tressler",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 67,
+    "terminal_name": "Private Property",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 68,
+    "terminal_name": "Raven's Roost",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 69,
+    "terminal_name": "Rayari Anvik Research Outpost",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 70,
+    "terminal_name": "Rayari Cantwell Research Outpost",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 71,
+    "terminal_name": "Rayari Deltana Research Outpost",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 72,
+    "terminal_name": "Rayari Kaltag Research Outpost",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 73,
+    "terminal_name": "Rayari McGrath Research Outpost",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 74,
+    "terminal_name": "Reclamation  Disposal Orinth",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 75,
+    "terminal_name": "Samson Son's Salvage Center",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 76,
+    "terminal_name": "Shady Glen",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 77,
+    "terminal_name": "Shubin Mining Facility SAL-2",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 78,
+    "terminal_name": "Shubin Mining Facility SAL-5",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 79,
+    "terminal_name": "Shubin Mining Facility SCD-1",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 80,
+    "terminal_name": "Shubin Mining Facility SM0-10",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 81,
+    "terminal_name": "Shubin Mining Facility SM0-13",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 82,
+    "terminal_name": "Shubin Mining Facility SM0-18",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 83,
+    "terminal_name": "Shubin Mining Facility SM0-22",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 84,
+    "terminal_name": "Shubin Mining Facility SMCa-6",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 85,
+    "terminal_name": "Shubin Mining Facility SMCa-8",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 86,
+    "terminal_name": "Terra Mills Hydrofarm",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 87,
+    "terminal_name": "The Necropolis",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 88,
+    "terminal_name": "The Orphanage",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 89,
+    "terminal_name": "TDD - Trade and Development Division - Commons - New Babbage",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 90,
+    "terminal_name": "TDD - Trade and Development Division - Cloudview Center - Orison",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 91,
+    "terminal_name": "Tram & Myers Mining",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 251,
+    "terminal_name": "Admin - Terra Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Terra Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 252,
+    "terminal_name": "Admin - Pyro Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Pyro Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 253,
+    "terminal_name": "Admin - Magnus Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Magnus Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 257,
+    "terminal_name": "Platinum Bay - Magnus Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Magnus Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 258,
+    "terminal_name": "Platinum Bay - Terra Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Terra Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 259,
+    "terminal_name": "Admin - Seraphim Station",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 262,
+    "terminal_name": "Platinum Bay - Port Tressler",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 263,
+    "terminal_name": "Platinum Bay - ARC-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 270,
+    "terminal_name": "Maker's Point",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 274,
+    "terminal_name": "Scrap - Rappel",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 276,
+    "terminal_name": "Rust - Pickers Field",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 280,
+    "terminal_name": "NT-999-XXII",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 282,
+    "terminal_name": "Platinum Bay - CRU-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 5",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 283,
+    "terminal_name": "Platinum Bay - CRU-L4",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 4",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 301,
+    "terminal_name": "Platinum Bay - Baijini Point",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 302,
+    "terminal_name": "Platinum Bay - CRU-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 303,
+    "terminal_name": "Platinum Bay - Everus Harbor",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 304,
+    "terminal_name": "Platinum Bay - HUR-L2",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 2",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 305,
+    "terminal_name": "Platinum Bay - HUR-L3",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 3",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 306,
+    "terminal_name": "Platinum Bay - HUR-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 5",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 318,
+    "terminal_name": "Platinum Bay - Pyro Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Pyro Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 329,
+    "terminal_name": "INS Jericho - Pyro Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Pyro Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 331,
+    "terminal_name": "Dumper's Depot - Area 18",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 332,
+    "terminal_name": "Jumptown",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 333,
+    "terminal_name": "Rust - Dunboro",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "MicroTech",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 344,
+    "terminal_name": "Dumper's Depot - Commodities - GrimHEX",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 352,
+    "terminal_name": "Maintenance Room - CRU-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 5",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 422,
+    "terminal_name": "Admin - UEX Station",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": null,
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 436,
+    "terminal_name": "Admin - Checkmate",
+    "star_system_name": "Pyro",
+    "planet_name": "Monox",
+    "orbit_name": "Checkmate",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 443,
+    "terminal_name": "Admin - Orbituary",
+    "star_system_name": "Pyro",
+    "planet_name": "Bloom",
+    "orbit_name": "Bloom",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 450,
+    "terminal_name": "Admin - Starlight Service Station",
+    "star_system_name": "Pyro",
+    "planet_name": "Bloom",
+    "orbit_name": "Starlight Service Station",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 453,
+    "terminal_name": "Admin - Patch City",
+    "star_system_name": "Pyro",
+    "planet_name": "Bloom",
+    "orbit_name": "Patch City",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 466,
+    "terminal_name": "Admin - Ruin Station",
+    "star_system_name": "Pyro",
+    "planet_name": "Terminus",
+    "orbit_name": "Terminus",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 477,
+    "terminal_name": "Scarper's Turn",
+    "star_system_name": "Pyro",
+    "planet_name": "Terminus",
+    "orbit_name": "Terminus",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 479,
+    "terminal_name": "Admin - Megumi Refueling",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro IV",
+    "orbit_name": "Megumi Refueling",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 482,
+    "terminal_name": "Admin - Endgame",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro IV",
+    "orbit_name": "Endgame",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 486,
+    "terminal_name": "Admin - Rod's Fuel 'N Supplies",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro V",
+    "orbit_name": "Rod's Fuel & Supplies",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 504,
+    "terminal_name": "Jackson's Swap",
+    "star_system_name": "Pyro",
+    "planet_name": "Monox",
+    "orbit_name": "Monox",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 507,
+    "terminal_name": "Ashland",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro V",
+    "orbit_name": "Pyro V",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 510,
+    "terminal_name": "Chawla's Beach",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro V",
+    "orbit_name": "Pyro V",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 511,
+    "terminal_name": "Admin - Gaslight",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro V",
+    "orbit_name": "Gaslight",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 518,
+    "terminal_name": "Seer's Canyon",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro V",
+    "orbit_name": "Pyro V",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 520,
+    "terminal_name": "Admin - Stanton Gateway Station",
+    "star_system_name": "Pyro",
+    "planet_name": null,
+    "orbit_name": "Stanton Gateway",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 521,
+    "terminal_name": "Platinum Bay - Stanton Gateway Station",
+    "star_system_name": "Pyro",
+    "planet_name": null,
+    "orbit_name": "Stanton Gateway",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 523,
+    "terminal_name": "Admin - Rat's Nest",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro V",
+    "orbit_name": "Rat's Nest",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 549,
+    "terminal_name": "Admin - Dudley  Daughters",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro IV",
+    "orbit_name": "Dudley & Daughters",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 551,
+    "terminal_name": "Commodities - Bueno Ravine",
+    "star_system_name": "Pyro",
+    "planet_name": "Bloom",
+    "orbit_name": "Bloom",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 555,
+    "terminal_name": "Commodity Shop - Shepherd's Rest",
+    "star_system_name": "Pyro",
+    "planet_name": "Bloom",
+    "orbit_name": "Bloom",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 565,
+    "terminal_name": "Commodity Shop - Last Landings",
+    "star_system_name": "Pyro",
+    "planet_name": "Terminus",
+    "orbit_name": "Terminus",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 590,
+    "terminal_name": "Commodities - Rustville",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro I",
+    "orbit_name": "Pyro I",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 591,
+    "terminal_name": "Commodities - Canard View",
+    "star_system_name": "Pyro",
+    "planet_name": "Terminus",
+    "orbit_name": "Terminus",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 599,
+    "terminal_name": "Commodity Terminal - Sunset Mesa",
+    "star_system_name": "Pyro",
+    "planet_name": "Monox",
+    "orbit_name": "Monox",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 605,
+    "terminal_name": "Fallow Field",
+    "star_system_name": "Pyro",
+    "planet_name": "Pyro V",
+    "orbit_name": "Pyro V",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 234,
+    "terminal_name": "Refinery Ore Sales - ARC-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 235,
+    "terminal_name": "Refinery Ore Sales - ARC-L2",
+    "star_system_name": "Stanton",
+    "planet_name": "ArcCorp",
+    "orbit_name": "ArcCorp Lagrange Point 2",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 236,
+    "terminal_name": "Refinery Ore Sales - CRU-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "Crusader",
+    "orbit_name": "Crusader Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 237,
+    "terminal_name": "Refinery Ore Sales - HUR-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 238,
+    "terminal_name": "Refinery Ore Sales - HUR-L2",
+    "star_system_name": "Stanton",
+    "planet_name": "Hurston",
+    "orbit_name": "Hurston Lagrange Point 2",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 239,
+    "terminal_name": "Refinery Ore Sales - MIC-L1",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 1",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 240,
+    "terminal_name": "Refinery Ore Sales - MIC-L2",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 2",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 241,
+    "terminal_name": "Refinery Ore Sales - MIC-L5",
+    "star_system_name": "Stanton",
+    "planet_name": "MicroTech",
+    "orbit_name": "microTech Lagrange Point 5",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 300,
+    "terminal_name": "Refinery Ore Sales - Terra Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Terra Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 308,
+    "terminal_name": "Refinery Ore Sales - Magnus Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Magnus Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 309,
+    "terminal_name": "Refinery Ore Sales - Pyro Gateway",
+    "star_system_name": "Stanton",
+    "planet_name": null,
+    "orbit_name": "Pyro Jump Point",
+    "is_auto_load": true
+  },
+  {
+    "terminal_id": 442,
+    "terminal_name": "Refinery Ore Sales - Checkmate",
+    "star_system_name": "Pyro",
+    "planet_name": "Monox",
+    "orbit_name": "Checkmate",
+    "is_auto_load": false
+  },
+  {
+    "terminal_id": 471,
+    "terminal_name": "Refinery Ore Sales - Ruin Station",
+    "star_system_name": "Pyro",
+    "planet_name": "Terminus",
+    "orbit_name": "Terminus",
+    "is_auto_load": false
+  }
+]

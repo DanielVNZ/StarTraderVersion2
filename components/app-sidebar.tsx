@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { deleteOldChats } from '@/app/actions';
+import { manualDeleteOldChats } from '@/lib/db/queries';
 import {
   Sidebar,
   SidebarContent,
@@ -35,18 +35,28 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const handleDeleteOldChats = async () => {
     try {
       const days = parseInt(daysToDelete);
-      if (isNaN(days) || days < 1) {
+      if (isNaN(days) || days < 0) {
         toast.error('Please enter a valid number of days');
         return;
       }
 
-      const result = await deleteOldChats(days);
-      if (result.status === 'success') {
-        toast.success(`Successfully deleted ${result.count} old chats`);
+      // Call the API route to delete old chats
+      const response = await fetch('/api/deleteOldChats', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ days, userId: user?.id }), // Pass userId from props
+      });
+
+      const result = await response.json();
+      console.log(result);
+      if (response.ok) {
+        toast.success(result.message);
         setShowDeleteDialog(false);
         window.location.reload();
       } else {
-        toast.error('Failed to delete old chats');
+        toast.error(result.message || 'Failed to delete old chats');
       }
     } catch (error) {
       toast.error('Failed to delete old chats');
@@ -135,7 +145,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="days">Delete chats older than (days)</Label>
+              <Label htmlFor="days">Delete chats older than (days).</Label>
               <Input
                 id="days"
                 type="number"
@@ -144,6 +154,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                 min="1"
                 className="col-span-3"
               />
+              <Label htmlFor="days">WARNING if you type 0 it will delete all chats!</Label>
             </div>
           </div>
           <DialogFooter>

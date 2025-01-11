@@ -14,7 +14,7 @@ export const authConfig = {
 
       // Publicly accessible routes
       const isOnPublicRoute =
-        ['/sitemap.xml', '/api/sitemap', '/information', '/api/cleanup'].some((route) =>
+        ['/sitemap.xml', '/api/sitemap', '/information', '/api/cleanup', '/api/uexgrabber', '/api/terminals', '/api/commodities', '/api/commodityprices', '/api/mergedData'].some((route) =>
           nextUrl.pathname.startsWith(route)
         ) ||
         /^\/sitemap-\d+\.xml$/.test(nextUrl.pathname) || // Dynamic sitemaps
@@ -51,6 +51,13 @@ export const authConfig = {
       }
 
       return true; // Default to allowing access
+    },
+    async session({ session, user, token }) {
+      // Include the user ID in the session
+      if (user?.id) {
+        session.user.id = user.id;
+      }
+      return session;
     },
   },
   trustHost: true, // Rely on the Host header from the incoming request

@@ -25,9 +25,9 @@ import { tools } from './tools';
 
 import { generateTitleFromUserMessage } from '../../actions';
 
-
-import { createClient } from '@supabase/supabase-js';
 import { NextRequest } from "next/server";
+import { createClient } from '@supabase/supabase-js';
+
 
 const supabaseUrl = process.env.SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_ANON_KEY || '';
@@ -36,37 +36,14 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export const maxDuration = 60;
 
 type AllowedTools =
-  'getCommodities' |
-'getBuyCommodityPrices' |
-'getSellCommodityPrices' |
-'getTerminals' |
-'getCities' |
-'getMoons' |
-'getOrbits' |
-'getOutposts' |
-'getPlanets' |
-'getStarSystems' |
-'getCommoditiesPricesAll' |
-'getSpaceStations' |
-'getAlternativeBuyLocations' |
-'getAlternativeSellLocations'
+  'getMostProfitableCommodity' |
+  'getCommodityLocations'
+
 
 
 const myTools: AllowedTools[] = [
-  'getCommodities',
-  'getBuyCommodityPrices',
-  'getSellCommodityPrices',
-  'getTerminals',
-  'getCities',
-  'getMoons',
-  'getOrbits',
-  'getOutposts',
-  'getPlanets',
-  'getStarSystems',
-  'getSpaceStations',
-  'getCommoditiesPricesAll',
-  'getAlternativeBuyLocations',
-  'getAlternativeSellLocations'
+  'getMostProfitableCommodity',
+  'getCommodityLocations' 
 ];
 
 const allTools: AllowedTools[] = [...myTools];
