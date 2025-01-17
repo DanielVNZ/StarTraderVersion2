@@ -36,13 +36,17 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export const maxDuration = 60;
 
 type AllowedTools =
-  'calculateBestTradeRoute' 
+  'calculateBestTradeRoute' |
+  'getCommoditiesByTerminal' |
+  'getTerminalInfo'
 
 
 
 
 const myTools: AllowedTools[] = [
   'calculateBestTradeRoute',  
+  'getCommoditiesByTerminal',
+  'getTerminalInfo',
 
 
 
